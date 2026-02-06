@@ -613,6 +613,50 @@ nav ul li:hover .dropdown-menu {
     }
 }
 
+@media (max-width: 576px) {
+    .container {
+        padding: 0 0.5rem;
+    }
+    .section-title h2 {
+        font-size: 1rem;
+    }
+    .hero h1 {
+        font-size: 2rem;
+    }
+    .service-card, .package-card, .info-card, .info-window {
+        padding: 0.5rem !important;
+        font-size: 0.9rem !important;
+    }
+    .service-card img, .package-card img {
+        max-width: 98vw;
+        height: auto;
+    }
+    .footer-logo {
+        max-width: 70px;
+    }
+    .veteran-badge {
+        max-width: 40px;
+    }
+    .social-links {
+        gap: 0.25rem;
+    }
+    .contact-form input, .contact-form select, .contact-form textarea {
+        font-size: 0.95rem;
+        padding: 0.5rem;
+    }
+    .hotspot-label {
+        font-size: 0.7rem;
+        padding: 6px 6px;
+        width: 95vw;
+        min-width: 120px;
+        max-width: 98vw;
+    }
+    .hotspot-wrapper {
+        height: 200px;
+        min-height: 120px;
+    }
+}
+
 /* Animations */
 @keyframes fadeInUp {
     from {
@@ -678,6 +722,110 @@ nav ul li:hover .dropdown-menu {
     nav ul {
         display: none;
         /* In a real app, this would toggle a mobile menu */
+    }
+}
+
+/* Hamburger styles */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1100;
+}
+
+.hamburger span {
+    display: block;
+    width: 28px;
+    height: 3px;
+    margin: 5px 0;
+    background: var(--clr-primary);
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
+.hamburger.is-active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger.is-active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.is-active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+
+    nav {
+        width: 100%;
+    }
+
+    #main-nav {
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: var(--clr-bg);
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        padding: 0;
+        display: none;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        z-index: 1001;
+    }
+
+    #main-nav.nav-open {
+        display: flex;
+    }
+
+    #main-nav li {
+        width: 100%;
+        border-bottom: 1px solid var(--glass-border);
+    }
+
+    #main-nav li:last-child {
+        border-bottom: none;
+    }
+
+    #main-nav a, #main-nav .btn, #main-nav .btn-outline {
+        width: 100%;
+        display: block;
+        padding: 1rem 2rem;
+        text-align: left;
+        font-size: 1.1rem;
+    }
+
+    .nav-wrapper {
+        position: relative;
+    }
+
+    .dropdown-menu {
+        position: static;
+        box-shadow: none;
+        background: none;
+        padding: 0;
+        margin: 0;
+        display: none;
+    }
+
+    .has-dropdown:hover .dropdown-menu,
+    .has-dropdown:focus-within .dropdown-menu {
+        display: none;
+    }
+
+    .has-dropdown.nav-open .dropdown-menu {
+        display: block;
     }
 }
 
@@ -917,12 +1065,46 @@ nav ul li:hover .dropdown-menu {
 }
 
 @media (max-width: 576px) {
-    .hotspot-wrapper {
-        grid-template-columns: 1fr;
+    .container {
+        padding: 0 0.5rem;
     }
-
-    .plane-visual {
-        grid-column: span 1;
+    .section-title h2 {
+        font-size: 1rem;
+    }
+    .hero h1 {
+        font-size: 2rem;
+    }
+    .service-card, .package-card, .info-card, .info-window {
+        padding: 0.5rem !important;
+        font-size: 0.9rem !important;
+    }
+    .service-card img, .package-card img {
+        max-width: 98vw;
+        height: auto;
+    }
+    .footer-logo {
+        max-width: 70px;
+    }
+    .veteran-badge {
+        max-width: 40px;
+    }
+    .social-links {
+        gap: 0.25rem;
+    }
+    .contact-form input, .contact-form select, .contact-form textarea {
+        font-size: 0.95rem;
+        padding: 0.5rem;
+    }
+    .hotspot-label {
+        font-size: 0.7rem;
+        padding: 6px 6px;
+        width: 95vw;
+        min-width: 120px;
+        max-width: 98vw;
+    }
+    .hotspot-wrapper {
+        height: 200px;
+        min-height: 120px;
     }
 }
 
@@ -1150,4 +1332,147 @@ nav ul li:hover .dropdown-menu {
     color: var(--clr-primary);
     font-weight: 700;
     font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .hotspot-wrapper {
+        height: 350px;
+        min-height: 220px;
+        max-width: 100vw;
+        overflow-x: auto;
+    }
+
+    .plane-visual {
+        width: 100vw;
+        height: auto;
+        max-width: 100vw;
+        min-width: 220px;
+    }
+
+    .hotspot-label {
+        width: 90vw;
+        min-width: 160px;
+        max-width: 95vw;
+        font-size: 0.85rem;
+        padding: 8px 10px;
+        left: 5vw !important;
+        right: unset !important;
+        border-left: 3px solid var(--clr-primary);
+        border-right: none;
+    }
+
+    .hotspot-left,
+    .hotspot-right {
+        left: 5vw !important;
+        right: unset !important;
+    }
+
+    .hotspot-label::before {
+        display: none;
+    }
+
+    .info-card,
+    .info-window {
+        max-width: 98vw !important;
+        width: 98vw !important;
+        padding: 1rem !important;
+        font-size: 0.95rem;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .section-title h2 {
+        font-size: 1.2rem;
+    }
+
+    .service-card,
+    .package-card {
+        min-width: unset;
+        max-width: 100vw;
+        width: 100%;
+        margin: 1rem 0;
+        padding: 1rem;
+        font-size: 0.95rem;
+        box-sizing: border-box;
+    }
+
+    .service-card img,
+    .package-card img {
+        max-width: 90vw;
+        height: auto;
+    }
+
+    .footer-content,
+    .contact-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        width: 100%;
+    }
+
+    .footer-logo {
+        max-width: 100px;
+        margin-bottom: 1rem;
+    }
+
+    .veteran-badge {
+        max-width: 60px;
+    }
+
+    .social-links {
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .contact-form input,
+    .contact-form select,
+    .contact-form textarea {
+        width: 100%;
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        padding: 0 0.5rem;
+    }
+    .section-title h2 {
+        font-size: 1rem;
+    }
+    .hero h1 {
+        font-size: 2rem;
+    }
+    .service-card, .package-card, .info-card, .info-window {
+        padding: 0.5rem !important;
+        font-size: 0.9rem !important;
+    }
+    .service-card img, .package-card img {
+        max-width: 98vw;
+        height: auto;
+    }
+    .footer-logo {
+        max-width: 70px;
+    }
+    .veteran-badge {
+        max-width: 40px;
+    }
+    .social-links {
+        gap: 0.25rem;
+    }
+    .contact-form input, .contact-form select, .contact-form textarea {
+        font-size: 0.95rem;
+        padding: 0.5rem;
+    }
+    .hotspot-label {
+        font-size: 0.7rem;
+        padding: 6px 6px;
+        width: 95vw;
+        min-width: 120px;
+        max-width: 98vw;
+    }
+    .hotspot-wrapper {
+        height: 200px;
+        min-height: 120px;
+    }
 }

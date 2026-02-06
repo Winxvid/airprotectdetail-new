@@ -28,6 +28,11 @@
             <a href="#" class="logo">
                 <img src="logo.png" alt="AirProtect Logo">
             </a>
+            <button class="hamburger" id="hamburger-menu" aria-label="Open navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <nav>
                 <ul id="main-nav">
                     <li><a href="#hero">Home</a></li>
@@ -901,6 +906,83 @@
         </footer>
 
         <script src="main.js"></script>
-    </body>
+        <script>
+            function isMobile() {
+                return window.innerWidth <= 768;
+            }
 
-    </html>
+            // Exterior Care toggles
+            const exteriorLabels = [
+                { id: 'ext-1', card: 'dry-wash-card' },
+                { id: 'ext-2', card: 'wet-wash-card' },
+                { id: 'ext-3', card: 'exterior-wax-card' },
+                { id: 'ext-4', card: 'brightwork-polishing-card' },
+                { id: 'ext-5', card: 'protective-coatings-card' },
+                { id: 'ext-6', card: 'window-restoration-card' },
+                { id: 'ext-7', card: 'deice-boot-card' },
+                { id: 'ext-8', card: 'paint-revitalization-card' }
+            ];
+
+            exteriorLabels.forEach(({ id, card }) => {
+                const label = document.getElementById(id);
+                if (label) {
+                    label.onclick = function(e) {
+                        if (isMobile()) {
+                            e.preventDefault();
+                            const cardEl = document.getElementById(card);
+                            if (cardEl.style.display === 'block') {
+                                cardEl.style.display = 'none';
+                            } else {
+                                document.querySelectorAll('.info-card').forEach(c => c.style.display = 'none');
+                                cardEl.style.display = 'block';
+                            }
+                        }
+                    };
+                    label.onmouseover = function() { if (!isMobile()) showCard(card); };
+                    label.onmouseout = function() { if (!isMobile()) hideCard(card); };
+                }
+            });
+
+            function showCard(cardId) {
+                document.getElementById(cardId).style.display = 'block';
+            }
+            function hideCard(cardId) {
+                document.getElementById(cardId).style.display = 'none';
+            }
+
+            // Cabin Care toggles
+            const interiorLabels = [
+                { id: 'int-1', card: 'interior-cleaning-card' },
+                { id: 'int-2', card: 'leather-conditioning-card' },
+                { id: 'int-3', card: 'leather-repair-card' },
+                { id: 'int-4', card: 'stain-removal-card' },
+                { id: 'int-5', card: 'lavatory-sanitation-card' },
+                { id: 'int-6', card: 'carpet-extraction-card' },
+                { id: 'int-7', card: 'wood-polishing-card' },
+                { id: 'int-8', card: 'dry-cleaning-card' }
+            ];
+
+            interiorLabels.forEach(({ id, card }) => {
+                const label = document.getElementById(id);
+                if (label) {
+                    label.onclick = function(e) {
+                        if (isMobile()) {
+                            e.preventDefault();
+                            const cardEl = document.getElementById(card);
+                            if (cardEl.style.display === 'block') {
+                                cardEl.style.display = 'none';
+                            } else {
+                                document.querySelectorAll('.info-card').forEach(c => c.style.display = 'none');
+                                cardEl.style.display = 'block';
+                            }
+                        }
+                    };
+                    label.onmouseover = function() { if (!isMobile()) showCard(card); };
+                    label.onmouseout = function() { if (!isMobile()) hideCard(card); };
+                }
+            });
+        </script>
+    </main>
+</body>
+
+</html>
