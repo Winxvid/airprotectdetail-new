@@ -907,80 +907,100 @@
 
         <script src="main.js"></script>
         <script>
-            function isMobile() {
-                return window.innerWidth <= 768;
+        const hamburger = document.getElementById('hamburger-menu');
+        const nav = document.getElementById('main-nav');
+        hamburger.addEventListener('click', function(e) {
+            e.stopPropagation();
+            nav.classList.toggle('nav-open');
+            hamburger.classList.toggle('is-active');
+            if (nav.classList.contains('nav-open')) {
+                nav.style.display = 'flex';
+            } else {
+                nav.style.display = '';
             }
-
-            // Exterior Care toggles
-            const exteriorLabels = [
-                { id: 'ext-1', card: 'dry-wash-card' },
-                { id: 'ext-2', card: 'wet-wash-card' },
-                { id: 'ext-3', card: 'exterior-wax-card' },
-                { id: 'ext-4', card: 'brightwork-polishing-card' },
-                { id: 'ext-5', card: 'protective-coatings-card' },
-                { id: 'ext-6', card: 'window-restoration-card' },
-                { id: 'ext-7', card: 'deice-boot-card' },
-                { id: 'ext-8', card: 'paint-revitalization-card' }
-            ];
-
-            exteriorLabels.forEach(({ id, card }) => {
-                const label = document.getElementById(id);
-                if (label) {
-                    label.onclick = function(e) {
-                        if (isMobile()) {
-                            e.preventDefault();
-                            const cardEl = document.getElementById(card);
-                            if (cardEl.style.display === 'block') {
-                                cardEl.style.display = 'none';
-                            } else {
-                                document.querySelectorAll('.info-card').forEach(c => c.style.display = 'none');
-                                cardEl.style.display = 'block';
-                            }
-                        }
-                    };
-                    label.onmouseover = function() { if (!isMobile()) showCard(card); };
-                    label.onmouseout = function() { if (!isMobile()) hideCard(card); };
+        });
+        // Close menu on link click (mobile UX)
+        document.querySelectorAll('#main-nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                if(window.innerWidth <= 768) {
+                    nav.classList.remove('nav-open');
+                    hamburger.classList.remove('is-active');
+                    nav.style.display = '';
                 }
             });
-
-            function showCard(cardId) {
-                document.getElementById(cardId).style.display = 'block';
-            }
-            function hideCard(cardId) {
-                document.getElementById(cardId).style.display = 'none';
-            }
-
-            // Cabin Care toggles
-            const interiorLabels = [
-                { id: 'int-1', card: 'interior-cleaning-card' },
-                { id: 'int-2', card: 'leather-conditioning-card' },
-                { id: 'int-3', card: 'leather-repair-card' },
-                { id: 'int-4', card: 'stain-removal-card' },
-                { id: 'int-5', card: 'lavatory-sanitation-card' },
-                { id: 'int-6', card: 'carpet-extraction-card' },
-                { id: 'int-7', card: 'wood-polishing-card' },
-                { id: 'int-8', card: 'dry-cleaning-card' }
-            ];
-
-            interiorLabels.forEach(({ id, card }) => {
-                const label = document.getElementById(id);
-                if (label) {
-                    label.onclick = function(e) {
-                        if (isMobile()) {
-                            e.preventDefault();
-                            const cardEl = document.getElementById(card);
-                            if (cardEl.style.display === 'block') {
-                                cardEl.style.display = 'none';
-                            } else {
-                                document.querySelectorAll('.info-card').forEach(c => c.style.display = 'none');
-                                cardEl.style.display = 'block';
-                            }
-                        }
-                    };
-                    label.onmouseover = function() { if (!isMobile()) showCard(card); };
-                    label.onmouseout = function() { if (!isMobile()) hideCard(card); };
+        });
+        // Ensure nav closes on outside click
+        document.addEventListener('click', function(e) {
+            if(window.innerWidth <= 768 && nav.classList.contains('nav-open')) {
+                if (!nav.contains(e.target) && !hamburger.contains(e.target)) {
+                    nav.classList.remove('nav-open');
+                    hamburger.classList.remove('is-active');
+                    nav.style.display = '';
                 }
-            });
+            }
+        });
+        // --- Service Card Toggle Fix for Mobile ---
+        function isMobile() {
+            return window.innerWidth <= 768;
+        }
+        function closeAllServiceCards() {
+            document.querySelectorAll('.info-card').forEach(c => c.style.display = 'none');
+        }
+        function toggleServiceCard(cardId) {
+            const cardEl = document.getElementById(cardId);
+            if (cardEl.style.display === 'block') {
+                cardEl.style.display = 'none';
+            } else {
+                closeAllServiceCards();
+                cardEl.style.display = 'block';
+            }
+        }
+        // Exterior Care
+        [
+            { id: 'ext-1', card: 'dry-wash-card' },
+            { id: 'ext-2', card: 'wet-wash-card' },
+            { id: 'ext-3', card: 'exterior-wax-card' },
+            { id: 'ext-4', card: 'brightwork-polishing-card' },
+            { id: 'ext-5', card: 'protective-coatings-card' },
+            { id: 'ext-6', card: 'window-restoration-card' },
+            { id: 'ext-7', card: 'deice-boot-card' },
+            { id: 'ext-8', card: 'paint-revitalization-card' }
+        ].forEach(({ id, card }) => {
+            const label = document.getElementById(id);
+            if (label) {
+                label.onclick = function(e) {
+                    if (isMobile()) {
+                        e.preventDefault();
+                        toggleServiceCard(card);
+                    }
+                };
+                label.onmouseover = function() { if (!isMobile()) document.getElementById(card).style.display = 'block'; };
+                label.onmouseout = function() { if (!isMobile()) document.getElementById(card).style.display = 'none'; };
+            }
+        });
+        // Cabin Care
+        [
+            { id: 'int-1', card: 'interior-cleaning-card' },
+            { id: 'int-2', card: 'leather-conditioning-card' },
+            { id: 'int-3', card: 'leather-repair-card' },
+            { id: 'int-4', card: 'stain-removal-card' },
+            { id: 'int-5', card: 'lavatory-sanitation-card' },
+            { id: 'int-6', card: 'carpet-extraction-card' },
+            { id: 'int-7', card: 'wood-polishing-card' },
+            { id: 'int-8', card: 'dry-cleaning-card' }
+        ].forEach(({ id, card }) => {
+            const label = document.getElementById(id);
+            if (label) {
+                label.onclick = function(e) {
+                    if (isMobile()) {
+                        e.preventDefault();
+                        toggleServiceCard(card);
+                    }
+                };
+                label.onmouseover = function() { if (!isMobile()) document.getElementById(card).style.display = 'block'; };
+                label.onmouseout = function() { if (!isMobile()) document.getElementById(card).style.display = 'none'; };
+            }
+        });
         </script>
     </main>
 </body>
