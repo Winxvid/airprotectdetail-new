@@ -1064,6 +1064,71 @@ nav ul li:hover .dropdown-menu {
     }
 }
 
+@media (max-width: 768px) {
+    .services-interactive {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .hotspot-wrapper {
+        position: static;
+        width: 100vw;
+        max-width: 100vw;
+        height: auto;
+        min-height: unset;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+    }
+    .hotspot-label {
+        position: static;
+        margin: 0.5rem 0;
+        width: 95vw;
+        left: unset !important;
+        right: unset !important;
+        border-radius: 6px;
+        background: var(--clr-surface);
+        border: 2px solid var(--clr-primary);
+        color: var(--clr-primary);
+        font-size: 1rem;
+        text-align: center;
+        z-index: 1;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        cursor: pointer;
+    }
+    .hotspot-label:hover {
+        background: var(--clr-primary);
+        color: var(--clr-bg);
+    }
+    .info-card, .info-window {
+        top: 55% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        z-index: 1002 !important;
+        border: 2px solid var(--clr-primary);
+        border-radius: 12px;
+        padding-top: 2.5rem !important;
+    }
+    .info-card .close-card-btn, .info-window .close-card-btn {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        background: var(--clr-primary);
+        color: var(--clr-bg);
+        border: none;
+        border-radius: 50%;
+        width: 2.2rem;
+        height: 2.2rem;
+        font-size: 1.5rem;
+        cursor: pointer;
+        z-index: 1003;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
 @media (max-width: 576px) {
     .container {
         padding: 0 0.5rem;

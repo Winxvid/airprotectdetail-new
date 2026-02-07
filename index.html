@@ -1001,6 +1001,25 @@
                 label.onmouseout = function() { if (!isMobile()) document.getElementById(card).style.display = 'none'; };
             }
         });
+        // Add close button to all info-cards and info-windows on mobile
+function addCloseButtons() {
+    if (window.innerWidth <= 768) {
+        document.querySelectorAll('.info-card, .info-window').forEach(card => {
+            if (!card.querySelector('.close-card-btn')) {
+                const btn = document.createElement('button');
+                btn.className = 'close-card-btn';
+                btn.innerHTML = '&times;';
+                btn.onclick = function(e) {
+                    e.stopPropagation();
+                    card.style.display = 'none';
+                };
+                card.insertBefore(btn, card.firstChild);
+            }
+        });
+    }
+}
+window.addEventListener('DOMContentLoaded', addCloseButtons);
+window.addEventListener('resize', addCloseButtons);
         </script>
     </main>
 </body>
