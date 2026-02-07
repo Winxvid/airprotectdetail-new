@@ -562,24 +562,67 @@ nav ul li:hover .dropdown-menu {
     .info-window {
         max-width: 98vw !important;
         width: 98vw !important;
+        min-width: 220px !important;
+        min-height: 120px !important;
+        max-height: 80vh !important;
+        overflow-y: auto !important;
         padding: 1rem !important;
-        font-size: 0.95rem;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        font-size: 0.95rem !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        background-size: cover !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.18) !important;
+        z-index: 1002 !important;
+        border: 2px solid var(--clr-primary) !important;
+        border-radius: 12px !important;
     }
-
-    .hotspot-wrapper {
-        width: 100vw;
-        overflow-x: auto;
-    }
-
-    .plane-visual {
-        width: 100%;
-        height: auto;
-    }
-
-    .section-title h2 {
+    .info-card .close-card-btn, .info-window .close-card-btn {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        background: var(--clr-primary);
+        color: var(--clr-bg);
+        border: none;
+        border-radius: 50%;
+        width: 2.2rem;
+        height: 2.2rem;
         font-size: 1.5rem;
+        cursor: pointer;
+        z-index: 1003;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .hero {
+        padding-top: 150px;
+        padding-bottom: 60px;
+    }
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    .hero p {
+        font-size: 1.1rem;
+    }
+    .section-title h2 {
+        font-size: 1.8rem;
+    }
+    .service-card,
+    .package-card {
+        min-width: unset;
+        max-width: 100vw;
+        width: 100%;
+        margin: 1rem 0;
+        padding: 1rem;
+        font-size: 0.95rem;
+        box-sizing: border-box;
+    }
+
+    .service-card img,
+    .package-card img {
+        max-width: 90vw;
+        height: auto;
     }
 
     .footer-content,
@@ -1440,16 +1483,52 @@ nav ul li:hover .dropdown-menu {
     .info-window {
         max-width: 98vw !important;
         width: 98vw !important;
+        min-width: 220px !important;
+        min-height: 120px !important;
+        max-height: 80vh !important;
+        overflow-y: auto !important;
         padding: 1rem !important;
-        font-size: 0.95rem;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        font-size: 0.95rem !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        background-size: cover !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.18) !important;
+        z-index: 1002 !important;
+        border: 2px solid var(--clr-primary) !important;
+        border-radius: 12px !important;
     }
-
+    .info-card .close-card-btn, .info-window .close-card-btn {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        background: var(--clr-primary);
+        color: var(--clr-bg);
+        border: none;
+        border-radius: 50%;
+        width: 2.2rem;
+        height: 2.2rem;
+        font-size: 1.5rem;
+        cursor: pointer;
+        z-index: 1003;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .hero {
+        padding-top: 150px;
+        padding-bottom: 60px;
+    }
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    .hero p {
+        font-size: 1.1rem;
+    }
     .section-title h2 {
-        font-size: 1.2rem;
+        font-size: 1.8rem;
     }
-
     .service-card,
     .package-card {
         min-width: unset;

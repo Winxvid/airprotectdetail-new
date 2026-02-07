@@ -1003,20 +1003,25 @@
         });
         // Add close button to all info-cards and info-windows on mobile
 function addCloseButtons() {
-    if (window.innerWidth <= 768) {
-        document.querySelectorAll('.info-card, .info-window').forEach(card => {
-            if (!card.querySelector('.close-card-btn')) {
-                const btn = document.createElement('button');
-                btn.className = 'close-card-btn';
-                btn.innerHTML = '&times;';
-                btn.onclick = function(e) {
-                    e.stopPropagation();
-                    card.style.display = 'none';
-                };
-                card.insertBefore(btn, card.firstChild);
-            }
-        });
-    }
+    document.querySelectorAll('.info-card, .info-window').forEach(card => {
+        if (!card.querySelector('.close-card-btn')) {
+            const btn = document.createElement('button');
+            btn.className = 'close-card-btn';
+            btn.innerHTML = '&times;';
+            btn.onclick = function(e) {
+                e.stopPropagation();
+                card.style.display = 'none';
+            };
+            card.insertBefore(btn, card.firstChild);
+        }
+        // Ensure background image is set
+        if (card.style.backgroundImage === '' && card.dataset.bg) {
+            card.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('${card.dataset.bg}')`;
+            card.style.backgroundSize = 'cover';
+            card.style.backgroundPosition = 'center';
+            card.style.backgroundRepeat = 'no-repeat';
+        }
+    });
 }
 window.addEventListener('DOMContentLoaded', addCloseButtons);
 window.addEventListener('resize', addCloseButtons);
