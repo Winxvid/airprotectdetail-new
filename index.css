@@ -1141,7 +1141,7 @@ nav ul li:hover .dropdown-menu {
     }
     .hotspot-label {
         position: static !important;
-        margin: 0.5rem 0 !important;
+        margin: 0.5rem auto !important;
         width: 95vw !important;
         left: unset !important;
         right: unset !important;
@@ -1150,16 +1150,52 @@ nav ul li:hover .dropdown-menu {
         border: 2px solid var(--clr-primary) !important;
         color: var(--clr-primary) !important;
         font-size: 1rem !important;
-        text-align: center !important;
+        text-align: left !important;
+        padding: 1rem !important;
         z-index: 3 !important;
         box-shadow: 0 2px 8px rgba(0,0,0,0.08) !important;
         cursor: pointer !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
     }
+
+    .hotspot-label::after {
+        content: '\f078';
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        transition: transform 0.3s ease;
+    }
+
+    .hotspot-label:has(+ .info-card[style*="block"])::after {
+        transform: rotate(180deg);
+    }
+
     .hotspot-label:hover {
         background: var(--clr-primary) !important;
         color: var(--clr-bg) !important;
     }
-    .info-card, .info-window {
+    
+    .info-card {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        transform: none !important;
+        width: 95vw !important;
+        max-width: 95vw !important;
+        margin: 0 auto 1rem !important;
+        z-index: 1002 !important;
+        border: 2px solid var(--clr-primary) !important;
+        border-radius: 12px !important;
+        padding: 1.5rem !important;
+        background: var(--clr-surface) !important;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.18) !important;
+        max-height: none !important;
+        overflow-y: visible !important;
+        min-height: unset !important;
+    }
+
+    .info-window {
         top: 55% !important;
         left: 50% !important;
         transform: translate(-50%, -50%) !important;
