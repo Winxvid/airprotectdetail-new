@@ -1188,11 +1188,13 @@ nav ul li:hover .dropdown-menu {
         border: 2px solid var(--clr-primary) !important;
         border-radius: 12px !important;
         padding: 1.5rem !important;
-        background: var(--clr-surface) !important;
         box-shadow: 0 8px 24px rgba(0,0,0,0.18) !important;
         max-height: none !important;
         overflow-y: visible !important;
         min-height: unset !important;
+        background-size: cover !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
     }
 
     .info-window {
