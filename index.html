@@ -216,19 +216,19 @@
                         <img src="plane_exterior_top.png" alt="Aircraft Exterior Top View" class="plane-visual">
 
                         <!-- Left Side -->
-                        <div class="hotspot-label hotspot-left" id="ext-1" onmouseover="showDryWashCard()" onmouseout="hideDryWashCard()">Dry Wash</div>
-                        <div class="hotspot-label hotspot-left" id="ext-2" onmouseover="showWetWashCard()" onmouseout="hideWetWashCard()">Wet Wash</div>
-                        <div class="hotspot-label hotspot-left" id="ext-3" onmouseover="showExteriorWaxCard()" onmouseout="hideExteriorWaxCard()">Exterior Wax</div>
-                        <div class="hotspot-label hotspot-left" id="ext-4" onmouseover="showBrightworkPolishingCard()" onmouseout="hideBrightworkPolishingCard()">Brightwork Polishing</div>
+                        <div class="hotspot-label hotspot-left" id="ext-1">Dry Wash</div>
+                        <div class="hotspot-label hotspot-left" id="ext-2">Wet Wash</div>
+                        <div class="hotspot-label hotspot-left" id="ext-3">Exterior Wax</div>
+                        <div class="hotspot-label hotspot-left" id="ext-4">Brightwork Polishing</div>
 
                         <!-- Right Side -->
-                        <div class="hotspot-label hotspot-right" id="ext-5" onmouseover="showProtectiveCoatingsCard()" onmouseout="hideProtectiveCoatingsCard()">Protective Coatings</div>
-                        <div class="hotspot-label hotspot-right" id="ext-6" onmouseover="showWindowRestorationCard()" onmouseout="hideWindowRestorationCard()">Window Restoration & Polishing</div>
-                        <div class="hotspot-label hotspot-right" id="ext-7" onmouseover="showDeIceBootCard()" onmouseout="hideDeIceBootCard()">De-Ice Boot Refurbishment</div>
-                        <div class="hotspot-label hotspot-right" id="ext-8" onmouseover="showPaintRevitalizationCard()" onmouseout="hidePaintRevitalizationCard()">Paint Revitalization</div>
+                        <div class="hotspot-label hotspot-right" id="ext-5">Protective Coatings</div>
+                        <div class="hotspot-label hotspot-right" id="ext-6">Window Restoration & Polishing</div>
+                        <div class="hotspot-label hotspot-right" id="ext-7">De-Ice Boot Refurbishment</div>
+                        <div class="hotspot-label hotspot-right" id="ext-8">Paint Revitalization</div>
                     </div>
 
-                    <div id="wet-wash-card" class="info-card" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('wet-wash-1.png') no-repeat center/cover; color: white; padding: 2rem; border-radius: 10px; max-width: 700px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); z-index: 9999;">
+                    <div id="wet-wash-card" class="info-card" data-bg="wet-wash-1.png" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('wet-wash-1.png') no-repeat center/cover; color: white; padding: 2rem; border-radius: 10px; max-width: 700px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); z-index: 9999;">
                         <h3 style="margin-bottom: 1rem;">Flawless Results Even in the Harshest Conditions</h3>
                         <p>At AirProtect, our Wet Wash service combines precision, premium products, and expert care to restore your aircraft to pristine condition. Designed for aircraft exposed to harsh environments, including saltwater regions, our meticulous process removes dirt, debris, and contaminants while protecting your investment. With a commitment to excellence, our wet washing service ensures your aircraft shines with a flawless, streak-free finish, ready to impress at every takeoff and landing.</p>
 
@@ -243,7 +243,7 @@
                         </ul>
                     </div>
 
-                    <div id="dry-wash-card" class="info-card" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('dry_wash.png') no-repeat center/cover; color: white; padding: 2rem; border-radius: 10px; max-width: 700px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); z-index: 9999;">
+                    <div id="dry-wash-card" class="info-card" data-bg="dry_wash.png" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('dry_wash.png') no-repeat center/cover; color: white; padding: 2rem; border-radius: 10px; max-width: 700px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); z-index: 9999;">
                         <h3 style="margin-bottom: 1rem;">Brilliantly Clean. Remarkably Efficient. Entirely Waterless.</h3>
                         <p>Designed for those who demand perfection, our eco-friendly, waterless solution saves valuable time while delivering unmatched results. By eliminating the need for traditional washing methods, you can reduce downtime and focus on what matters most—flying. This innovative approach not only ensures a spotless, polished finish but also complies with environmental regulations, making it a smarter, more sustainable choice for protecting your aircraft and your investment.</p>
                         <h4 style="margin-top: 1.5rem;">Benefits</h4>
@@ -257,7 +257,7 @@
                         </ul>
                     </div>
 
-                    <div id="exterior-wax-card" class="info-card" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('exterior_wax.webp') no-repeat center/cover; color: white; padding: 2rem; border-radius: 10px; max-width: 700px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); z-index: 9999;">
+                    <div id="exterior-wax-card" class="info-card" data-bg="exterior_wax.webp" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('exterior_wax.webp') no-repeat center/cover; color: white; padding: 2rem; border-radius: 10px; max-width: 700px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); z-index: 9999;">
                         <h3 style="margin-bottom: 1rem;">Protect and Shine with Professional Precision</h3>
                         <p>Safeguard your aircraft’s exterior while achieving a sleek, polished finish with our Exterior Wax service. Designed to shield against environmental damage, UV rays, and oxidation, this service enhances the durability and appearance of your aircraft’s paint. Let your aircraft shine with a protective barrier that ensures long-lasting brilliance and performance.</p>
                         <h4 style="margin-top: 1.5rem;">Benefits</h4>
@@ -272,7 +272,7 @@
                         </ul>
                     </div>
 
-                    <div id="protective-coatings-card" class="info-card" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('protective-coating.png') no-repeat center/cover; color: white; padding: 2rem; border-radius: 10px; max-width: 700px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); z-index: 9999;">
+                    <div id="protective-coatings-card" class="info-card" data-bg="protective-coating.png" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('protective-coating.png') no-repeat center/cover; color: white; padding: 2rem; border-radius: 10px; max-width: 700px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); z-index: 9999;">
                         <h3 style="margin-bottom: 1rem;">Ultimate Defense for Your Aircraft’s Exterior</h3>
                         <p>Protect and enhance your aircraft with AirProtect’s industry-leading Protective Coatings, offering advanced solutions tailored to your needs.</p>
                         <h4 style="margin-top: 1.5rem;">Benefits</h4>
@@ -286,7 +286,7 @@
                         </ul>
                     </div>
 
-                    <div id="window-restoration-card" class="info-card" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('window_restore.png') no-repeat center/cover; color: white; padding: 2rem; border-radius: 10px; max-width: 700px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); z-index: 9999;">
+                    <div id="window-restoration-card" class="info-card" data-bg="window_restore.png" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('window_restore.png') no-repeat center/cover; color: white; padding: 2rem; border-radius: 10px; max-width: 700px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); z-index: 9999;">
                         <h3 style="margin-bottom: 1rem;">Window Restoration & Polishing</h3>
                         <p>Restore your aircraft’s windows to their original clarity and brilliance with our FAA-approved Window Restoration & Polishing service. Our expert technicians eliminate scratches, haze, and imperfections, ensuring crystal-clear views and a polished finish. This cost-effective alternative to replacement enhances safety, boosts passenger confidence, and extends the life of your windows.</p>
                         <h4 style="margin-top: 1.5rem;">Benefits</h4>
@@ -300,7 +300,7 @@
                         </ul>
                     </div>
 
-                    <div id="brightwork-polishing-card" class="info-card" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('brightwork.png') no-repeat center/cover; color: white; padding: 2rem; border-radius: 10px; max-width: 700px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); z-index: 9999;">
+                    <div id="brightwork-polishing-card" class="info-card" data-bg="brightwork.png" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('brightwork.png') no-repeat center/cover; color: white; padding: 2rem; border-radius: 10px; max-width: 700px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); z-index: 9999;">
                         <h3 style="margin-bottom: 1rem;">Beyond Aesthetics</h3>
                         <p>At AirProtect, our expertise in brightwork metal polishing sets the standard for excellence in the aviation industry. We specialize in transforming leading edges, engine inlets, window retainers, and thrust reversers into stunning, mirror-like surfaces that radiate precision and professionalism. With an unwavering commitment to detail, our skilled technicians expertly remove scratches, gouges, and imperfections, restoring your aircraft’s metal surfaces to their original brilliance.</p>
                         <h4 style="margin-top: 1.5rem;">Benefits</h4>
@@ -316,7 +316,7 @@
                         </ul>
                     </div>
 
-                    <div id="de-ice-boot-card" class="info-card" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('de-ice-boot.png') no-repeat center/cover; color: white; padding: 2rem; border-radius: 10px; max-width: 700px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); z-index: 9999;">
+                    <div id="de-ice-boot-card" class="info-card" data-bg="de-ice-boot.png" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('de-ice-boot.png') no-repeat center/cover; color: white; padding: 2rem; border-radius: 10px; max-width: 700px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); z-index: 9999;">
                         <h3 style="margin-bottom: 1rem;">Protect and Revitalize Your Aircraft’s Defenses</h3>
                         <p>Maintain the efficiency and appearance of your aircraft’s de-ice boots with our De-Ice Boot Refurbishment service. This specialized process removes oxidation, restores flexibility, and enhances the boots’ protective coating to ensure optimal performance in icy conditions. Keep your de-ice boots looking great and operating reliably with a service designed to extend their lifespan and functionality.</p>
                         <h4 style="margin-top: 1.5rem;">Benefits</h4>
@@ -331,7 +331,7 @@
                         </ul>
                     </div>
 
-                    <div id="paint-revitalization-card" class="info-card" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('paint_revive.webp') no-repeat center/cover; color: white; padding: 2rem; border-radius: 10px; max-width: 700px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); z-index: 9999;">
+                    <div id="paint-revitalization-card" class="info-card" data-bg="paint_revive.webp" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('paint_revive.webp') no-repeat center/cover; color: white; padding: 2rem; border-radius: 10px; max-width: 700px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); z-index: 9999;">
                         <h3 style="margin-bottom: 1rem;">Why Repaint When You Can Revitalize & Protect</h3>
                         <p>Transform your aircraft’s exterior with our Paint Revitalization service, designed to restore a factory-new look without the downtime and high costs of repainting. Our process addresses chips, scratches, and surface imperfections while applying a durable protective coating that enhances the paint’s longevity and appearance.</p>
                         <p>Unlike traditional repainting, which requires weeks of downtime and aircraft repositioning, our revitalization service is completed in just a few days at your aircraft’s base. This efficient and cost-effective solution is perfect for owners and brokers looking to protect their investment, boost resale value, and make a lasting impression.</p>
@@ -456,19 +456,19 @@
                         <img src="plane_interior_top.png" alt="Aircraft Interior Top View" class="plane-visual">
 
                         <!-- Left Side -->
-                        <div class="hotspot-label hotspot-left" id="int-1" onmouseover="showInteriorCleaningCard()" onmouseout="hideInteriorCleaningCard()">Interior Cleaning & Detail</div>
-                        <div class="hotspot-label hotspot-left" id="int-2" onmouseover="showLeatherConditioningCard()" onmouseout="hideLeatherConditioningCard()">Leather Conditioning</div>
-                        <div class="hotspot-label hotspot-left" id="int-3" onmouseover="showLeatherRepairCard()" onmouseout="hideLeatherRepairCard()">Leather Repair & Re-Dye</div>
-                        <div class="hotspot-label hotspot-left" id="int-4" onmouseover="showStainRemovalCard()" onmouseout="hideStainRemovalCard()">Stain Removal</div>
-                        <div class="hotspot-label hotspot-left" id="int-5" onmouseover="showLavatorySanitationCard()" onmouseout="hideLavatorySanitationCard()">Lavatory & Galley Sanitation</div>
-                        <div class="hotspot-label hotspot-left" id="int-6" onmouseover="showCarpetExtractionCard()" onmouseout="hideCarpetExtractionCard()">Carpet & Upholstery Extraction</div>
-                        <div class="hotspot-label hotspot-left" id="int-7" onmouseover="showWoodPolishingCard()" onmouseout="hideWoodPolishingCard()">Wood & Trim Polishing</div>
+                        <div class="hotspot-label hotspot-left" id="int-1">Interior Cleaning & Detail</div>
+                        <div class="hotspot-label hotspot-left" id="int-2">Leather Conditioning</div>
+                        <div class="hotspot-label hotspot-left" id="int-3">Leather Repair & Re-Dye</div>
+                        <div class="hotspot-label hotspot-left" id="int-4">Stain Removal</div>
+                        <div class="hotspot-label hotspot-left" id="int-5">Lavatory & Galley Sanitation</div>
+                        <div class="hotspot-label hotspot-left" id="int-6">Carpet & Upholstery Extraction</div>
+                        <div class="hotspot-label hotspot-left" id="int-7">Wood & Trim Polishing</div>
 
                         <!-- Right Side -->
-                        <div class="hotspot-label hotspot-right" id="int-8" onmouseover="showDryCleaningCard()" onmouseout="hideDryCleaningCard()">Dry Cleaning Carpet & Upholstery</div>
+                        <div class="hotspot-label hotspot-right" id="int-8">Dry Cleaning Carpet & Upholstery</div>
                     </div>
 
-                    <div id="interior-cleaning-card" class="info-card" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('interior_cleaning.webp') no-repeat center/cover; color: white; padding: 2rem; border-radius: 10px; max-width: 700px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); z-index: 9999;">
+                    <div id="interior-cleaning-card" class="info-card" data-bg="interior_cleaning.webp" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('interior_cleaning.webp') no-repeat center/cover; color: white; padding: 2rem; border-radius: 10px; max-width: 700px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); z-index: 9999;">
                         <h3 style="margin-bottom: 1rem;">Elevate Your Cabin Experience</h3>
                         <p>Rediscover luxury and comfort with our Complete Interior Cleaning & Detailing service. Designed to provide unparalleled care, this service features meticulous vacuuming, customized cleaning methods for carpets and upholstery, and comprehensive sanitization of all surfaces. From rejuvenating leather and polishing wood trim to expertly detailing galleys, lavatories, and cockpits, we leave no detail overlooked. Ensure your aircraft interior is spotless, inviting, and ready to impress at every cabin entry.</p>
 
@@ -483,7 +483,7 @@
                         </ul>
                     </div>
 
-                    <div id="leather-conditioning-card" class="info-card" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('leather.webp') no-repeat center/cover; color: white; padding: 2rem; border-radius: 10px; max-width: 700px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); z-index: 9999;">
+                    <div id="leather-conditioning-card" class="info-card" data-bg="leather.webp" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('leather.webp') no-repeat center/cover; color: white; padding: 2rem; border-radius: 10px; max-width: 700px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); z-index: 9999;">
                         <h3 style="margin-bottom: 1rem;">Restore, Protect, and Shine</h3>
                         <p>Elevate the look and feel of your aircraft’s interior with our Leather Cleaning & Conditioning service. Designed to preserve and rejuvenate leather surfaces, this service removes dirt and stains while restoring the natural softness and luster of your leather. Our conditioning process protects against wear, cracking, and fading, ensuring your aircraft interior remains luxurious and comfortable for years to come.</p>
 
@@ -498,7 +498,7 @@
                         </ul>
                     </div>
 
-                    <div id="leather-repair-card" class="info-card" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('leather_repair.png') no-repeat center/cover; color: white; padding: 2rem; border-radius: 10px; max-width: 700px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); z-index: 9999;">
+                    <div id="leather-repair-card" class="info-card" data-bg="leather_repair.png" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('leather_repair.png') no-repeat center/cover; color: white; padding: 2rem; border-radius: 10px; max-width: 700px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); z-index: 9999;">
                         <h3 style="margin-bottom: 1rem;">Revive the Beauty of Your Aircraft's Leather</h3>
                         <p>Breathe new life into your aircraft’s interior with AirProtect's Leather Restoration service. Our expert process revitalizes worn or faded leather, restoring its original color, texture, and softness. Elevate the luxurious appeal of your cabin while extending the longevity of your leather surfaces, ensuring they remain as stunning as the day they were first installed.</p>
 
@@ -513,7 +513,7 @@
                         </ul>
                     </div>
 
-                    <div id="stain-removal-card" class="info-card" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('Stain.png') no-repeat center/cover; color: white; padding: 2rem; border-radius: 10px; max-width: 700px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); z-index: 9999;">
+                    <div id="stain-removal-card" class="info-card" data-bg="Stain.png" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('Stain.png') no-repeat center/cover; color: white; padding: 2rem; border-radius: 10px; max-width: 700px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); z-index: 9999;">
                         <h3 style="margin-bottom: 1rem;">Restore Pristine Interiors, Effortlessly</h3>
                         <p>Say goodbye to stubborn stains with our Stain Removal service, designed to revitalize your aircraft’s interior surfaces. Whether it’s carpets, upholstery, or other materials, our advanced techniques and aviation-safe solutions effectively eliminate stains without causing damage. Restore the beauty of your cabin and maintain a fresh, professional appearance for every flight.</p>
 
@@ -529,7 +529,7 @@
                         </ul>
                     </div>
 
-                    <div id="lavatory-sanitation-card" class="info-card" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('lavatory_galley.png') no-repeat center/cover; color: white; padding: 2rem; border-radius: 10px; max-width: 700px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); z-index: 9999;">
+                    <div id="lavatory-sanitation-card" class="info-card" data-bg="lavatory_galley.png" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('lavatory_galley.png') no-repeat center/cover; color: white; padding: 2rem; border-radius: 10px; max-width: 700px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); z-index: 9999;">
                         <h3 style="margin-bottom: 1rem;">Spotless, Hygienic, and Ready for Service</h3>
                         <p>Ensure your aircraft’s most critical areas meet the highest standards of cleanliness with our Lavatory & Galley Sanitation service. Using aviation-safe cleaning products, we thoroughly clean, disinfect, and deodorize these essential spaces. From eliminating bacteria and odors to ensuring every surface is pristine, this service keeps your lavatories and galleys fresh, hygienic, and ready for passengers and crew.</p>
 
@@ -544,7 +544,7 @@
                         </ul>
                     </div>
 
-                    <div id="carpet-extraction-card" class="info-card" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('Carpet.gif') no-repeat center/cover; color: white; padding: 2rem; border-radius: 10px; max-width: 700px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); z-index: 9999;">
+                    <div id="carpet-extraction-card" class="info-card" data-bg="Carpet.gif" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('Carpet.gif') no-repeat center/cover; color: white; padding: 2rem; border-radius: 10px; max-width: 700px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); z-index: 9999;">
                         <h3 style="margin-bottom: 1rem;">Deep Clean Without the Damage</h3>
                         <p>Experience the innovation of our advanced Carpet & Upholstery Extraction service, specially designed to clean and sanitize your aircraft’s interiors without the use of steam or water. Unlike traditional methods, our unique dry-cleaning process protects delicate upholstery and carpets from potential damage while delivering a thorough and effective clean. Perfect for maintaining a pristine cabin environment, this service ensures your aircraft’s interiors remain fresh, comfortable, and long-lasting.</p>
 
@@ -558,7 +558,7 @@
                         </ul>
                     </div>
 
-                    <div id="wood-polishing-card" class="info-card" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('wood_trim.png') no-repeat center/cover; color: white; padding: 2rem; border-radius: 10px; max-width: 700px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); z-index: 9999;">
+                    <div id="wood-polishing-card" class="info-card" data-bg="wood_trim.png" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('wood_trim.png') no-repeat center/cover; color: white; padding: 2rem; border-radius: 10px; max-width: 700px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); z-index: 9999;">
                         <h3 style="margin-bottom: 1rem;">Elevate Elegance, Shine with Perfection</h3>
                         <p>Bring out the natural beauty of your aircraft’s interior with our Wood & Trim Polishing service. Our meticulous process enhances the appearance of wood surfaces and trims, restoring their original luster and ensuring a luxurious finish. Using specialized techniques and products, we protect and preserve these delicate details, adding sophistication to every flight.</p>
 
@@ -574,7 +574,7 @@
                         </ul>
                     </div>
 
-                    <div id="dry-cleaning-card" class="info-card" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('dry_clean.png') no-repeat center/cover; color: white; padding: 2rem; border-radius: 10px; max-width: 700px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); z-index: 9999;">
+                    <div id="dry-cleaning-card" class="info-card" data-bg="dry_clean.png" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('dry_clean.png') no-repeat center/cover; color: white; padding: 2rem; border-radius: 10px; max-width: 700px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); z-index: 9999;">
                         <h3 style="margin-bottom: 1rem;">Gentle Care, Immaculate Results</h3>
                         <p>Preserve the beauty and longevity of your aircraft’s interior with our Dry Cleaning Carpet & Upholstery service. Using advanced dry-cleaning techniques, we provide a deep, effective clean without the risks of water or steam damage. Perfect for delicate materials, this service removes dirt, stains, and allergens while maintaining the integrity of your carpets and upholstery, leaving them fresh, clean, and ready to impress.</p>
 
@@ -968,14 +968,11 @@
         ].forEach(({ id, card }) => {
             const label = document.getElementById(id);
             if (label) {
+                // Click behavior for all devices (Mobile & Desktop)
                 label.onclick = function(e) {
-                    if (isMobile()) {
-                        e.preventDefault();
-                        toggleServiceCard(card);
-                    }
+                    e.preventDefault();
+                    toggleServiceCard(card);
                 };
-                label.onmouseover = function() { if (!isMobile()) document.getElementById(card).style.display = 'block'; };
-                label.onmouseout = function() { if (!isMobile()) document.getElementById(card).style.display = 'none'; };
             }
         });
         // Cabin Care
@@ -991,14 +988,11 @@
         ].forEach(({ id, card }) => {
             const label = document.getElementById(id);
             if (label) {
+                // Click behavior for all devices (Mobile & Desktop)
                 label.onclick = function(e) {
-                    if (isMobile()) {
-                        e.preventDefault();
-                        toggleServiceCard(card);
-                    }
+                    e.preventDefault();
+                    toggleServiceCard(card);
                 };
-                label.onmouseover = function() { if (!isMobile()) document.getElementById(card).style.display = 'block'; };
-                label.onmouseout = function() { if (!isMobile()) document.getElementById(card).style.display = 'none'; };
             }
         });
         // Add close button to all info-cards and info-windows on mobile
