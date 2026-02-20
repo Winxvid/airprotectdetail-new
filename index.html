@@ -454,57 +454,79 @@
 
         <script src="main.js"></script>
         <script>
-        const hamburger = document.getElementById('hamburger-menu');
-        const nav = document.getElementById('main-nav');
+        (function() {
+            const hamburger = document.getElementById('hamburger-menu');
+            const nav = document.getElementById('main-nav');
+            let isAnimating = false;
 
-        hamburger.addEventListener('click', function(e) {
-            e.stopPropagation();
-            nav.classList.toggle('nav-open');
-            hamburger.classList.toggle('is-active');
-            if (nav.classList.contains('nav-open')) {
-                nav.style.display = 'flex';
-            } else {
-                nav.style.display = '';
-                // Close any open dropdowns
+            function closeMenu() {
+                nav.classList.remove('nav-open');
+                hamburger.classList.remove('is-active');
                 document.querySelectorAll('.has-dropdown.open').forEach(el => el.classList.remove('open'));
             }
-        });
 
-        // Mobile dropdown toggle
-        document.querySelectorAll('.has-dropdown > .dropdown-toggle').forEach(toggle => {
-            toggle.addEventListener('click', function(e) {
-                if (window.innerWidth <= 768) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    const parent = this.closest('.has-dropdown');
-                    parent.classList.toggle('open');
-                }
-            });
-        });
+            // Hamburger toggle — debounced to prevent double-fire
+            hamburger.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                if (isAnimating) return;
+                isAnimating = true;
 
-        // Close menu on link click (mobile UX) — but not the dropdown toggle
-        document.querySelectorAll('#main-nav a:not(.dropdown-toggle)').forEach(link => {
-            link.addEventListener('click', () => {
-                if(window.innerWidth <= 768) {
-                    nav.classList.remove('nav-open');
-                    hamburger.classList.remove('is-active');
-                    nav.style.display = '';
+                nav.classList.toggle('nav-open');
+                hamburger.classList.toggle('is-active');
+
+                // If closing, also close sub-dropdowns
+                if (!nav.classList.contains('nav-open')) {
                     document.querySelectorAll('.has-dropdown.open').forEach(el => el.classList.remove('open'));
                 }
-            });
-        });
 
-        // Ensure nav closes on outside click
-        document.addEventListener('click', function(e) {
-            if(window.innerWidth <= 768 && nav.classList.contains('nav-open')) {
-                if (!nav.contains(e.target) && !hamburger.contains(e.target)) {
-                    nav.classList.remove('nav-open');
-                    hamburger.classList.remove('is-active');
-                    nav.style.display = '';
-                    document.querySelectorAll('.has-dropdown.open').forEach(el => el.classList.remove('open'));
+                // Debounce — match CSS transition duration
+                setTimeout(() => { isAnimating = false; }, 450);
+            });
+
+            // Mobile dropdown toggle (Services / Packages accordions)
+            document.querySelectorAll('.has-dropdown > .dropdown-toggle').forEach(toggle => {
+                toggle.addEventListener('click', function(e) {
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const parent = this.closest('.has-dropdown');
+
+                        // Close other open dropdowns (accordion behavior)
+                        document.querySelectorAll('.has-dropdown.open').forEach(el => {
+                            if (el !== parent) el.classList.remove('open');
+                        });
+
+                        parent.classList.toggle('open');
+                    }
+                });
+            });
+
+            // Close menu when a real link is clicked
+            document.querySelectorAll('#main-nav a:not(.dropdown-toggle)').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        closeMenu();
+                    }
+                });
+            });
+
+            // Close on outside click
+            document.addEventListener('click', function(e) {
+                if (window.innerWidth <= 768 && nav.classList.contains('nav-open')) {
+                    if (!nav.contains(e.target) && !hamburger.contains(e.target)) {
+                        closeMenu();
+                    }
                 }
-            }
-        });
+            });
+
+            // Close on Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && nav.classList.contains('nav-open')) {
+                    closeMenu();
+                }
+            });
+        })();
         </script>
     </main>
 </body>
