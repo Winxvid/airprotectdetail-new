@@ -544,12 +544,7 @@ nav ul li:hover > .dropdown-menu {
     }
 }
 
-@media (max-width: 768px) {
-    nav {
-        display: none;
-        /* Mobile menu logic would go here */
-    }
-}
+/* [CLEANED] Old nav hide rule removed - hamburger system handles this */
 
 /* Added responsive CSS rules for mobile optimization */
 @media (max-width: 768px) {
@@ -575,12 +570,6 @@ nav ul li:hover > .dropdown-menu {
 
     .top-bar a {
         gap: 0.3rem;
-    }
-
-    nav ul {
-        flex-direction: column;
-        gap: 1rem;
-        padding: 1rem 0;
     }
 
     .hero-content {
@@ -821,16 +810,7 @@ nav ul li:hover > .dropdown-menu {
     cursor: pointer;
 }
 
-@media (max-width: 768px) {
-    .mobile-toggle {
-        display: block;
-    }
-
-    nav ul {
-        display: none;
-        /* In a real app, this would toggle a mobile menu */
-    }
-}
+/* [CLEANED] Old mobile-toggle/nav-ul hide rule removed - hamburger system handles this */
 
 /* Hamburger styles */
 .hamburger {
@@ -872,10 +852,21 @@ nav ul li:hover > .dropdown-menu {
 @media (max-width: 768px) {
     .hamburger {
         display: flex;
+        order: 2;
     }
 
     nav {
         width: 100%;
+        order: 3;
+    }
+
+    .logo {
+        order: 1;
+    }
+
+    .nav-wrapper {
+        flex-wrap: wrap;
+        position: relative;
     }
 
     #main-nav {
@@ -934,10 +925,6 @@ nav ul li:hover > .dropdown-menu {
         text-align: center;
         padding: 0.75rem 2rem;
         border-radius: 4px;
-    }
-
-    .nav-wrapper {
-        position: relative;
     }
 
     /* Mobile dropdown toggle */
