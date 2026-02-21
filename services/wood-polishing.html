@@ -80,13 +80,9 @@
     <main>
         <section class="service-hero" style="background-image: url('../wood_trim.png');">
             <div class="container">
-                <div class="breadcrumb fade-in">
-                    <a href="../index.html">Home</a><span>/</span>
-                    <a href="../index.html#interior-services">Interior Care</a><span>/</span>
-                    <span>Wood & Trim Polishing</span>
-                </div>
+                
                 <h1 class="text-gradient fade-in fade-in-delay-1">Wood & Trim Polishing</h1>
-                <p class="hero-subtitle fade-in fade-in-delay-2">Elevate Elegance, Shine with Perfection</p>
+                
             </div>
         </section>
 
@@ -148,28 +144,80 @@
         </section>
     </main>
 
-    <footer>
-        <div class="container">
-            <div class="footer-inner">
-                <a href="../index.html"><img src="../logo.png" alt="AirProtect Logo" class="footer-logo-img"></a>
-                <ul class="footer-links">
-                    <li><a href="../index.html#about">About</a></li>
-                    <li><a href="../index.html#services">Services</a></li>
-                    <li><a href="flightline-standard.html">Flightline Standard</a></li>
-                    <li><a href="flightline-elite.html">Flightline Elite</a></li>
-                    <li><a href="flightline-command.html">Flightline Command</a></li>
-                    <li><a href="../index.html#footer">Contact</a></li>
-                </ul>
-                <div class="social-links">
-                    <a href="https://youtube.com/@airprotectgroup" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                    <a href="https://www.facebook.com/airPROTECTdetailing" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                    <a href="https://www.instagram.com/airprotectllc/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.linkedin.com/in/tim-warner-jr-206b95381/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+    <footer class="section-padding" id="footer" style="background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../Request_Consultation.webp') no-repeat top center/cover;">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="contact-container">
+                        <div>
+                            <p class="text-gradient" style="font-weight: bold; letter-spacing: 3px;">Request Consultation</p>
+                            <h2 style="font-size: 3.5rem;">Preserve Your Legacy</h2>
+                            <p style="margin-top: 1rem; color: var(--clr-text-muted);">Provide your aircraft details below. As a veteran-owned company, we approach every aircraft with discipline and respect.</p>
+                        </div>
+                        <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+                            <input type="hidden" name="access_key" value="045c56e1-0f78-414b-9e7f-82f1e97cd12d">
+                            <input type="text" name="name" placeholder="Full Name" required>
+                            <input type="email" name="email" placeholder="Email Address" required>
+                            <input type="tel" name="phone" placeholder="Phone Number" required>
+                            <input type="text" name="aircraft" placeholder="Aircraft Model (e.g. Cessna 172)">
+                            <select name="service" required>
+                                <option value="" disabled selected>Service Interested In *</option>
+                                <optgroup label="Flightline Programs">
+                                    <option value="Flightline Standard">Flightline Standard</option>
+                                    <option value="Flightline Elite">Flightline Elite</option>
+                                    <option value="Flightline Command">Flightline Command</option>
+                                </optgroup>
+                                <optgroup label="Exterior Preservation">
+                                    <option value="Dry Wash">Dry Wash</option>
+                                    <option value="Wet Wash">Wet Wash</option>
+                                    <option value="Exterior Wax">Exterior Wax</option>
+                                    <option value="Brightwork Polishing">Brightwork Polishing</option>
+                                    <option value="Protective Coatings">Protective Coatings</option>
+                                    <option value="Window Restoration & Polishing">Window Restoration & Polishing</option>
+                                    <option value="De-Ice Boot Refurbishment">De-Ice Boot Refurbishment</option>
+                                    <option value="Paint Revitalization">Paint Revitalization</option>
+                                </optgroup>
+                                <optgroup label="Cabin Care">
+                                    <option value="Interior Cleaning & Detail">Interior Cleaning & Detail</option>
+                                    <option value="Leather Conditioning">Leather Conditioning</option>
+                                    <option value="Leather Repair & Re-Dye">Leather Repair & Re-Dye</option>
+                                    <option value="Stain Removal">Stain Removal</option>
+                                    <option value="Lavatory & Galley Sanitation">Lavatory & Galley Sanitation</option>
+                                    <option value="Carpet & Upholstery Extraction">Carpet & Upholstery Extraction</option>
+                                    <option value="Wood & Trim Polishing">Wood & Trim Polishing</option>
+                                    <option value="Dry Cleaning Carpet & Upholstery">Dry Cleaning Carpet & Upholstery</option>
+                                </optgroup>
+                            </select>
+                            <textarea name="message" placeholder="Additional Details" rows="4"></textarea>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                    <div>
+                        <p class="social-subtitle">CONNECT WITH US</p>
+                        <h3 class="social-title">Our Socials</h3>
+                        <div class="social-links">
+                            <a href="https://youtube.com/@airprotectgroup" target="_blank" aria-label="YouTube">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                            <a href="https://www.facebook.com/airPROTECTdetailing" target="_blank" aria-label="Facebook">
+                                <i class="fab fa-facebook"></i>
+                            </a>
+                            <a href="https://www.instagram.com/airprotectllc/" target="_blank" aria-label="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/tim-warner-jr-206b95381/" target="_blank" aria-label="LinkedIn">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 1rem; align-items: center;">
+                        <img src="../veteran.png" alt="Veteran Owned Business" class="veteran-badge" style="opacity: 0.5; filter: grayscale(1);">
+                    </div>
+                </div>
+                <div class="footer-copyright">
+                    © 2026 AirProtect. All rights reserved.
                 </div>
             </div>
-            <div class="footer-bottom">© 2026 AirProtect. All rights reserved.</div>
-        </div>
-    </footer>
+        </footer>
 
     <script>
         // Header scroll

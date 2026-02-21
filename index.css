@@ -122,6 +122,17 @@ img {
     color: var(--clr-bg);
 }
 
+.btn-primary {
+    background: var(--clr-primary);
+    color: var(--clr-bg);
+}
+
+.btn-primary:hover {
+    background: #e6c041;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+}
+
 /* Header & Nav */
 header {
     position: fixed;
