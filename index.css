@@ -197,7 +197,9 @@ footer {
 }
 
 .veteran-badge {
-    height: 80px;
+    width: 80px;
+    height: auto;
+    object-fit: contain;
 }
 
 .footer-copyright {
@@ -698,7 +700,8 @@ nav ul li:hover > .dropdown-menu {
     }
 
     .veteran-badge {
-        max-width: 60px;
+        width: 60px;
+        height: auto;
     }
 
     .social-links {
@@ -745,7 +748,8 @@ nav ul li:hover > .dropdown-menu {
         max-width: 70px;
     }
     .veteran-badge {
-        max-width: 40px;
+        width: 50px;
+        height: auto;
     }
     .social-links {
         gap: 0.25rem;
@@ -1435,7 +1439,8 @@ nav ul li:hover > .dropdown-menu {
         max-width: 70px;
     }
     .veteran-badge {
-        max-width: 40px;
+        width: 50px;
+        height: auto;
     }
     .social-links {
         gap: 0.25rem;
@@ -1801,7 +1806,8 @@ nav ul li:hover > .dropdown-menu {
     }
 
     .veteran-badge {
-        max-width: 60px;
+        width: 60px;
+        height: auto;
     }
 
     .social-links {
@@ -1840,7 +1846,8 @@ nav ul li:hover > .dropdown-menu {
         max-width: 70px;
     }
     .veteran-badge {
-        max-width: 40px;
+        width: 50px;
+        height: auto;
     }
     .social-links {
         gap: 0.25rem;

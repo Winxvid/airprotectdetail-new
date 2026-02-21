@@ -975,7 +975,9 @@ footer {
 }
 
 .veteran-badge {
-    height: 80px;
+    width: 80px;
+    height: auto;
+    object-fit: contain;
 }
 
 .footer-copyright {
@@ -1149,7 +1151,8 @@ footer {
     }
 
     .veteran-badge {
-        max-width: 60px;
+        width: 60px;
+        height: auto;
     }
 
     .social-links {
@@ -1195,7 +1198,8 @@ footer {
     }
 
     .veteran-badge {
-        max-width: 40px;
+        width: 50px;
+        height: auto;
     }
 
     .social-links {
