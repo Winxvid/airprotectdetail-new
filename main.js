@@ -32,22 +32,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 const imgAspect = img.width / img.height;
                 let drawWidth, drawHeight, offsetX, offsetY;
 
-                if (canvasAspect > imgAspect) {
-                    drawWidth = canvas.width;
-                    drawHeight = canvas.width / imgAspect;
-                    offsetX = 0;
-                    offsetY = (canvas.height - drawHeight) / 2;
+                // Adaptive fitting logic: 
+                // In landscape (Desktop): use 'cover' to fill space.
+                // In portrait (Mobile): use 'contain' to ensure sides aren't cropped.
+                const isMobile = window.innerWidth <= 768;
+
+                if (isMobile) {
+                    // Force contain for mobile to avoid side cropping
+                    if (canvasAspect > imgAspect) {
+                        drawHeight = canvas.height;
+                        drawWidth = canvas.height * imgAspect;
+                    } else {
+                        drawWidth = canvas.width;
+                        drawHeight = canvas.width / imgAspect;
+                    }
                 } else {
-                    drawWidth = canvas.height * imgAspect;
-                    drawHeight = canvas.height;
-                    offsetX = (canvas.width - drawWidth) / 2;
-                    offsetY = 0;
+                    // Standard cover logic for desktop
+                    if (canvasAspect > imgAspect) {
+                        drawWidth = canvas.width;
+                        drawHeight = canvas.width / imgAspect;
+                    } else {
+                        drawHeight = canvas.height;
+                        drawWidth = canvas.height * imgAspect;
+                    }
                 }
+
+                offsetX = (canvas.width - drawWidth) / 2;
+                offsetY = (canvas.height - drawHeight) / 2;
 
                 context.clearRect(0, 0, canvas.width, canvas.height);
                 context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
 
-                // Overlay a dark tint to maintain text readability (anti-contrast)
+                // Overlay a dark tint
                 context.fillStyle = 'rgba(9, 17, 27, 0.4)';
                 context.fillRect(0, 0, canvas.width, canvas.height);
             }
