@@ -702,7 +702,8 @@ nav ul li:hover>.dropdown-menu {
     }
 
     .hero h1 {
-        font-size: 2.5rem;
+        font-size: clamp(1.8rem, 8vw, 2.3rem);
+        line-height: 1.1;
     }
 
     .hero p {
@@ -779,7 +780,7 @@ nav ul li:hover>.dropdown-menu {
     }
 
     .hero h1 {
-        font-size: 2rem;
+        font-size: clamp(1.6rem, 10vw, 2rem);
     }
 
     .service-card,
