@@ -40,12 +40,40 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (isMobile) {
                     // Force contain for mobile to avoid side cropping
                     if (canvasAspect > imgAspect) {
-                        drawHeight = canvas.height;
-                        drawWidth = canvas.height * imgAspect;
+                        drawHeight = canvas.height * 0.45; // Shrink original slightly to fit reflection
+                        drawWidth = drawHeight * imgAspect;
                     } else {
                         drawWidth = canvas.width;
                         drawHeight = canvas.width / imgAspect;
                     }
+
+                    offsetX = (canvas.width - drawWidth) / 2;
+                    offsetY = (canvas.height * 0.4) - (drawHeight / 2); // Position original in top 40%
+
+                    context.clearRect(0, 0, canvas.width, canvas.height);
+
+                    // 1. Draw Original Image
+                    context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
+
+                    // 2. Draw Mirror Reflection
+                    context.save();
+                    context.translate(0, offsetY + drawHeight * 2); // Position below original
+                    context.scale(1, -1); // Vertical flip
+
+                    // Apply soft blur specifically to the reflection
+                    context.filter = 'blur(12px)';
+                    context.globalAlpha = 0.3; // Subdued opacity for the reflection
+                    context.drawImage(img, offsetX, 0, drawWidth, drawHeight);
+                    context.restore();
+
+                    // 3. Add soft gradient transition to the reflection for a "water" fade
+                    const reflectionGradient = context.createLinearGradient(0, offsetY + drawHeight, 0, canvas.height);
+                    reflectionGradient.addColorStop(0, 'rgba(9, 17, 27, 0)');
+                    reflectionGradient.addColorStop(0.5, 'rgba(9, 17, 27, 0.6)');
+                    reflectionGradient.addColorStop(1, 'rgba(9, 17, 27, 1)');
+                    context.fillStyle = reflectionGradient;
+                    context.fillRect(0, offsetY + drawHeight, canvas.width, canvas.height - (offsetY + drawHeight));
+
                 } else {
                     // Standard cover logic for desktop
                     if (canvasAspect > imgAspect) {
@@ -55,15 +83,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         drawHeight = canvas.height;
                         drawWidth = canvas.height * imgAspect;
                     }
+                    offsetX = (canvas.width - drawWidth) / 2;
+                    offsetY = (canvas.height - drawHeight) / 2;
+
+                    context.clearRect(0, 0, canvas.width, canvas.height);
+                    context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
                 }
 
-                offsetX = (canvas.width - drawWidth) / 2;
-                offsetY = (canvas.height - drawHeight) / 2;
-
-                context.clearRect(0, 0, canvas.width, canvas.height);
-                context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
-
-                // Overlay a dark tint
+                // Overlay a global dark tint to maintain text readability
                 context.fillStyle = 'rgba(9, 17, 27, 0.4)';
                 context.fillRect(0, 0, canvas.width, canvas.height);
             }
