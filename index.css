@@ -302,7 +302,7 @@ nav ul li a:hover {
     border-right: 1px solid var(--glass-border);
 }
 
-nav ul li:hover > .dropdown-menu {
+nav ul li:hover>.dropdown-menu {
     opacity: 1;
     visibility: visible;
     transform: translateX(-50%) translateY(0);
@@ -354,20 +354,57 @@ nav ul li:hover > .dropdown-menu {
 
 /* Hero Section */
 .hero {
-    min-height: 100vh;
+    height: 500vh;
+    position: relative;
+    overflow: visible;
+}
+
+.hero-sticky {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
     display: flex;
     align-items: center;
-    position: relative;
-    background: linear-gradient(rgba(9, 17, 27, 0.7), rgba(9, 17, 27, 0.7)), url('hero-fallback.jpg') no-repeat center center/cover;
-    overflow: hidden;
-    padding-top: 200px;
-    /* Increased to fully clear the tall header */
-    padding-bottom: 80px;
+}
+
+#hero-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    z-index: 1;
 }
 
 .hero-content {
-    max-width: 1200px;
+    position: relative;
     z-index: 2;
+    width: 100%;
+}
+
+.hero-line,
+#hero-btns-container {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.hero-line {
+    display: block;
+}
+
+#hero-btns-container {
+    display: inline-block;
+}
+
+.hero-line.revealed,
+#hero-btns-container.revealed {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
 }
 
 .hero h1 {
@@ -634,12 +671,14 @@ nav ul li:hover > .dropdown-menu {
         background-size: cover !important;
         background-position: center !important;
         background-repeat: no-repeat !important;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.18) !important;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18) !important;
         z-index: 1002 !important;
         border: 2px solid var(--clr-primary) !important;
         border-radius: 12px !important;
     }
-    .info-card .close-card-btn, .info-window .close-card-btn {
+
+    .info-card .close-card-btn,
+    .info-window .close-card-btn {
         position: absolute;
         top: 0.5rem;
         right: 0.5rem;
@@ -656,19 +695,24 @@ nav ul li:hover > .dropdown-menu {
         align-items: center;
         justify-content: center;
     }
+
     .hero {
         padding-top: 150px;
         padding-bottom: 60px;
     }
+
     .hero h1 {
         font-size: 2.5rem;
     }
+
     .hero p {
         font-size: 1.1rem;
     }
+
     .section-title h2 {
         font-size: 1.8rem;
     }
+
     .service-card,
     .package-card {
         min-width: unset;
@@ -733,31 +777,45 @@ nav ul li:hover > .dropdown-menu {
     .section-title h2 {
         font-size: 1rem;
     }
+
     .hero h1 {
         font-size: 2rem;
     }
-    .service-card, .package-card, .info-card, .info-window {
+
+    .service-card,
+    .package-card,
+    .info-card,
+    .info-window {
         padding: 0.5rem !important;
         font-size: 0.9rem !important;
     }
-    .service-card img, .package-card img {
+
+    .service-card img,
+    .package-card img {
         max-width: 98vw;
         height: auto;
     }
+
     .footer-logo {
         max-width: 70px;
     }
+
     .veteran-badge {
         width: 50px;
         height: auto;
     }
+
     .social-links {
         gap: 0.25rem;
     }
-    .contact-form input, .contact-form select, .contact-form textarea {
+
+    .contact-form input,
+    .contact-form select,
+    .contact-form textarea {
         font-size: 0.95rem;
         padding: 0.5rem;
     }
+
     .hotspot-label {
         font-size: 0.7rem;
         padding: 6px 6px;
@@ -765,6 +823,7 @@ nav ul li:hover > .dropdown-menu {
         min-width: 120px;
         max-width: 98vw;
     }
+
     .hotspot-wrapper {
         height: 200px;
         min-height: 120px;
@@ -858,7 +917,7 @@ nav ul li:hover > .dropdown-menu {
     left: 50%;
     transform: translateX(-50%);
     transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
-                opacity 0.25s ease;
+        opacity 0.25s ease;
 }
 
 .hamburger span:nth-child(1) {
@@ -929,7 +988,7 @@ nav ul li:hover > .dropdown-menu {
         opacity: 0;
         pointer-events: none;
         transition: max-height 0.45s cubic-bezier(0.23, 1, 0.32, 1),
-                    opacity 0.3s ease;
+            opacity 0.3s ease;
     }
 
     #main-nav.nav-open {
@@ -939,16 +998,16 @@ nav ul li:hover > .dropdown-menu {
         overflow-y: auto;
     }
 
-    #main-nav > li {
+    #main-nav>li {
         width: 100%;
         border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
 
-    #main-nav > li:last-child {
+    #main-nav>li:last-child {
         border-bottom: none;
     }
 
-    #main-nav > li > a {
+    #main-nav>li>a {
         width: 100%;
         display: block;
         padding: 0.9rem 1.5rem;
@@ -960,7 +1019,7 @@ nav ul li:hover > .dropdown-menu {
         opacity: 0.9;
     }
 
-    #main-nav > li > a:hover {
+    #main-nav>li>a:hover {
         color: var(--clr-primary);
         background: rgba(255, 255, 255, 0.03);
     }
@@ -974,21 +1033,21 @@ nav ul li:hover > .dropdown-menu {
     }
 
     /* Mobile dropdown toggle */
-    .has-dropdown > .dropdown-toggle {
+    .has-dropdown>.dropdown-toggle {
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
 
-    .has-dropdown > .dropdown-toggle .dropdown-arrow {
+    .has-dropdown>.dropdown-toggle .dropdown-arrow {
         transition: transform 0.3s ease;
     }
 
-    .has-dropdown.open > .dropdown-toggle .dropdown-arrow {
+    .has-dropdown.open>.dropdown-toggle .dropdown-arrow {
         transform: rotate(180deg);
     }
 
-    .has-dropdown.open > .dropdown-toggle {
+    .has-dropdown.open>.dropdown-toggle {
         color: var(--clr-primary);
         background: rgba(212, 175, 55, 0.05);
     }
@@ -1067,12 +1126,12 @@ nav ul li:hover > .dropdown-menu {
     }
 
     /* Show/hide dropdown on .open */
-    nav ul li:hover > .dropdown-menu {
+    nav ul li:hover>.dropdown-menu {
         max-height: 0 !important;
         overflow: hidden !important;
     }
 
-    .has-dropdown.open > .dropdown-menu {
+    .has-dropdown.open>.dropdown-menu {
         max-height: 800px !important;
         overflow: visible !important;
     }
@@ -1322,6 +1381,7 @@ nav ul li:hover > .dropdown-menu {
         box-shadow: none !important;
         padding: 0 !important;
     }
+
     .hotspot-wrapper {
         position: static !important;
         width: 100vw !important;
@@ -1336,6 +1396,7 @@ nav ul li:hover > .dropdown-menu {
         background: none !important;
         box-shadow: none !important;
     }
+
     .plane-visual {
         width: 100vw !important;
         height: auto !important;
@@ -1346,6 +1407,7 @@ nav ul li:hover > .dropdown-menu {
         position: static !important;
         z-index: 2 !important;
     }
+
     .hotspot-label {
         position: static !important;
         margin: 0.5rem auto !important;
@@ -1360,7 +1422,7 @@ nav ul li:hover > .dropdown-menu {
         text-align: left !important;
         padding: 1rem !important;
         z-index: 3 !important;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08) !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
         cursor: pointer !important;
         display: flex !important;
         justify-content: space-between !important;
@@ -1382,7 +1444,7 @@ nav ul li:hover > .dropdown-menu {
         background: var(--clr-primary) !important;
         color: var(--clr-bg) !important;
     }
-    
+
     .info-card {
         position: relative !important;
         top: auto !important;
@@ -1395,7 +1457,7 @@ nav ul li:hover > .dropdown-menu {
         border: 2px solid var(--clr-primary) !important;
         border-radius: 12px !important;
         padding: 1.5rem !important;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.18) !important;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18) !important;
         max-height: none !important;
         overflow-y: visible !important;
         min-height: unset !important;
@@ -1413,7 +1475,7 @@ nav ul li:hover > .dropdown-menu {
         border-radius: 12px !important;
         padding-top: 2.5rem !important;
         background: var(--glass-bg) !important;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.18) !important;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18) !important;
     }
 }
 
@@ -1421,34 +1483,49 @@ nav ul li:hover > .dropdown-menu {
     .container {
         padding: 0 0.5rem;
     }
+
     .section-title h2 {
         font-size: 1rem;
     }
+
     .hero h1 {
         font-size: 2rem;
     }
-    .service-card, .package-card, .info-card, .info-window {
+
+    .service-card,
+    .package-card,
+    .info-card,
+    .info-window {
         padding: 0.5rem !important;
         font-size: 0.9rem !important;
     }
-    .service-card img, .package-card img {
+
+    .service-card img,
+    .package-card img {
         max-width: 98vw;
         height: auto;
     }
+
     .footer-logo {
         max-width: 70px;
     }
+
     .veteran-badge {
         width: 50px;
         height: auto;
     }
+
     .social-links {
         gap: 0.25rem;
     }
-    .contact-form input, .contact-form select, .contact-form textarea {
+
+    .contact-form input,
+    .contact-form select,
+    .contact-form textarea {
         font-size: 0.95rem;
         padding: 0.5rem;
     }
+
     .hotspot-label {
         font-size: 0.7rem;
         padding: 6px 6px;
@@ -1456,6 +1533,7 @@ nav ul li:hover > .dropdown-menu {
         min-width: 120px;
         max-width: 98vw;
     }
+
     .hotspot-wrapper {
         height: 200px;
         min-height: 120px;
@@ -1740,12 +1818,14 @@ nav ul li:hover > .dropdown-menu {
         background-size: cover !important;
         background-position: center !important;
         background-repeat: no-repeat !important;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.18) !important;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18) !important;
         z-index: 1002 !important;
         border: 2px solid var(--clr-primary) !important;
         border-radius: 12px !important;
     }
-    .info-card .close-card-btn, .info-window .close-card-btn {
+
+    .info-card .close-card-btn,
+    .info-window .close-card-btn {
         position: absolute;
         top: 0.5rem;
         right: 0.5rem;
@@ -1762,19 +1842,24 @@ nav ul li:hover > .dropdown-menu {
         align-items: center;
         justify-content: center;
     }
+
     .hero {
         padding-top: 150px;
         padding-bottom: 60px;
     }
+
     .hero h1 {
         font-size: 2.5rem;
     }
+
     .hero p {
         font-size: 1.1rem;
     }
+
     .section-title h2 {
         font-size: 1.8rem;
     }
+
     .service-card,
     .package-card {
         min-width: unset;
@@ -1828,34 +1913,49 @@ nav ul li:hover > .dropdown-menu {
     .container {
         padding: 0 0.5rem;
     }
+
     .section-title h2 {
         font-size: 1rem;
     }
+
     .hero h1 {
         font-size: 2rem;
     }
-    .service-card, .package-card, .info-card, .info-window {
+
+    .service-card,
+    .package-card,
+    .info-card,
+    .info-window {
         padding: 0.5rem !important;
         font-size: 0.9rem !important;
     }
-    .service-card img, .package-card img {
+
+    .service-card img,
+    .package-card img {
         max-width: 98vw;
         height: auto;
     }
+
     .footer-logo {
         max-width: 70px;
     }
+
     .veteran-badge {
         width: 50px;
         height: auto;
     }
+
     .social-links {
         gap: 0.25rem;
     }
-    .contact-form input, .contact-form select, .contact-form textarea {
+
+    .contact-form input,
+    .contact-form select,
+    .contact-form textarea {
         font-size: 0.95rem;
         padding: 0.5rem;
     }
+
     .hotspot-label {
         font-size: 0.7rem;
         padding: 6px 6px;
@@ -1863,6 +1963,7 @@ nav ul li:hover > .dropdown-menu {
         min-width: 120px;
         max-width: 98vw;
     }
+
     .hotspot-wrapper {
         height: 200px;
         min-height: 120px;

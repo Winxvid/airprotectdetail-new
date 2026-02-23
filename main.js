@@ -1,4 +1,110 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Hero Image Sequence Scroller ---
+    const canvas = document.getElementById('hero-canvas');
+    const heroSection = document.getElementById('hero');
+
+    if (canvas && heroSection) {
+        const context = canvas.getContext('2d');
+        const frameCount = 300;
+
+        // Match frames to the filenames in hero-sequence folder
+        const currentFrame = index => (
+            `hero-sequence/ezgif-frame-${index.toString().padStart(3, '0')}.png`
+        );
+
+        const images = [];
+        const airprotectHero = {
+            frame: 0
+        };
+
+        // Preload images
+        for (let i = 1; i <= frameCount; i++) {
+            const img = new Image();
+            img.src = currentFrame(i);
+            images.push(img);
+        }
+
+        const render = () => {
+            const img = images[airprotectHero.frame];
+            if (img && img.complete) {
+                // Handle canvas sizing and aspect ratio
+                const canvasAspect = canvas.width / canvas.height;
+                const imgAspect = img.width / img.height;
+                let drawWidth, drawHeight, offsetX, offsetY;
+
+                if (canvasAspect > imgAspect) {
+                    drawWidth = canvas.width;
+                    drawHeight = canvas.width / imgAspect;
+                    offsetX = 0;
+                    offsetY = (canvas.height - drawHeight) / 2;
+                } else {
+                    drawWidth = canvas.height * imgAspect;
+                    drawHeight = canvas.height;
+                    offsetX = (canvas.width - drawWidth) / 2;
+                    offsetY = 0;
+                }
+
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
+
+                // Overlay a dark tint to maintain text readability (anti-contrast)
+                context.fillStyle = 'rgba(9, 17, 27, 0.4)';
+                context.fillRect(0, 0, canvas.width, canvas.height);
+            }
+        };
+
+        const updateCanvasSize = () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            render();
+        };
+
+        window.addEventListener('resize', updateCanvasSize);
+        updateCanvasSize();
+
+        // Elements for sequential reveal
+        const line1 = document.getElementById('hero-line-1');
+        const line2 = document.getElementById('hero-line-2');
+        const line3 = document.getElementById('hero-line-3');
+        const btns = document.getElementById('hero-btns-container');
+
+        // Scroll listener to update frames and sequential reveals
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const scrollHeight = heroSection.offsetHeight - window.innerHeight;
+
+            // Only calculate if we are within the hero section's scroll range
+            if (scrollTop <= heroSection.offsetTop + scrollHeight) {
+                const scrollFraction = Math.max(0, Math.min(1, scrollTop / scrollHeight));
+
+                // Update Image Frame
+                const frameIndex = Math.min(
+                    frameCount - 1,
+                    Math.floor(scrollFraction * frameCount)
+                );
+
+                if (airprotectHero.frame !== frameIndex) {
+                    airprotectHero.frame = frameIndex;
+                    requestAnimationFrame(render);
+                }
+
+                // Sequential Reveals
+                if (scrollFraction >= 0.05) line1?.classList.add('revealed'); else line1?.classList.remove('revealed');
+                if (scrollFraction >= 0.25) line2?.classList.add('revealed'); else line2?.classList.remove('revealed');
+                if (scrollFraction >= 0.45) line3?.classList.add('revealed'); else line3?.classList.remove('revealed');
+                if (scrollFraction >= 0.65) btns?.classList.add('revealed'); else btns?.classList.remove('revealed');
+            }
+        });
+
+        // Initial render
+        if (images[0].complete) {
+            render();
+        } else {
+            images[0].onload = render;
+        }
+    }
+    // --- End Hero Image Sequence ---
+
     const header = document.getElementById('main-header');
 
     // Header scroll background
