@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (isMobile) {
                     // Force contain for mobile to avoid side cropping
                     if (canvasAspect > imgAspect) {
-                        drawHeight = canvas.height * 0.45; // Shrink original slightly to fit reflection
+                        drawHeight = canvas.height * 0.4; // Slightly smaller to accommodate dual reflection
                         drawWidth = drawHeight * imgAspect;
                     } else {
                         drawWidth = canvas.width;
@@ -48,30 +48,44 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
 
                     offsetX = (canvas.width - drawWidth) / 2;
-                    offsetY = (canvas.height * 0.4) - (drawHeight / 2); // Position original in top 40%
+                    offsetY = (canvas.height - drawHeight) / 2; // Center main content vertically
 
                     context.clearRect(0, 0, canvas.width, canvas.height);
 
-                    // 1. Draw Original Image
+                    // 1. Draw Original Image (Centered)
                     context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
 
-                    // 2. Draw Mirror Reflection
+                    // 2. Draw Bottom Mirror Reflection
                     context.save();
-                    context.translate(0, offsetY + drawHeight * 2); // Position below original
-                    context.scale(1, -1); // Vertical flip
-
-                    // Apply soft blur specifically to the reflection
+                    context.translate(0, (offsetY + drawHeight) * 2);
+                    context.scale(1, -1);
                     context.filter = 'blur(12px)';
-                    context.globalAlpha = 0.3; // Subdued opacity for the reflection
-                    context.drawImage(img, offsetX, 0, drawWidth, drawHeight);
+                    context.globalAlpha = 0.25;
+                    context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
                     context.restore();
 
-                    // 3. Add soft gradient transition to the reflection for a "water" fade
-                    const reflectionGradient = context.createLinearGradient(0, offsetY + drawHeight, 0, canvas.height);
-                    reflectionGradient.addColorStop(0, 'rgba(9, 17, 27, 0)');
-                    reflectionGradient.addColorStop(0.5, 'rgba(9, 17, 27, 0.6)');
-                    reflectionGradient.addColorStop(1, 'rgba(9, 17, 27, 1)');
-                    context.fillStyle = reflectionGradient;
+                    // 3. Draw Top Mirror Reflection
+                    context.save();
+                    context.translate(0, offsetY * 2);
+                    context.scale(1, -1);
+                    context.filter = 'blur(12px)';
+                    context.globalAlpha = 0.25;
+                    context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
+                    context.restore();
+
+                    // 4. Gradient Masks for seamless blending
+                    // Top Shadow/Fade
+                    const topFade = context.createLinearGradient(0, 0, 0, offsetY);
+                    topFade.addColorStop(0, 'rgba(9, 17, 27, 1)');
+                    topFade.addColorStop(1, 'rgba(9, 17, 27, 0)');
+                    context.fillStyle = topFade;
+                    context.fillRect(0, 0, canvas.width, offsetY);
+
+                    // Bottom Shadow/Fade
+                    const bottomFade = context.createLinearGradient(0, offsetY + drawHeight, 0, canvas.height);
+                    bottomFade.addColorStop(0, 'rgba(9, 17, 27, 0)');
+                    bottomFade.addColorStop(1, 'rgba(9, 17, 27, 1)');
+                    context.fillStyle = bottomFade;
                     context.fillRect(0, offsetY + drawHeight, canvas.width, canvas.height - (offsetY + drawHeight));
 
                 } else {
