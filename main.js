@@ -17,30 +17,39 @@ document.addEventListener('DOMContentLoaded', () => {
             frame: 0
         };
 
-        // Preload images
-        for (let i = 1; i <= frameCount; i++) {
-            const img = new Image();
-            img.src = currentFrame(i);
-            images.push(img);
-        }
+        // --- Smart Preloading ---
+        // Load initial frames first to show something quickly
+        const initialFramesCount = 30; // Load first 30 frames immediately
+        const loadImages = async () => {
+            // Priority load
+            for (let i = 1; i <= Math.min(frameCount, initialFramesCount); i++) {
+                const img = new Image();
+                img.src = currentFrame(i);
+                images[i - 1] = img;
+            }
+
+            // Deferred load the rest in small chunks to avoid blocking
+            for (let i = initialFramesCount + 1; i <= frameCount; i++) {
+                if (i % 20 === 0) await new Promise(r => setTimeout(r, 50)); // Small breather
+                const img = new Image();
+                img.src = currentFrame(i);
+                images[i - 1] = img;
+            }
+        };
+        loadImages();
 
         const render = () => {
             const img = images[airprotectHero.frame];
             if (img && img.complete) {
-                // Handle canvas sizing and aspect ratio
+                // ... adaptive fitting logic (UNCHANGED) ...
                 const canvasAspect = canvas.width / canvas.height;
                 const imgAspect = img.width / img.height;
                 let drawWidth, drawHeight, offsetX, offsetY;
-
-                // Adaptive fitting logic: 
-                // In landscape (Desktop): use 'cover' to fill space.
-                // In portrait (Mobile): use 'contain' to ensure sides aren't cropped.
                 const isMobile = window.innerWidth <= 768;
 
                 if (isMobile) {
-                    // Force contain for mobile to avoid side cropping
                     if (canvasAspect > imgAspect) {
-                        drawHeight = canvas.height * 0.4; // Slightly smaller to accommodate dual reflection
+                        drawHeight = canvas.height * 0.4;
                         drawWidth = drawHeight * imgAspect;
                     } else {
                         drawWidth = canvas.width;
@@ -48,14 +57,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
 
                     offsetX = (canvas.width - drawWidth) / 2;
-                    offsetY = (canvas.height - drawHeight) / 2; // Center main content vertically
+                    offsetY = (canvas.height - drawHeight) / 2;
 
                     context.clearRect(0, 0, canvas.width, canvas.height);
-
-                    // 1. Draw Original Image (Centered)
                     context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
 
-                    // 2. Draw Bottom Mirror Reflection
                     context.save();
                     context.translate(0, (offsetY + drawHeight) * 2);
                     context.scale(1, -1);
@@ -64,7 +70,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
                     context.restore();
 
-                    // 3. Draw Top Mirror Reflection
                     context.save();
                     context.translate(0, offsetY * 2);
                     context.scale(1, -1);
@@ -73,15 +78,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
                     context.restore();
 
-                    // 4. Gradient Masks for seamless blending
-                    // Top Shadow/Fade
                     const topFade = context.createLinearGradient(0, 0, 0, offsetY);
                     topFade.addColorStop(0, 'rgba(9, 17, 27, 1)');
                     topFade.addColorStop(1, 'rgba(9, 17, 27, 0)');
                     context.fillStyle = topFade;
                     context.fillRect(0, 0, canvas.width, offsetY);
 
-                    // Bottom Shadow/Fade
                     const bottomFade = context.createLinearGradient(0, offsetY + drawHeight, 0, canvas.height);
                     bottomFade.addColorStop(0, 'rgba(9, 17, 27, 0)');
                     bottomFade.addColorStop(1, 'rgba(9, 17, 27, 1)');
@@ -89,7 +91,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     context.fillRect(0, offsetY + drawHeight, canvas.width, canvas.height - (offsetY + drawHeight));
 
                 } else {
-                    // Standard cover logic for desktop
                     if (canvasAspect > imgAspect) {
                         drawWidth = canvas.width;
                         drawHeight = canvas.width / imgAspect;
@@ -104,7 +105,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
                 }
 
-                // Overlay a global dark tint to maintain text readability
                 context.fillStyle = 'rgba(9, 17, 27, 0.4)';
                 context.fillRect(0, 0, canvas.width, canvas.height);
             }
@@ -119,46 +119,46 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('resize', updateCanvasSize);
         updateCanvasSize();
 
-        // Elements for sequential reveal
         const line1 = document.getElementById('hero-line-1');
         const line2 = document.getElementById('hero-line-2');
         const line3 = document.getElementById('hero-line-3');
         const btns = document.getElementById('hero-btns-container');
 
-        // Scroll listener to update frames and sequential reveals
+        // --- Throttled Scroll Listener ---
+        let ticking = false;
         window.addEventListener('scroll', () => {
-            const scrollTop = window.scrollY;
-            const scrollHeight = heroSection.offsetHeight - window.innerHeight;
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const scrollTop = window.scrollY;
+                    const scrollHeight = heroSection.offsetHeight - window.innerHeight;
 
-            // Only calculate if we are within the hero section's scroll range
-            if (scrollTop <= heroSection.offsetTop + scrollHeight) {
-                const scrollFraction = Math.max(0, Math.min(1, scrollTop / scrollHeight));
+                    if (scrollTop <= heroSection.offsetTop + scrollHeight) {
+                        const scrollFraction = Math.max(0, Math.min(1, scrollTop / scrollHeight));
+                        const frameIndex = Math.min(frameCount - 1, Math.floor(scrollFraction * frameCount));
 
-                // Update Image Frame
-                const frameIndex = Math.min(
-                    frameCount - 1,
-                    Math.floor(scrollFraction * frameCount)
-                );
+                        if (airprotectHero.frame !== frameIndex) {
+                            airprotectHero.frame = frameIndex;
+                            render();
+                        }
 
-                if (airprotectHero.frame !== frameIndex) {
-                    airprotectHero.frame = frameIndex;
-                    requestAnimationFrame(render);
-                }
-
-                // Sequential Reveals
-                if (scrollFraction >= 0.05) line1?.classList.add('revealed'); else line1?.classList.remove('revealed');
-                if (scrollFraction >= 0.25) line2?.classList.add('revealed'); else line2?.classList.remove('revealed');
-                if (scrollFraction >= 0.45) line3?.classList.add('revealed'); else line3?.classList.remove('revealed');
-                if (scrollFraction >= 0.65) btns?.classList.add('revealed'); else btns?.classList.remove('revealed');
+                        if (scrollFraction >= 0.05) line1?.classList.add('revealed'); else line1?.classList.remove('revealed');
+                        if (scrollFraction >= 0.25) line2?.classList.add('revealed'); else line2?.classList.remove('revealed');
+                        if (scrollFraction >= 0.45) line3?.classList.add('revealed'); else line3?.classList.remove('revealed');
+                        if (scrollFraction >= 0.65) btns?.classList.add('revealed'); else btns?.classList.remove('revealed');
+                    }
+                    ticking = false;
+                });
+                ticking = true;
             }
         });
 
-        // Initial render
-        if (images[0].complete) {
-            render();
-        } else {
-            images[0].onload = render;
-        }
+        // Use a simpler check for initial render
+        const checkInitialRender = setInterval(() => {
+            if (images[0] && images[0].complete) {
+                render();
+                clearInterval(checkInitialRender);
+            }
+        }, 100);
     }
     // --- End Hero Image Sequence ---
 
