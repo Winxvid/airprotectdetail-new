@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Match frames to the filenames in hero-sequence folder
         const currentFrame = index => (
-            `hero-sequence/ezgif-frame-${index.toString().padStart(3, '0')}.png`
+            `assets/ezgif-frame-${index.toString().padStart(3, '0')}.png`
         );
 
         const images = [];
