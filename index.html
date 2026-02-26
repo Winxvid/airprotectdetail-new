@@ -11,9 +11,38 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="assets/favicon.png" type="image/png">
+    <style>
+        /* ── Preloader ── */
+        #preloader {
+            position: fixed;
+            inset: 0;
+            background: #09111b;
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        #preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        #preloader img {
+            width: 180px;
+            height: auto;
+        }
+    </style>
 </head>
 
 <body>
+
+    <!-- Preloader: only shown on first visit via sessionStorage -->
+    <div id="preloader" class="hidden" aria-hidden="true">
+        <img src="assets/preloader.gif" alt="Loading AirProtect...">
+    </div>
 
     <header id="main-header" class="glass">
         <div class="top-bar">
@@ -37,7 +66,7 @@
             <nav>
                 <ul id="main-nav">
                     <li><a href="#hero">Home</a></li>
-                    <li><a href="#about">About</a></li>
+                    <li><a href="about.html">About</a></li>
                     <li class="has-dropdown">
                         <a href="#services" class="dropdown-toggle">Services <i
                                 class="fa-solid fa-chevron-down dropdown-arrow"></i></a>
@@ -55,7 +84,7 @@
                                     <li><a href="services/paint-revitalization.html">Paint Revitalization</a></li>
                                 </ul>
                             </div>
-                            <div class="mega-col">
+                            <div class="mega-col" style="border-right: none;">
                                 <h4 class="mega-title"><i class="fa-solid fa-couch"></i> Interior Care</h4>
                                 <ul>
                                     <li><a href="services/interior-cleaning.html">Interior Cleaning &amp; Detail</a>
@@ -72,7 +101,13 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="mega-col" style="border-right: none;">
+                        </div>
+                    </li>
+                    <li class="has-dropdown">
+                        <a href="#packages" class="dropdown-toggle">Packages <i
+                                class="fa-solid fa-chevron-down dropdown-arrow"></i></a>
+                        <div class="dropdown-menu mega-menu">
+                            <div class="mega-col">
                                 <h4 class="mega-title"><i class="fa-solid fa-crosshairs"></i> Targeted Support</h4>
                                 <ul>
                                     <li><a href="services/gear-well-cleaning.html">Gear Well &amp; Belly Cleaning</a>
@@ -82,12 +117,6 @@
                                     </li>
                                 </ul>
                             </div>
-                        </div>
-                    </li>
-                    <li class="has-dropdown">
-                        <a href="#packages" class="dropdown-toggle">Packages <i
-                                class="fa-solid fa-chevron-down dropdown-arrow"></i></a>
-                        <div class="dropdown-menu mega-menu">
                             <div class="mega-col" style="border-right: none;">
                                 <h4 class="mega-title"><i class="fa-solid fa-shield-halved"></i> Flightline Programs
                                 </h4>
@@ -126,27 +155,6 @@
                                 onclick="event.preventDefault(); document.getElementById('footer').scrollIntoView({behavior: 'smooth'});">Request
                                 Consultation</a>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="about" class="section-padding">
-            <div class="container">
-                <div class="about-container">
-                    <div class="about-image">
-                        <img src="assets/about_us.png" alt="AirProtect Team" loading="lazy">
-                    </div>
-                    <div class="about-text">
-                        <p class="text-gradient" style="font-weight: bold; letter-spacing: 3px;">About Us</p>
-                        <h2>Who We Are</h2>
-                        <p>AirProtect was founded to serve aircraft owners who want their aircraft cared for correctly,
-                            not rushed or treated like an automotive detail. As a veteran-owned company, we approach
-                            aircraft detailing with discipline, respect for materials, and an understanding that every
-                            aircraft represents a significant investment.</p>
-                        <p>We specialize in preservation-first detailing using FAA-safe methods designed to protect
-                            paint, brightwork, and interior materials while minimizing unnecessary abrasion. Our focus
-                            is not chasing shine, but reducing long-term wear and maintaining value over time.</p>
                     </div>
                 </div>
             </div>
@@ -524,37 +532,95 @@
             </div>
         </footer>
 
+        <script>
+            // Preloader — show only on first visit per session
+            (function () {
+                const preloader = document.getElementById('preloader');
+                if (!preloader) return;
+
+                const isFirstVisit = !sessionStorage.getItem('ap_visited');
+
+                if (isFirstVisit) {
+                    // Mark as visited so subsequent navigation skips preloader
+                    sessionStorage.setItem('ap_visited', '1');
+
+                    // Show the preloader immediately
+                    preloader.classList.remove('hidden');
+                    // Prevent scrolling while preloader is visible
+                    document.body.style.overflow = 'hidden';
+
+                    function hidePreloader() {
+                        preloader.classList.add('hidden');
+                        document.body.style.overflow = '';
+                        // Remove from DOM after fade completes
+                        preloader.addEventListener('transitionend', () => preloader.remove(), { once: true });
+                    }
+
+                    // Hide once page is fully loaded, with a brief pause for polish
+                    if (document.readyState === 'complete') {
+                        setTimeout(hidePreloader, 800);
+                    } else {
+                        window.addEventListener('load', () => setTimeout(hidePreloader, 800));
+                    }
+                } else {
+                    // Not first visit — remove immediately without showing
+                    preloader.remove();
+                }
+            })();
+        </script>
         <script src="main.js"></script>
         <script>
             (function () {
                 const hamburger = document.getElementById('hamburger-menu');
                 const nav = document.getElementById('main-nav');
+                const body = document.body;
                 let isAnimating = false;
 
-                function closeMenu() {
-                    nav.classList.remove('nav-open');
-                    hamburger.classList.remove('is-active');
-                    document.querySelectorAll('.has-dropdown.open').forEach(el => el.classList.remove('open'));
-                }
-
-                // Hamburger toggle — debounced to prevent double-fire
-                hamburger.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    if (isAnimating) return;
+                function openMenu() {
+                    if (isAnimating || nav.classList.contains('nav-open')) return;
                     isAnimating = true;
 
-                    nav.classList.toggle('nav-open');
-                    hamburger.classList.toggle('is-active');
+                    // Add classes
+                    nav.classList.add('nav-open');
+                    hamburger.classList.add('is-active');
+                    body.classList.add('nav-open');
 
-                    // If closing, also close sub-dropdowns
-                    if (!nav.classList.contains('nav-open')) {
-                        document.querySelectorAll('.has-dropdown.open').forEach(el => el.classList.remove('open'));
+                    setTimeout(() => { isAnimating = false; }, 450);
+                }
+
+                function closeMenu() {
+                    if (isAnimating || !nav.classList.contains('nav-open')) return;
+                    isAnimating = true;
+
+                    // Remove classes
+                    nav.classList.remove('nav-open');
+                    hamburger.classList.remove('is-active');
+
+                    // Close all sub-dropdowns
+                    document.querySelectorAll('.has-dropdown.open').forEach(el => el.classList.remove('open'));
+
+                    // Remove body lock after animation
+                    setTimeout(() => {
+                        body.classList.remove('nav-open');
+                        isAnimating = false;
+                    }, 450);
+                }
+
+                function toggleMenu(e) {
+                    if (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
                     }
 
-                    // Debounce — match CSS transition duration
-                    setTimeout(() => { isAnimating = false; }, 450);
-                });
+                    if (nav.classList.contains('nav-open')) {
+                        closeMenu();
+                    } else {
+                        openMenu();
+                    }
+                }
+
+                // Hamburger toggle
+                hamburger.addEventListener('click', toggleMenu);
 
                 // Mobile dropdown toggle (Services / Packages accordions)
                 document.querySelectorAll('.has-dropdown > .dropdown-toggle').forEach(toggle => {
@@ -578,6 +644,8 @@
                 document.querySelectorAll('#main-nav a:not(.dropdown-toggle)').forEach(link => {
                     link.addEventListener('click', () => {
                         if (window.innerWidth <= 768) {
+                            // Close immediately but keep body locked for a split second to prevent jump
+                            // The closeMenu function already handles the timing
                             closeMenu();
                         }
                     });

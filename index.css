@@ -42,6 +42,12 @@ html {
     font-size: 16px;
 }
 
+body.nav-open {
+    overflow: hidden !important;
+    position: fixed;
+    width: 100%;
+}
+
 body {
     background-color: var(--clr-bg);
     color: var(--clr-text);
@@ -627,6 +633,11 @@ nav ul li:hover>.dropdown-menu {
 
     .top-bar {
         padding: 0.4rem 0;
+    }
+
+    /* Stabilize header padding on mobile even when scrolled */
+    header.scrolled .nav-wrapper {
+        padding: 1rem 0 !important;
     }
 
     .top-bar-content {

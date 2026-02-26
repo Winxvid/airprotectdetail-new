@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About AirProtect | Veteran-Owned Aircraft Preservation</title>
+    <meta name="description"
+        content="Learn about AirProtect Detailing — a veteran-owned aircraft preservation company dedicated to protecting the value and appearance of general aviation aircraft.">
+    <link rel="stylesheet" href="service.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="assets/favicon.png" type="image/png">
+    <style>
+        /* ── About Page Specific Styles ── */
+        .about-hero {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background-image: url('assets/about_us.png');
+            background-size: cover;
+            background-position: center 30%;
+            background-repeat: no-repeat;
+            overflow: hidden;
+        }
+
+        .about-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom,
+                    rgba(9, 17, 27, 0.35) 0%,
+                    rgba(9, 17, 27, 0.6) 60%,
+                    var(--clr-bg) 100%);
+            z-index: 1;
+        }
+
+        .about-hero .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .about-hero-eyebrow {
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--clr-primary);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .about-hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            line-height: 1.1;
+            font-weight: 800;
+            color: #fff;
+            text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .about-hero h1 span {
+            background: linear-gradient(135deg, var(--clr-primary), #fff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .about-hero-sub {
+            margin-top: 1.25rem;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.75);
+            max-width: 580px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+
+        /* ── Content Layout ── */
+        .about-content {
+            padding: 6rem 0 5rem;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 5rem;
+            align-items: start;
+        }
+
+        /* ── Main Body Copy ── */
+        .about-body {
+            max-width: 760px;
+        }
+
+        .about-body h2 {
+            font-size: clamp(1.6rem, 3vw, 2.4rem);
+            margin-bottom: 1.75rem;
+            color: var(--clr-text);
+        }
+
+        .about-body p {
+            font-size: 1.08rem;
+            line-height: 1.9;
+            color: var(--clr-text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-body p strong {
+            color: var(--clr-text);
+            font-weight: 600;
+        }
+
+        .about-body .commitment-section {
+            margin-top: 3rem;
+            padding-top: 2.5rem;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .about-body .commitment-section h3 {
+            font-size: 1.15rem;
+            letter-spacing: 2px;
+            color: var(--clr-primary);
+            margin-bottom: 1.25rem;
+        }
+
+        .about-body .closing-statement {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--clr-text);
+            font-style: italic;
+            margin-top: 2rem;
+            margin-bottom: 0;
+            padding-left: 1.5rem;
+            border-left: 3px solid var(--clr-primary);
+        }
+
+        /* ── Sidebar ── */
+        .about-sidebar {
+            position: sticky;
+            top: 130px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .sidebar-card {
+            background: var(--clr-surface);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            padding: 2rem;
+        }
+
+        .sidebar-card h3 {
+            font-size: 0.75rem;
+            letter-spacing: 2.5px;
+            color: var(--clr-primary);
+            text-transform: uppercase;
+            margin-bottom: 1.25rem;
+        }
+
+        .sidebar-stat {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 0.85rem 0;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .sidebar-stat:last-of-type {
+            border-bottom: none;
+        }
+
+        .sidebar-stat-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: rgba(212, 175, 55, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .sidebar-stat-icon i {
+            color: var(--clr-primary);
+            font-size: 0.85rem;
+        }
+
+        .sidebar-stat-text p {
+            font-size: 0.82rem;
+            color: var(--clr-text-muted);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .sidebar-stat-text strong {
+            display: block;
+            font-size: 0.93rem;
+            color: var(--clr-text);
+            font-weight: 600;
+            margin-bottom: 0.15rem;
+        }
+
+        .about-cta-card {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.08), rgba(212, 175, 55, 0.03));
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .about-cta-card i {
+            font-size: 2rem;
+            color: var(--clr-primary);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .about-cta-card h3 {
+            font-size: 1rem;
+            letter-spacing: 1.5px;
+            margin-bottom: 0.75rem;
+            color: var(--clr-text);
+        }
+
+        .about-cta-card p {
+            font-size: 0.9rem;
+            color: var(--clr-text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .about-cta-card .btn {
+            width: 100%;
+            text-align: center;
+        }
+
+        /* ── Values strip ── */
+        .values-strip {
+            padding: 4rem 0;
+            background: var(--clr-surface);
+            border-top: 1px solid var(--glass-border);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .value-item {
+            text-align: center;
+            padding: 1.5rem 1rem;
+        }
+
+        .value-item i {
+            font-size: 1.4rem;
+            color: var(--clr-primary);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .value-item h4 {
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            color: var(--clr-text);
+            margin-bottom: 0.6rem;
+        }
+
+        .value-item p {
+            font-size: 0.88rem;
+            color: var(--clr-text-muted);
+            line-height: 1.6;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 992px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .about-sidebar {
+                position: static;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .about-hero {
+                min-height: 55vh;
+                background-position: center center;
+            }
+
+            .about-content {
+                padding: 4rem 0 3rem;
+            }
+
+            .about-sidebar {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .values-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header id="main-header" class="glass">
+        <div class="top-bar">
+            <div class="container">
+                <div class="top-bar-content">
+                    <a href="mailto:info@aircraftprotect.com"><i class="fa-regular fa-envelope"></i>
+                        info@aircraftprotect.com</a>
+                    <a href="tel:8177524762"><i class="fa-solid fa-phone"></i> (817) 752-4762</a>
+                </div>
+            </div>
+        </div>
+        <div class="container nav-wrapper">
+            <a href="index.html" class="logo"><img src="assets/logo.png" alt="AirProtect Logo"></a>
+            <button class="hamburger" id="hamburger-menu"
+                aria-label="Open navigation menu"><span></span><span></span><span></span></button>
+            <nav>
+                <ul id="main-nav">
+                    <li><a href="index.html#hero">Home</a></li>
+                    <li><a href="about.html" style="color: var(--clr-primary);">About</a></li>
+                    <li class="has-dropdown">
+                        <a href="index.html#services" class="dropdown-toggle">Services <i
+                                class="fa-solid fa-chevron-down dropdown-arrow"></i></a>
+                        <div class="dropdown-menu mega-menu">
+                            <div class="mega-col">
+                                <h4 class="mega-title"><i class="fa-solid fa-plane"></i> Exterior Care</h4>
+                                <ul>
+                                    <li><a href="services/dry-wash.html">Dry Wash</a></li>
+                                    <li><a href="services/wet-wash.html">Wet Wash</a></li>
+                                    <li><a href="services/exterior-wax.html">Exterior Wax</a></li>
+                                    <li><a href="services/brightwork-polishing.html">Brightwork Polishing</a></li>
+                                    <li><a href="services/protective-coatings.html">Protective Coatings</a></li>
+                                    <li><a href="services/window-restoration.html">Window Restoration</a></li>
+                                    <li><a href="services/de-ice-boot.html">De-Ice Boot Refurbishment</a></li>
+                                    <li><a href="services/paint-revitalization.html">Paint Revitalization</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col" style="border-right: none;">
+                                <h4 class="mega-title"><i class="fa-solid fa-couch"></i> Interior Care</h4>
+                                <ul>
+                                    <li><a href="services/interior-cleaning.html">Interior Cleaning &amp; Detail</a>
+                                    </li>
+                                    <li><a href="services/leather-conditioning.html">Leather Conditioning</a></li>
+                                    <li><a href="services/leather-repair.html">Leather Repair &amp; Re-Dye</a></li>
+                                    <li><a href="services/stain-removal.html">Stain Removal</a></li>
+                                    <li><a href="services/lavatory-sanitation.html">Lavatory &amp; Galley Sanitation</a>
+                                    </li>
+                                    <li><a href="services/carpet-extraction.html">Carpet &amp; Upholstery Extraction</a>
+                                    </li>
+                                    <li><a href="services/wood-polishing.html">Wood &amp; Trim Polishing</a></li>
+                                    <li><a href="services/dry-cleaning.html">Dry Cleaning Carpet &amp; Upholstery</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="has-dropdown">
+                        <a href="index.html#packages" class="dropdown-toggle">Packages <i
+                                class="fa-solid fa-chevron-down dropdown-arrow"></i></a>
+                        <div class="dropdown-menu mega-menu">
+                            <div class="mega-col">
+                                <h4 class="mega-title"><i class="fa-solid fa-crosshairs"></i> Targeted Support</h4>
+                                <ul>
+                                    <li><a href="services/gear-well-cleaning.html">Gear Well &amp; Belly Cleaning</a>
+                                    </li>
+                                    <li><a href="services/oxidation-correction.html">Oxidation Correction</a></li>
+                                    <li><a href="services/preservation-consultation.html">Preservation Consultations</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="mega-col" style="border-right: none;">
+                                <h4 class="mega-title"><i class="fa-solid fa-shield-halved"></i> Flightline Programs
+                                </h4>
+                                <ul>
+                                    <li><a href="services/flightline-standard.html">Flightline Standard</a></li>
+                                    <li><a href="services/flightline-elite.html">Flightline Elite</a></li>
+                                    <li><a href="services/flightline-command.html">Flightline Command</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="index.html#footer" class="btn btn-outline">Quote</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- ── Hero ── -->
+        <section class="about-hero">
+            <div class="container">
+                <span class="about-hero-eyebrow">Veteran-Owned &amp; Operated</span>
+                <h1>About <span>AirProtect</span></h1>
+                <p class="about-hero-sub">Precision aircraft preservation rooted in military discipline, aviation
+                    expertise, and an uncompromising commitment to protecting your investment.</p>
+            </div>
+        </section>
+
+        <!-- ── Values Strip ── -->
+        <section class="values-strip">
+            <div class="container">
+                <div class="values-grid">
+                    <div class="value-item">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <h4>Preservation-First</h4>
+                        <p>Every service is designed to minimize wear and extend aircraft longevity.</p>
+                    </div>
+                    <div class="value-item">
+                        <i class="fa-solid fa-star"></i>
+                        <h4>FAA-Safe Methods</h4>
+                        <p>Only aviation-grade products and approved processes — never automotive shortcuts.</p>
+                    </div>
+                    <div class="value-item">
+                        <i class="fa-solid fa-medal"></i>
+                        <h4>Veteran-Owned</h4>
+                        <p>Founded and operated with the precision and integrity of U.S. military service.</p>
+                    </div>
+                    <div class="value-item">
+                        <i class="fa-solid fa-file-shield"></i>
+                        <h4>Fully Insured</h4>
+                        <p>A legitimate Texas corporation with all required insurance and certifications.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── Main Content ── -->
+        <section class="about-content">
+            <div class="container">
+                <div class="about-grid">
+
+                    <div class="about-body">
+                        <p class="text-gradient"
+                            style="font-weight: 700; letter-spacing: 3px; font-size: 0.78rem; margin-bottom: 0.75rem;">
+                            Our Story</p>
+                        <h2>About AirProtect Detailing</h2>
+
+                        <p>AirProtect Detailing is a veteran-owned aircraft preservation company dedicated to protecting
+                            the value and appearance of general aviation aircraft through precision, discipline, and
+                            uncompromising standards. Founded by Tim Warner, a U.S. military veteran, AirProtect was
+                            created for aircraft owners who demand more than a basic wash — owners who understand that
+                            proper care is an investment in safety, longevity, and resale value.</p>
+
+                        <p>We specialize in <strong>preservation-first detailing</strong> using only FAA-safe methods
+                            and aviation-grade products. Our approach is deliberately different from automotive-style
+                            detailing. We never rush the job or apply unnecessary abrasion. Instead, every aircraft
+                            receives an individual, in-person assessment followed by a tailored plan designed to
+                            minimize long-term wear while maximizing protection for paint, brightwork, windows,
+                            interiors, and critical components.</p>
+
+                        <p>At the heart of our work is a simple belief: an aircraft is far more than a vehicle; it is a
+                            significant asset that deserves expert, respectful care. Whether your aircraft flies daily
+                            or sits in a hangar, our goal is the same — to preserve its surfaces, maintain its
+                            operational readiness, and protect its value for years to come.</p>
+
+                        <p>All work is performed on-site at your hangar or airport by trained, insured professionals who
+                            treat every aircraft with the same attention to detail and operational rigor learned through
+                            years of military service.</p>
+
+                        <div class="commitment-section">
+                            <h3>Our Commitment</h3>
+                            <p>AirProtect is proud to operate as a fully insured, legitimate Texas corporation and
+                                maintains affiliations with leading aviation detailing organizations. In October 2025,
+                                we entered a strategic growth partnership with SouthernPlex Group, enabling us to expand
+                                our premium services across key Texas markets while continuing to deliver the same
+                                personal, high-standard care our clients expect.</p>
+                            <p>We don't just clean aircraft — we protect them.</p>
+                            <p class="closing-statement">Whether you fly a single-engine piston, a turboprop, or a light
+                                jet, AirProtect delivers the professional aircraft care your investment deserves. We
+                                invite you to schedule a consultation and experience the difference that true
+                                preservation-focused detailing can make.</p>
+                        </div>
+                    </div>
+
+                    <aside class="about-sidebar">
+                        <div class="sidebar-card">
+                            <h3>Why AirProtect</h3>
+                            <div class="sidebar-stat">
+                                <div class="sidebar-stat-icon"><i class="fa-solid fa-user-check"></i></div>
+                                <div class="sidebar-stat-text">
+                                    <strong>Veteran-Founded</strong>
+                                    <p>Built on military discipline and respect for every asset.</p>
+                                </div>
+                            </div>
+                            <div class="sidebar-stat">
+                                <div class="sidebar-stat-icon"><i class="fa-solid fa-plane-up"></i></div>
+                                <div class="sidebar-stat-text">
+                                    <strong>On-Site Service</strong>
+                                    <p>We come to your hangar — no transport required.</p>
+                                </div>
+                            </div>
+                            <div class="sidebar-stat">
+                                <div class="sidebar-stat-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+                                <div class="sidebar-stat-text">
+                                    <strong>Individual Assessments</strong>
+                                    <p>Every aircraft receives a tailored in-person evaluation.</p>
+                                </div>
+                            </div>
+                            <div class="sidebar-stat">
+                                <div class="sidebar-stat-icon"><i class="fa-solid fa-certificate"></i></div>
+                                <div class="sidebar-stat-text">
+                                    <strong>Insured &amp; Certified</strong>
+                                    <p>Fully insured Texas corporation with affiliated credentials.</p>
+                                </div>
+                            </div>
+                            <div class="sidebar-stat">
+                                <div class="sidebar-stat-icon"><i class="fa-solid fa-handshake"></i></div>
+                                <div class="sidebar-stat-text">
+                                    <strong>SouthernPlex Partnership</strong>
+                                    <p>Strategic growth across key Texas aviation markets since Oct 2025.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </aside>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="section-padding" id="footer"
+        style="background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('assets/Request_Consultation.webp') no-repeat top center/cover;">
+        <div class="container">
+            <div class="footer-content">
+                <div class="contact-container">
+                    <div>
+                        <p class="text-gradient" style="font-weight: bold; letter-spacing: 3px;">Request Consultation
+                        </p>
+                        <h2 style="font-size: 3.5rem;">Preserve Your Legacy</h2>
+                        <p style="margin-top: 1rem; color: var(--clr-text-muted);">Provide your aircraft details below.
+                            As a veteran-owned company, we approach every aircraft with discipline and respect.</p>
+                    </div>
+                    <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+                        <input type="hidden" name="access_key" value="045c56e1-0f78-414b-9e7f-82f1e97cd12d">
+                        <input type="text" name="name" placeholder="Full Name" required>
+                        <input type="email" name="email" placeholder="Email Address" required>
+                        <input type="tel" name="phone" placeholder="Phone Number" required>
+                        <input type="text" name="aircraft" placeholder="Aircraft Model (e.g. Cessna 172)">
+                        <select name="service" required>
+                            <option value="" disabled selected>Service Interested In *</option>
+                            <optgroup label="Flightline Programs">
+                                <option value="Flightline Standard">Flightline Standard</option>
+                                <option value="Flightline Elite">Flightline Elite</option>
+                                <option value="Flightline Command">Flightline Command</option>
+                            </optgroup>
+                            <optgroup label="Exterior Preservation">
+                                <option value="Dry Wash">Dry Wash</option>
+                                <option value="Wet Wash">Wet Wash</option>
+                                <option value="Exterior Wax">Exterior Wax</option>
+                                <option value="Brightwork Polishing">Brightwork Polishing</option>
+                                <option value="Protective Coatings">Protective Coatings</option>
+                                <option value="Window Restoration &amp; Polishing">Window Restoration &amp; Polishing
+                                </option>
+                                <option value="De-Ice Boot Refurbishment">De-Ice Boot Refurbishment</option>
+                                <option value="Paint Revitalization">Paint Revitalization</option>
+                            </optgroup>
+                            <optgroup label="Cabin Care">
+                                <option value="Interior Cleaning &amp; Detail">Interior Cleaning &amp; Detail</option>
+                                <option value="Leather Conditioning">Leather Conditioning</option>
+                                <option value="Leather Repair &amp; Re-Dye">Leather Repair &amp; Re-Dye</option>
+                                <option value="Stain Removal">Stain Removal</option>
+                                <option value="Lavatory &amp; Galley Sanitation">Lavatory &amp; Galley Sanitation
+                                </option>
+                                <option value="Carpet &amp; Upholstery Extraction">Carpet &amp; Upholstery Extraction
+                                </option>
+                                <option value="Wood &amp; Trim Polishing">Wood &amp; Trim Polishing</option>
+                                <option value="Dry Cleaning Carpet &amp; Upholstery">Dry Cleaning Carpet &amp;
+                                    Upholstery</option>
+                            </optgroup>
+                        </select>
+                        <textarea name="message" placeholder="Additional Details" rows="4"></textarea>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+                <div>
+                    <p class="social-subtitle">CONNECT WITH US</p>
+                    <h3 class="social-title">Our Socials</h3>
+                    <div class="social-links">
+                        <a href="https://youtube.com/@airprotectgroup" target="_blank" aria-label="YouTube"><i
+                                class="fab fa-youtube"></i></a>
+                        <a href="https://www.facebook.com/airPROTECTdetailing" target="_blank" aria-label="Facebook"><i
+                                class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/airprotectllc/" target="_blank" aria-label="Instagram"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/tim-warner-jr-206b95381/" target="_blank"
+                            aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 1rem; align-items: center;">
+                    <img src="assets/veteran.png" alt="Veteran Owned Business" class="veteran-badge" loading="lazy"
+                        style="opacity: 0.5; filter: grayscale(1);">
+                </div>
+            </div>
+            <div class="footer-copyright">
+                © 2026 AirProtect. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll
+        const header = document.getElementById('main-header');
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Hamburger
+        const hamburger = document.getElementById('hamburger-menu');
+        const nav = document.getElementById('main-nav');
+        const body = document.body;
+        let isAnimating = false;
+
+        function openMenu() {
+            if (isAnimating || nav.classList.contains('nav-open')) return;
+            isAnimating = true;
+            nav.classList.add('nav-open');
+            hamburger.classList.add('is-active');
+            body.classList.add('nav-open');
+            setTimeout(() => { isAnimating = false; }, 450);
+        }
+
+        function closeMenu() {
+            if (isAnimating || !nav.classList.contains('nav-open')) return;
+            isAnimating = true;
+            nav.classList.remove('nav-open');
+            hamburger.classList.remove('is-active');
+            document.querySelectorAll('.has-dropdown.open').forEach(el => el.classList.remove('open'));
+            setTimeout(() => {
+                body.classList.remove('nav-open');
+                isAnimating = false;
+            }, 450);
+        }
+
+        hamburger.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            nav.classList.contains('nav-open') ? closeMenu() : openMenu();
+        });
+
+        // Mobile dropdown toggle
+        document.querySelectorAll('.has-dropdown > .dropdown-toggle').forEach(toggle => {
+            toggle.addEventListener('click', function (e) {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const parent = this.closest('.has-dropdown');
+                    document.querySelectorAll('.has-dropdown.open').forEach(el => {
+                        if (el !== parent) el.classList.remove('open');
+                    });
+                    parent.classList.toggle('open');
+                }
+            });
+        });
+
+        // Close menu on link click
+        document.querySelectorAll('#main-nav a:not(.dropdown-toggle)').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) closeMenu();
+            });
+        });
+
+        // Close on outside click
+        document.addEventListener('click', function (e) {
+            if (window.innerWidth <= 768 && nav.classList.contains('nav-open')) {
+                if (!nav.contains(e.target) && !hamburger.contains(e.target)) closeMenu();
+            }
+        });
+
+        // Close on Escape
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && nav.classList.contains('nav-open')) closeMenu();
+        });
+
+        // Form submission
+        const form = document.querySelector('.contact-form');
+        if (form) {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const btn = form.querySelector('button');
+                const originalText = btn.innerText;
+                btn.innerText = 'Request Sent!';
+                btn.style.background = '#00d084';
+                form.reset();
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.style.background = '';
+                }, 3000);
+            });
+        }
+    </script>
+    <script src="gif-optimizer.js" defer></script>
+
+</body>
+
+</html>
