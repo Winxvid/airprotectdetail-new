@@ -35,12 +35,14 @@
         #preloader {
             position: fixed;
             inset: 0;
-            background: #09111b;
+            background: #000000;
             z-index: 99999;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            transition: opacity 0.6s ease, visibility 0.6s ease;
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                        visibility 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         #preloader.hidden {
@@ -50,8 +52,53 @@
         }
 
         #preloader img {
-            width: 180px;
+            width: min(45vw, 320px);
             height: auto;
+            margin-bottom: 2.5rem;
+            animation: preloaderPulse 2s ease-in-out infinite;
+        }
+
+        /* Subtle breathing pulse on the logo */
+        @keyframes preloaderPulse {
+            0%, 100% { opacity: 0.85; transform: scale(1); }
+            50%      { opacity: 1;    transform: scale(1.03); }
+        }
+
+        /* Slim loading bar */
+        .preloader-bar {
+            width: min(40vw, 260px);
+            height: 2px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .preloader-bar::after {
+            content: '';
+            display: block;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, #d4a84b, transparent);
+            border-radius: 999px;
+            animation: preloaderSlide 1.2s ease-in-out infinite;
+        }
+
+        @keyframes preloaderSlide {
+            0%   { transform: translateX(-100%); }
+            100% { transform: translateX(350%); }
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            #preloader img {
+                width: 55vw;
+                max-width: 240px;
+                margin-bottom: 2rem;
+            }
+            .preloader-bar {
+                width: 55vw;
+                max-width: 220px;
+            }
         }
     </style>
 </head>
@@ -61,6 +108,7 @@
     <!-- Preloader: only shown on first visit via sessionStorage -->
     <div id="preloader" class="hidden" aria-hidden="true">
         <img src="assets/preloader.gif" alt="Loading AirProtect...">
+        <div class="preloader-bar"></div>
     </div>
 
     <header id="main-header" class="glass">
@@ -150,6 +198,11 @@
                     <li><a href="#contact" class="btn btn-outline"
                             onclick="event.preventDefault(); document.getElementById('footer').scrollIntoView({behavior: 'smooth'});">Quote</a>
                     </li>
+                    <li style="display: flex; align-items: center;">
+                        <button class="theme-toggle" aria-label="Toggle light/dark mode" type="button">
+                            <span class="theme-toggle-thumb"><i class="fa-solid fa-moon"></i></span>
+                        </button>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -179,11 +232,72 @@
             </div>
         </section>
 
-        <section id="why-choose-us" class="section-padding" style="background: rgba(255, 255, 255, 0.02);">
-            <div id="root"></div>
+        <section id="why-choose-us" class="section-padding" style="background: var(--clr-bg); padding-top: 2rem;">
+            <!-- Desktop: animated React cards -->
+            <div id="root" class="why-choose-desktop"></div>
+
+            <!-- Mobile: original static cards -->
+            <div class="why-choose-mobile">
+                <div class="container">
+                    <div class="section-title">
+                        <p class="text-gradient" style="font-weight: bold; letter-spacing: 3px;">Why Choose Us</p>
+                        <h2>Why Choose AirProtect Over the Competition?</h2>
+                        <p style="max-width: 850px; margin: 1.5rem auto 0; color: var(--clr-text-muted); font-size: 1.1rem; line-height: 1.6;">
+                            Discover why AirProtect stands out in the industry with our unparalleled expertise and commitment to excellence.</p>
+                    </div>
+                    <div class="packages-grid" style="flex-wrap: wrap;">
+                        <div class="package-card glass"
+                            style="background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('assets/skilled_trained.webp') no-repeat center/cover;">
+                            <img src="assets/favicon.png" alt="AirProtect Icon" class="package-icon" loading="lazy">
+                            <h3>Skilled and Trained Technicians</h3>
+                            <p style="margin-bottom: 1.5rem; color: #ccc;">Our detailers are skilled
+                                professionals with years of experience and training.</p>
+                        </div>
+                        <div class="package-card glass"
+                            style="background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('assets/INSURED_CERTIFIED.png') no-repeat center/cover;">
+                            <img src="assets/favicon.png" alt="AirProtect Icon" class="package-icon">
+                            <h3>Insured and Certified</h3>
+                            <p style="margin-bottom: 1.5rem; color: #ccc;">We are a legitimate corporation
+                                with all required insurance and compliant certifications.</p>
+                        </div>
+                        <div class="package-card glass"
+                            style="background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('assets/aircraft_specific.webp') no-repeat center/cover;">
+                            <img src="assets/favicon.png" alt="AirProtect Icon" class="package-icon">
+                            <h3>Aircraft Specific Care</h3>
+                            <p style="margin-bottom: 1.5rem; color: #ccc;">Every aircraft is inspected and
+                                serviced based on its condition, usage, and long-term protection needs.</p>
+                        </div>
+                        <div class="package-card glass"
+                            style="background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('assets/AFTERCARE.png') no-repeat center/cover;">
+                            <img src="assets/favicon.png" alt="AirProtect Icon" class="package-icon">
+                            <h3>Aftercare Support &amp; Service</h3>
+                            <p style="margin-bottom: 1.5rem; color: #ccc;">Our dedication to being elite at
+                                what we do isn't just rooted in our work; it is rooted in our service and care for our
+                                customers.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <style>
+            /* Desktop: show animated, hide static */
+            .why-choose-desktop { display: block; }
+            .why-choose-mobile { display: none; }
+
+            /* Mobile: show static, hide animated */
+            @media (max-width: 768px) {
+                .why-choose-desktop { display: none !important; }
+                .why-choose-mobile { display: block !important; }
+                .why-choose-mobile .packages-grid {
+                    flex-wrap: wrap !important;
+                }
+                .why-choose-mobile .package-card {
+                    flex: 1 1 100% !important;
+                    min-width: 0 !important;
+                }
+            }
+
             .card-container {
                 display: flex;
                 justify-content: space-between;
@@ -260,7 +374,7 @@
             }
         </style>
 
-        <section id="services" class="section-padding">
+        <section id="services" class="section-padding" style="background: var(--clr-bg);">
             <div class="container">
                 <div class="section-title">
                     <p class="text-gradient" style="font-weight: bold; letter-spacing: 3px;">Exterior Care</p>
@@ -358,7 +472,7 @@
                         style="background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('assets/flightline_standard_card.jpeg') no-repeat center/cover;">
                         <img src="assets/favicon.png" alt="AirProtect Icon" class="package-icon">
                         <h3>Flightline Standard</h3>
-                        <p style="margin-bottom: 1.5rem; color: var(--clr-text-muted);">Foundational cleaning and
+                        <p style="margin-bottom: 1.5rem; color: #ccc;">Foundational cleaning and
                             short-term protection for actively flown aircraft.</p>
                         <ul>
                             <li>Cleaning &amp; Short-term Protection</li>
@@ -372,7 +486,7 @@
                         style="background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('assets/FLIGHTLINE_ELITE.png') no-repeat center/cover;">
                         <img src="assets/favicon.png" alt="AirProtect Icon" class="package-icon">
                         <h3>Flightline Elite</h3>
-                        <p style="margin-bottom: 1.5rem; color: var(--clr-text-muted);">Deep clean and mid-term
+                        <p style="margin-bottom: 1.5rem; color: #ccc;">Deep clean and mid-term
                             protection designed to reduce surface wear and long-term degradation.</p>
                         <ul>
                             <li>Deep Clean &amp; Mid-term Protection</li>
@@ -386,7 +500,7 @@
                         style="background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('assets/FLIGHTLINE_COMMAND.png') no-repeat center/cover;">
                         <img src="assets/favicon.png" alt="AirProtect Icon" class="package-icon">
                         <h3>Flightline Command</h3>
-                        <p style="margin-bottom: 1.5rem; color: var(--clr-text-muted);">Flagship multi-year preservation
+                        <p style="margin-bottom: 1.5rem; color: #ccc;">Flagship multi-year preservation
                             program for owners focused on long-term aircraft value and protection.</p>
                         <ul>
                             <li>Multi-year Preservation Program</li>
@@ -426,93 +540,8 @@
             </div>
         </section>
 
-        <footer class="section-padding" id="footer"
-            style="position: relative; overflow: hidden;">
-            <video class="footer-video-bg" autoplay muted loop playsinline>
-                <source src="assets/Request_Consultation.mp4" type="video/mp4">
-            </video>
-            <div class="container">
-                <div class="footer-content">
-                    <div class="contact-container">
-                        <div>
-                            <p class="text-gradient" style="font-weight: bold; letter-spacing: 3px;">Request
-                                Consultation</p>
-                            <h2 style="font-size: 3.5rem;">Preserve Your Legacy</h2>
-                            <p style="margin-top: 1rem; color: var(--clr-text-muted);">Provide your aircraft details
-                                below. As a veteran-owned company, we approach every aircraft with discipline and
-                                respect.</p>
-                        </div>
-                        <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
-                            <input type="hidden" name="access_key" value="045c56e1-0f78-414b-9e7f-82f1e97cd12d">
-                            <input type="text" name="name" placeholder="Full Name" required>
-                            <input type="email" name="email" placeholder="Email Address" required>
-                            <input type="tel" name="phone" placeholder="Phone Number" required>
-                            <input type="text" name="aircraft" placeholder="Aircraft Model (e.g. Cessna 172)">
-                            <select name="service" required>
-                                <option value="" disabled selected>Service Interested In *</option>
-                                <optgroup label="Flightline Programs">
-                                    <option value="Flightline Standard">Flightline Standard</option>
-                                    <option value="Flightline Elite">Flightline Elite</option>
-                                    <option value="Flightline Command">Flightline Command</option>
-                                </optgroup>
-                                <optgroup label="Exterior Preservation">
-                                    <option value="Dry Wash">Dry Wash</option>
-                                    <option value="Wet Wash">Wet Wash</option>
-                                    <option value="Exterior Wax">Exterior Wax</option>
-                                    <option value="Brightwork Polishing">Brightwork Polishing</option>
-                                    <option value="Protective Coatings">Protective Coatings</option>
-                                    <option value="Window Restoration & Polishing">Window Restoration & Polishing
-                                    </option>
-                                    <option value="De-Ice Boot Refurbishment">De-Ice Boot Refurbishment</option>
-                                    <option value="Paint Revitalization">Paint Revitalization</option>
-                                </optgroup>
-                                <optgroup label="Cabin Care">
-                                    <option value="Interior Cleaning & Detail">Interior Cleaning & Detail</option>
-                                    <option value="Leather Conditioning">Leather Conditioning</option>
-                                    <option value="Leather Repair & Re-Dye">Leather Repair & Re-Dye</option>
-                                    <option value="Stain Removal">Stain Removal</option>
-                                    <option value="Lavatory & Galley Sanitation">Lavatory & Galley Sanitation</option>
-                                    <option value="Carpet & Upholstery Extraction">Carpet & Upholstery Extraction
-                                    </option>
-                                    <option value="Wood & Trim Polishing">Wood & Trim Polishing</option>
-                                    <option value="Dry Cleaning Carpet & Upholstery">Dry Cleaning Carpet & Upholstery
-                                    </option>
-                                </optgroup>
-                            </select>
-                            <textarea name="message" placeholder="Additional Details" rows="4"></textarea>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
-                    </div>
-                    <div>
-                        <p class="social-subtitle">CONNECT WITH US</p>
-                        <h3 class="social-title">Our Socials</h3>
-                        <div class="social-links">
-                            <a href="https://youtube.com/@airprotectgroup" target="_blank" aria-label="YouTube">
-                                <i class="fab fa-youtube"></i>
-                            </a>
-                            <a href="https://www.facebook.com/airPROTECTdetailing" target="_blank"
-                                aria-label="Facebook">
-                                <i class="fab fa-facebook"></i>
-                            </a>
-                            <a href="https://www.instagram.com/airprotectllc/" target="_blank" aria-label="Instagram">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                            <a href="https://www.linkedin.com/in/tim-warner-jr-206b95381/" target="_blank"
-                                aria-label="LinkedIn">
-                                <i class="fab fa-linkedin"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div style="display: flex; gap: 1rem; align-items: center;">
-                        <img src="assets/veteran.png" alt="Veteran Owned Business" class="veteran-badge" loading="lazy"
-                            style="opacity: 0.5; filter: grayscale(1);">
-                    </div>
-                </div>
-                <div class="footer-copyright">
-                    © 2026 AirProtect. All rights reserved.
-                </div>
-            </div>
-        </footer>
+        <div id="footer-placeholder"></div>
+        <script src="load-footer.js"></script>
 
         <script>
             // Preloader — show only on first visit per session
@@ -540,9 +569,9 @@
 
                     // Hide once page is fully loaded, with a brief pause for polish
                     if (document.readyState === 'complete') {
-                        setTimeout(hidePreloader, 800);
+                        setTimeout(hidePreloader, 3500);
                     } else {
-                        window.addEventListener('load', () => setTimeout(hidePreloader, 800));
+                        window.addEventListener('load', () => setTimeout(hidePreloader, 3500));
                     }
                 } else {
                     // Not first visit — remove immediately without showing
@@ -551,6 +580,7 @@
             })();
         </script>
         <script src="main.js"></script>
+        <script src="theme-toggle.js"></script>
         <script>
             (function () {
                 const hamburger = document.getElementById('hamburger-menu');
@@ -700,11 +730,11 @@
                 const rotateY = useTransform(scrollYProgress, [0.3, 0.7], [0, 180]);
                 const groupScale = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.8, 1, 1, 0.9]);
 
-            return React.createElement('main', { className: "bg-[#020617] text-white" },
+            return React.createElement('main', { className: "text-white", style: { background: 'var(--clr-bg)', color: 'var(--clr-text)' } },
                 React.createElement('div', { style: { textAlign: 'center', paddingTop: '4rem', paddingBottom: '2rem', maxWidth: '900px', margin: '0 auto', paddingLeft: '1rem', paddingRight: '1rem' } },
                     React.createElement('p', { className: "text-gradient", style: { fontWeight: 'bold', letterSpacing: '3px', fontSize: '0.95rem', marginBottom: '0.75rem' } }, "Why Choose Us"),
-                    React.createElement('h2', { style: { fontSize: 'clamp(2rem, 5vw, 3.5rem)', marginTop: '0', marginBottom: '1.25rem', color: 'white', fontWeight: '900', lineHeight: '1.15', textTransform: 'uppercase', letterSpacing: '1px' } }, "Why Choose AirProtect Over the Competition?"),
-                    React.createElement('p', { style: { maxWidth: '750px', margin: '0 auto', color: 'rgba(255, 255, 255, 0.6)', fontSize: '1rem', lineHeight: '1.7' } }, "Discover why AirProtect stands out in the industry with our unparalleled expertise and commitment to excellence.")
+                    React.createElement('h2', { style: { fontSize: 'clamp(2rem, 5vw, 3.5rem)', marginTop: '0', marginBottom: '1.25rem', color: 'var(--clr-text)', fontWeight: '900', lineHeight: '1.15', textTransform: 'uppercase', letterSpacing: '1px' } }, "Why Choose AirProtect Over the Competition?"),
+                    React.createElement('p', { style: { maxWidth: '750px', margin: '0 auto', color: 'var(--clr-text-muted)', fontSize: '1rem', lineHeight: '1.7' } }, "Discover why AirProtect stands out in the industry with our unparalleled expertise and commitment to excellence.")
                 ),
                 React.createElement('div', { ref: containerRef, className: "relative h-[400vh]" },
                     React.createElement('div', { className: "sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden perspective-1500" },
