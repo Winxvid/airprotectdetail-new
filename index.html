@@ -239,7 +239,7 @@
             <!-- Mobile: original static cards -->
             <div class="why-choose-mobile">
                 <div class="container">
-                    <div class="section-title">
+                    <div class="section-title fade-in-scroll">
                         <p class="text-gradient" style="font-weight: bold; letter-spacing: 3px;">Why Choose Us</p>
                         <h2>Why Choose AirProtect Over the Competition?</h2>
                         <p style="max-width: 850px; margin: 1.5rem auto 0; color: var(--clr-text-muted); font-size: 1.1rem; line-height: 1.6;">
@@ -296,6 +296,17 @@
                     flex: 1 1 100% !important;
                     min-width: 0 !important;
                 }
+            }
+
+            /* Scroll fade-in for mobile Why Choose Us text */
+            .fade-in-scroll {
+                opacity: 0;
+                transform: translateY(40px);
+                transition: opacity 0.9s cubic-bezier(0.25, 1, 0.5, 1), transform 0.9s cubic-bezier(0.25, 1, 0.5, 1);
+            }
+            .fade-in-scroll.visible {
+                opacity: 1;
+                transform: translateY(0);
             }
 
             .card-container {
@@ -731,7 +742,13 @@
                 const groupScale = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.8, 1, 1, 0.9]);
 
             return React.createElement('main', { className: "text-white", style: { background: 'var(--clr-bg)', color: 'var(--clr-text)' } },
-                React.createElement('div', { style: { textAlign: 'center', paddingTop: '4rem', paddingBottom: '2rem', maxWidth: '900px', margin: '0 auto', paddingLeft: '1rem', paddingRight: '1rem' } },
+                React.createElement(motion.div, {
+                    initial: { opacity: 0, y: 40 },
+                    whileInView: { opacity: 1, y: 0 },
+                    viewport: { once: true, amount: 0.6 },
+                    transition: { duration: 0.9, ease: [0.25, 1, 0.5, 1] },
+                    style: { textAlign: 'center', paddingTop: '4rem', paddingBottom: '2rem', maxWidth: '900px', margin: '0 auto', paddingLeft: '1rem', paddingRight: '1rem' }
+                },
                     React.createElement('p', { className: "text-gradient", style: { fontWeight: 'bold', letterSpacing: '3px', fontSize: '0.95rem', marginBottom: '0.75rem' } }, "Why Choose Us"),
                     React.createElement('h2', { style: { fontSize: 'clamp(2rem, 5vw, 3.5rem)', marginTop: '0', marginBottom: '1.25rem', color: 'var(--clr-text)', fontWeight: '900', lineHeight: '1.15', textTransform: 'uppercase', letterSpacing: '1px' } }, "Why Choose AirProtect Over the Competition?"),
                     React.createElement('p', { style: { maxWidth: '750px', margin: '0 auto', color: 'var(--clr-text-muted)', fontSize: '1rem', lineHeight: '1.7' } }, "Discover why AirProtect stands out in the industry with our unparalleled expertise and commitment to excellence.")
@@ -795,6 +812,22 @@
 
             const root = ReactDOM.createRoot(document.getElementById('root'));
             root.render(React.createElement(App));
+        </script>
+        <script>
+            // Scroll fade-in for mobile Why Choose Us title
+            document.addEventListener('DOMContentLoaded', function() {
+                const fadeEls = document.querySelectorAll('.fade-in-scroll');
+                if (!fadeEls.length) return;
+                const io = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            io.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.3 });
+                fadeEls.forEach(function(el) { io.observe(el); });
+            });
         </script>
     </main>
 </body>
