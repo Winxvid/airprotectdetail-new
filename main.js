@@ -1,124 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Hero Image Sequence Scroller ---
-    const canvas = document.getElementById('hero-canvas');
+    // --- Hero Scroll Animations ---
     const heroSection = document.getElementById('hero');
 
-    if (canvas && heroSection) {
-        const context = canvas.getContext('2d');
-        const frameCount = 300;
-
-        // Match frames to the filenames in hero-sequence folder
-        const currentFrame = index => (
-            `assets/ezgif-frame-${index.toString().padStart(3, '0')}.png`
-        );
-
-        const images = [];
-        const airprotectHero = {
-            frame: 0
-        };
-
-        // --- Smart Preloading ---
-        // Load initial frames first to show something quickly
-        const initialFramesCount = 30; // Load first 30 frames immediately
-        const loadImages = async () => {
-            // Priority load
-            for (let i = 1; i <= Math.min(frameCount, initialFramesCount); i++) {
-                const img = new Image();
-                img.src = currentFrame(i);
-                images[i - 1] = img;
-            }
-
-            // Deferred load the rest in small chunks to avoid blocking
-            for (let i = initialFramesCount + 1; i <= frameCount; i++) {
-                if (i % 20 === 0) await new Promise(r => setTimeout(r, 50)); // Small breather
-                const img = new Image();
-                img.src = currentFrame(i);
-                images[i - 1] = img;
-            }
-        };
-        loadImages();
-
-        const render = () => {
-            const img = images[airprotectHero.frame];
-            if (img && img.complete) {
-                // ... adaptive fitting logic (UNCHANGED) ...
-                const canvasAspect = canvas.width / canvas.height;
-                const imgAspect = img.width / img.height;
-                let drawWidth, drawHeight, offsetX, offsetY;
-                const isMobile = window.innerWidth <= 768;
-
-                if (isMobile) {
-                    if (canvasAspect > imgAspect) {
-                        drawHeight = canvas.height * 0.4;
-                        drawWidth = drawHeight * imgAspect;
-                    } else {
-                        drawWidth = canvas.width;
-                        drawHeight = canvas.width / imgAspect;
-                    }
-
-                    offsetX = (canvas.width - drawWidth) / 2;
-                    offsetY = (canvas.height - drawHeight) / 2;
-
-                    context.clearRect(0, 0, canvas.width, canvas.height);
-                    context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
-
-                    context.save();
-                    context.translate(0, (offsetY + drawHeight) * 2);
-                    context.scale(1, -1);
-                    context.filter = 'blur(12px)';
-                    context.globalAlpha = 0.25;
-                    context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
-                    context.restore();
-
-                    context.save();
-                    context.translate(0, offsetY * 2);
-                    context.scale(1, -1);
-                    context.filter = 'blur(12px)';
-                    context.globalAlpha = 0.25;
-                    context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
-                    context.restore();
-
-                    const topFade = context.createLinearGradient(0, 0, 0, offsetY);
-                    topFade.addColorStop(0, 'rgba(9, 17, 27, 1)');
-                    topFade.addColorStop(1, 'rgba(9, 17, 27, 0)');
-                    context.fillStyle = topFade;
-                    context.fillRect(0, 0, canvas.width, offsetY);
-
-                    const bottomFade = context.createLinearGradient(0, offsetY + drawHeight, 0, canvas.height);
-                    bottomFade.addColorStop(0, 'rgba(9, 17, 27, 0)');
-                    bottomFade.addColorStop(1, 'rgba(9, 17, 27, 1)');
-                    context.fillStyle = bottomFade;
-                    context.fillRect(0, offsetY + drawHeight, canvas.width, canvas.height - (offsetY + drawHeight));
-
-                } else {
-                    if (canvasAspect > imgAspect) {
-                        drawWidth = canvas.width;
-                        drawHeight = canvas.width / imgAspect;
-                    } else {
-                        drawHeight = canvas.height;
-                        drawWidth = canvas.height * imgAspect;
-                    }
-                    offsetX = (canvas.width - drawWidth) / 2;
-                    offsetY = (canvas.height - drawHeight) / 2;
-
-                    context.clearRect(0, 0, canvas.width, canvas.height);
-                    context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
-                }
-
-                context.fillStyle = 'rgba(9, 17, 27, 0.4)';
-                context.fillRect(0, 0, canvas.width, canvas.height);
-            }
-        };
-
-        const updateCanvasSize = () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            render();
-        };
-
-        window.addEventListener('resize', updateCanvasSize);
-        updateCanvasSize();
-
+    if (heroSection) {
         const line1 = document.getElementById('hero-line-1');
         const line2 = document.getElementById('hero-line-2');
         const line3 = document.getElementById('hero-line-3');
@@ -134,12 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     if (scrollTop <= heroSection.offsetTop + scrollHeight) {
                         const scrollFraction = Math.max(0, Math.min(1, scrollTop / scrollHeight));
-                        const frameIndex = Math.min(frameCount - 1, Math.floor(scrollFraction * frameCount));
-
-                        if (airprotectHero.frame !== frameIndex) {
-                            airprotectHero.frame = frameIndex;
-                            render();
-                        }
 
                         if (scrollFraction >= 0.05) line1?.classList.add('revealed'); else line1?.classList.remove('revealed');
                         if (scrollFraction >= 0.25) line2?.classList.add('revealed'); else line2?.classList.remove('revealed');
@@ -151,16 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 ticking = true;
             }
         });
-
-        // Use a simpler check for initial render
-        const checkInitialRender = setInterval(() => {
-            if (images[0] && images[0].complete) {
-                render();
-                clearInterval(checkInitialRender);
-            }
-        }, 100);
     }
-    // --- End Hero Image Sequence ---
+    // --- End Hero Scroll Animations ---
 
     const header = document.getElementById('main-header');
 
