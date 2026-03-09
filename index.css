@@ -2415,3 +2415,43 @@ nav ul li:hover>.dropdown-menu {
         min-height: 120px;
     }
 }
+/* --- Exterior Animation (Desktop Only) --- */
+@media (min-width: 993px) {
+    /* Initial State: Plane */
+    #services .plane-visual {
+        opacity: 0;
+        transform: translateX(50vw) scale(0.9);
+        transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.2s ease-out;
+        will-change: transform, opacity;
+    }
+
+    /* Active State: Plane (Lock into place) */
+    #services.animate-active .plane-visual {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+
+    /* Initial State: Hotspot Labels */
+    #services .hotspot-label {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    /* Active State: Hotspot Labels (Sequential Fade-in) */
+    #services.animate-active .hotspot-label {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Staggered Delays for Hotspots */
+    /* Start fading in AFTER the plane lands (approx 1.0s delay base) */
+    #services.animate-active #ext-1 { transition-delay: 1.0s; }
+    #services.animate-active #ext-2 { transition-delay: 1.1s; }
+    #services.animate-active #ext-3 { transition-delay: 1.2s; }
+    #services.animate-active #ext-4 { transition-delay: 1.3s; }
+    #services.animate-active #ext-5 { transition-delay: 1.4s; }
+    #services.animate-active #ext-6 { transition-delay: 1.5s; }
+    #services.animate-active #ext-7 { transition-delay: 1.6s; }
+    #services.animate-active #ext-8 { transition-delay: 1.7s; }
+}
