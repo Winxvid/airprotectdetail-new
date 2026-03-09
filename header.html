@@ -1,0 +1,214 @@
+<!-- ═══════════════════════════════════════════════════════════
+     AIRPROTECT — Shared header / Liquid Gold Navigation Dock
+     Loaded dynamically by load-header.js on every page.
+     • Do NOT add <style> or <script> tags here.
+     • CSS lives in index.css / service.css (search "DOCK").
+     • All JavaScript is bootstrapped by load-header.js.
+     • {{BASE}} is replaced at runtime with the correct
+       relative path (""  for root pages, "../" for /services/).
+═══════════════════════════════════════════════════════════ -->
+
+<!-- SVG filter for the gooey liquid-morph bubble effect -->
+<svg class="dock-goo-svg" aria-hidden="true" focusable="false">
+    <defs>
+        <filter id="liquid-goo">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
+            <feColorMatrix in="blur" mode="matrix"
+                values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -10" result="goo"/>
+            <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
+        </filter>
+    </defs>
+</svg>
+
+<header id="main-header">
+
+    <!-- ── Contact strip ─────────────────────────────────────── -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <a href="mailto:info@aircraftprotect.com">
+                    <i class="fa-regular fa-envelope"></i> info@aircraftprotect.com
+                </a>
+                <a href="tel:8177524762">
+                    <i class="fa-solid fa-phone"></i> (817) 752-4762
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Dock navigation row ───────────────────────────────── -->
+    <div class="dock-nav-row">
+
+        <!-- Logo — absolute-left on desktop, inline on mobile -->
+        <a href="{{BASE}}index.html" class="dock-logo" aria-label="AirProtect – go to homepage">
+            <img src="{{BASE}}assets/logo.png" alt="AirProtect Logo">
+        </a>
+
+        <!-- Mobile hamburger -->
+        <button class="hamburger" id="hamburger-menu" aria-label="Open navigation menu">
+            <span></span><span></span><span></span>
+        </button>
+
+        <!-- Dock pill -->
+        <div class="dock-pill-wrap">
+
+            <!-- Gooey sliding gold bubble (filtered, desktop only) -->
+            <div class="dock-liquid-layer" aria-hidden="true">
+                <span class="dock-liquid-bubble" id="dock-liquid-bubble"></span>
+            </div>
+
+            <nav aria-label="Main navigation">
+                <ul class="dock-pill-items" id="main-nav">
+
+                    <!-- HOME -->
+                    <li class="dock-item" data-dock-id="home">
+                        <a href="{{BASE}}index.html" class="dock-btn">
+                            <span class="dock-av" aria-hidden="true">
+                                <span class="dock-pbox">
+                                    <span class="dock-pring"></span>
+                                    <span class="dock-pshine"></span>
+                                    <span class="dock-pmask"></span>
+                                </span>
+                                <span class="dock-glow-a"></span>
+                                <span class="dock-glow-b"></span>
+                            </span>
+                            <i class="fa-solid fa-house" aria-hidden="true"></i>
+                            <span class="dock-label">Home</span>
+                        </a>
+                    </li>
+                    <li class="dock-sep" aria-hidden="true"></li>
+
+                    <!-- ABOUT -->
+                    <li class="dock-item" data-dock-id="about">
+                        <a href="{{BASE}}about.html" class="dock-btn">
+                            <span class="dock-av" aria-hidden="true">
+                                <span class="dock-pbox">
+                                    <span class="dock-pring"></span>
+                                    <span class="dock-pshine"></span>
+                                    <span class="dock-pmask"></span>
+                                </span>
+                                <span class="dock-glow-a"></span>
+                                <span class="dock-glow-b"></span>
+                            </span>
+                            <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+                            <span class="dock-label">About</span>
+                        </a>
+                    </li>
+                    <li class="dock-sep" aria-hidden="true"></li>
+
+                    <!-- SERVICES (mega-menu dropdown) -->
+                    <li class="dock-item has-dropdown" data-dock-id="services">
+                        <a href="{{BASE}}index.html#services" class="dock-btn dropdown-toggle">
+                            <span class="dock-av" aria-hidden="true">
+                                <span class="dock-pbox">
+                                    <span class="dock-pring"></span>
+                                    <span class="dock-pshine"></span>
+                                    <span class="dock-pmask"></span>
+                                </span>
+                                <span class="dock-glow-a"></span>
+                                <span class="dock-glow-b"></span>
+                            </span>
+                            <i class="fa-solid fa-plane" aria-hidden="true"></i>
+                            <span class="dock-label">Services <i class="fa-solid fa-chevron-down dropdown-arrow"></i></span>
+                        </a>
+                        <div class="dropdown-menu mega-menu">
+                            <div class="mega-col">
+                                <h4 class="mega-title"><i class="fa-solid fa-plane"></i> Exterior Care</h4>
+                                <ul>
+                                    <li><a href="{{BASE}}services/dry-wash.html">Dry Wash</a></li>
+                                    <li><a href="{{BASE}}services/wet-wash.html">Wet Wash</a></li>
+                                    <li><a href="{{BASE}}services/exterior-wax.html">Exterior Wax</a></li>
+                                    <li><a href="{{BASE}}services/brightwork-polishing.html">Brightwork Polishing</a></li>
+                                    <li><a href="{{BASE}}services/protective-coatings.html">Protective Coatings</a></li>
+                                    <li><a href="{{BASE}}services/window-restoration.html">Window Restoration</a></li>
+                                    <li><a href="{{BASE}}services/de-ice-boot.html">De-Ice Boot Refurbishment</a></li>
+                                    <li><a href="{{BASE}}services/paint-revitalization.html">Paint Revitalization</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col" style="border-right:none">
+                                <h4 class="mega-title"><i class="fa-solid fa-couch"></i> Interior Care</h4>
+                                <ul>
+                                    <li><a href="{{BASE}}services/interior-cleaning.html">Interior Cleaning &amp; Detail</a></li>
+                                    <li><a href="{{BASE}}services/leather-conditioning.html">Leather Conditioning</a></li>
+                                    <li><a href="{{BASE}}services/leather-repair.html">Leather Repair &amp; Re-Dye</a></li>
+                                    <li><a href="{{BASE}}services/stain-removal.html">Stain Removal</a></li>
+                                    <li><a href="{{BASE}}services/lavatory-sanitation.html">Lavatory &amp; Galley Sanitation</a></li>
+                                    <li><a href="{{BASE}}services/carpet-extraction.html">Carpet &amp; Upholstery Extraction</a></li>
+                                    <li><a href="{{BASE}}services/wood-polishing.html">Wood &amp; Trim Polishing</a></li>
+                                    <li><a href="{{BASE}}services/dry-cleaning.html">Dry Cleaning Carpet &amp; Upholstery</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="dock-sep" aria-hidden="true"></li>
+
+                    <!-- PACKAGES (mega-menu dropdown) -->
+                    <li class="dock-item has-dropdown" data-dock-id="packages">
+                        <a href="{{BASE}}index.html#packages" class="dock-btn dropdown-toggle">
+                            <span class="dock-av" aria-hidden="true">
+                                <span class="dock-pbox">
+                                    <span class="dock-pring"></span>
+                                    <span class="dock-pshine"></span>
+                                    <span class="dock-pmask"></span>
+                                </span>
+                                <span class="dock-glow-a"></span>
+                                <span class="dock-glow-b"></span>
+                            </span>
+                            <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+                            <span class="dock-label">Packages <i class="fa-solid fa-chevron-down dropdown-arrow"></i></span>
+                        </a>
+                        <div class="dropdown-menu mega-menu">
+                            <div class="mega-col">
+                                <h4 class="mega-title"><i class="fa-solid fa-crosshairs"></i> Targeted Support</h4>
+                                <ul>
+                                    <li><a href="{{BASE}}services/gear-well-cleaning.html">Gear Well &amp; Belly Cleaning</a></li>
+                                    <li><a href="{{BASE}}services/oxidation-correction.html">Oxidation Correction</a></li>
+                                    <li><a href="{{BASE}}services/preservation-consultation.html">Preservation Consultations</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col" style="border-right:none">
+                                <h4 class="mega-title"><i class="fa-solid fa-shield-halved"></i> Flightline Programs</h4>
+                                <ul>
+                                    <li><a href="{{BASE}}services/flightline-standard.html">Flightline Standard</a></li>
+                                    <li><a href="{{BASE}}services/flightline-elite.html">Flightline Elite</a></li>
+                                    <li><a href="{{BASE}}services/flightline-command.html">Flightline Command</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="dock-sep" aria-hidden="true"></li>
+
+                    <!-- QUOTE (CTA) -->
+                    <li class="dock-item dock-cta-item" data-dock-id="quote">
+                        <a href="{{BASE}}index.html#footer" class="dock-btn">
+                            <span class="dock-av" aria-hidden="true">
+                                <span class="dock-pbox">
+                                    <span class="dock-pring"></span>
+                                    <span class="dock-pshine"></span>
+                                    <span class="dock-pmask"></span>
+                                </span>
+                                <span class="dock-glow-a"></span>
+                                <span class="dock-glow-b"></span>
+                            </span>
+                            <i class="fa-solid fa-file-lines" aria-hidden="true"></i>
+                            <span class="dock-label">Quote</span>
+                        </a>
+                    </li>
+                    <li class="dock-sep" aria-hidden="true"></li>
+
+                    <!-- THEME TOGGLE -->
+                    <li class="dock-item dock-theme-item" data-dock-id="theme">
+                        <button type="button" class="dock-btn theme-toggle" aria-label="Toggle light/dark mode">
+                            <span class="theme-toggle-thumb">
+                                <i class="fa-solid fa-moon" aria-hidden="true"></i>
+                            </span>
+                            <span class="dock-label">Theme</span>
+                        </button>
+                    </li>
+
+                </ul><!-- /dock-pill-items#main-nav -->
+            </nav>
+
+        </div><!-- /dock-pill-wrap -->
+    </div><!-- /dock-nav-row -->
+</header>

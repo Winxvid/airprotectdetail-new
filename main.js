@@ -32,16 +32,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     // --- End Hero Scroll Animations ---
 
-    const header = document.getElementById('main-header');
-
-    // Header scroll background
+    // Header scroll — load-header.js handles this now; keep as null-safe fallback
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 40) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-    });
+        const header = document.getElementById('main-header');
+        if (!header) return;
+        header.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
 
     // Back to top logic
     const backToTop = document.createElement('div');
