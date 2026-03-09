@@ -6,8 +6,7 @@
         <div class="footer-content">
             <div class="contact-container">
                 <div>
-                    <p class="text-gradient" style="font-weight: bold; letter-spacing: 3px;">Request Consultation</p>
-                    <h2 style="font-size: 3.5rem;">Preserve Your Legacy</h2>
+                    <h2 style="font-size: 3.5rem; background: linear-gradient(135deg, var(--clr-primary), var(--clr-text)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.25));">PRESERVE YOUR LEGACY</h2>
                     <p style="margin-top: 1rem; color: var(--clr-text-muted);">Provide your aircraft details
                         below. As a veteran-owned company, we approach every aircraft with discipline and
                         respect.</p>
@@ -55,12 +54,24 @@
                         </optgroup>
                     </select>
                     <textarea name="message" placeholder="Additional Details" rows="4"></textarea>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary submit-btn">
+                        <span class="submit-btn__text">Send Request</span>
+                        <span class="submit-btn__icon" aria-hidden="true">
+                            <svg class="submit-btn__svg" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg" overflow="visible">
+                                <path class="submit-btn__plane" d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/>
+                                <line class="submit-btn__line submit-btn__line--1" x1="5" y1="15" x2="1" y2="19" stroke-width="1.5"/>
+                                <line class="submit-btn__line submit-btn__line--2" x1="7" y1="17" x2="3" y2="21" stroke-width="1.5"/>
+                                <line class="submit-btn__line submit-btn__line--3" x1="9" y1="19" x2="5" y2="23" stroke-width="1.5"/>
+                            </svg>
+                        </span>
+                    </button>
                 </form>
             </div>
-            <div>
-                <p class="social-subtitle">CONNECT WITH US</p>
-                <h3 class="social-title">Our Socials</h3>
+        </div>
+
+        <!-- Footer bottom bar: socials + copyright left, veteran badge right -->
+        <div class="footer-bottom">
+            <div class="footer-bottom-left">
                 <div class="social-links">
                     <a href="https://youtube.com/@airprotectgroup" target="_blank" aria-label="YouTube">
                         <i class="fab fa-youtube"></i>
@@ -75,14 +86,13 @@
                         <i class="fab fa-linkedin"></i>
                     </a>
                 </div>
+                <span class="footer-divider"></span>
+                <p class="footer-copyright">&copy; 2026 AirProtect. All rights reserved.</p>
             </div>
-            <div style="display: flex; gap: 1rem; align-items: center;">
+            <div class="footer-bottom-right">
                 <img src="{{BASE}}assets/veteran.png" alt="Veteran Owned Business" class="veteran-badge" loading="lazy"
-                    style="opacity: 0.5; filter: grayscale(1);">
+                    style="opacity: 0.85;">
             </div>
-        </div>
-        <div class="footer-copyright">
-            &copy; 2026 AirProtect. All rights reserved.
         </div>
     </div>
 </footer>

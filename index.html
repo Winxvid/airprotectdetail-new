@@ -232,7 +232,7 @@
             </div>
         </section>
 
-        <section id="why-choose-us" class="section-padding" style="background: var(--clr-bg); padding-top: 2rem;">
+        <section id="why-choose-us" class="section-padding wcu-curtain" style="background: var(--clr-bg); padding-top: 0; padding-bottom: 0;">
             <!-- Desktop: animated React cards -->
             <div id="root" class="why-choose-desktop"></div>
 
@@ -384,81 +384,83 @@
             }
         </style>
 
-        <section id="services" class="section-padding" style="background: var(--clr-bg);">
-            <div class="container">
-                <div class="section-title">
-                    <h2><span style="background: linear-gradient(135deg, var(--clr-primary), var(--clr-text)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25));">EXTERIOR PRESERVATION</span></h2>
-                    <p style="max-width: 800px; margin: 2rem auto 0; color: var(--clr-text-muted);">
-                        At AirProtect, we specialize in delivering premium exterior detailing services tailored for
-                        aviation enthusiasts and aircraft owners. Our skilled team utilizes industry-leading products
-                        and state-of-the-art equipment to ensure every detail of your aircraft receives the care it
-                        deserves.
-                    </p>
-                </div>
+        <section id="services" class="section-padding ext-curtain" style="background: var(--clr-bg); padding-top: 0; padding-bottom: 0;">
+            <!-- Desktop: scroll animation only (title is rendered inside the React scroll component) -->
+            <div class="desktop-only">
+                <div id="exterior-scroll-root"></div>
+            </div>
 
-                <div class="services-interactive">
-                    <div class="hotspot-wrapper">
-                        <img src="assets/plane_exterior_top.png" alt="Aircraft Exterior Top View" class="plane-visual"
-                            loading="lazy">
+            <!-- Mobile Static Layout -->
+            <div class="mobile-only">
+                <div class="container">
+                    <div class="section-title">
+                        <h2><span style="background: linear-gradient(135deg, var(--clr-primary), var(--clr-text)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25));">EXTERIOR PRESERVATION</span></h2>
+                        <p style="max-width: 800px; margin: 2rem auto 0; color: var(--clr-text-muted);">
+                            At AirProtect, we specialize in delivering premium exterior detailing services tailored for
+                            aviation enthusiasts and aircraft owners. Our skilled team utilizes industry-leading products
+                            and state-of-the-art equipment to ensure every detail of your aircraft receives the care it
+                            deserves.
+                        </p>
+                    </div>
 
-                        <!-- Left Side -->
-                        <a href="services/dry-wash.html" class="hotspot-label hotspot-left" id="ext-1">Dry Wash</a>
+                    <div class="services-interactive">
+                        <div class="hotspot-wrapper">
+                            <img src="assets/Exterior_Services.png" alt="Aircraft Exterior Top View" class="plane-visual"
+                                loading="lazy">
 
-                        <a href="services/wet-wash.html" class="hotspot-label hotspot-left" id="ext-2">Wet Wash</a>
-                        <a href="services/exterior-wax.html" class="hotspot-label hotspot-left" id="ext-3">Exterior
-                            Wax</a>
-                        <a href="services/brightwork-polishing.html" class="hotspot-label hotspot-left"
-                            id="ext-4">Brightwork Polishing</a>
+                            <!-- Left Side -->
+                            <a href="services/dry-wash.html" class="hotspot-label hotspot-left" id="ext-1">Dry Wash</a>
 
-                        <!-- Right Side -->
-                        <a href="services/protective-coatings.html" class="hotspot-label hotspot-right"
-                            id="ext-5">Protective Coatings</a>
-                        <a href="services/window-restoration.html" class="hotspot-label hotspot-right" id="ext-6">Window
-                            Restoration &amp; Polishing</a>
-                        <a href="services/de-ice-boot.html" class="hotspot-label hotspot-right" id="ext-7">De-Ice Boot
-                            Refurbishment</a>
-                        <a href="services/paint-revitalization.html" class="hotspot-label hotspot-right"
-                            id="ext-8">Paint Revitalization</a>
+                            <a href="services/wet-wash.html" class="hotspot-label hotspot-left" id="ext-2">Wet Wash</a>
+                            <a href="services/exterior-wax.html" class="hotspot-label hotspot-left" id="ext-3">Exterior
+                                Wax</a>
+                            <a href="services/brightwork-polishing.html" class="hotspot-label hotspot-left"
+                                id="ext-4">Brightwork Polishing</a>
+
+                            <!-- Right Side -->
+                            <a href="services/protective-coatings.html" class="hotspot-label hotspot-right"
+                                id="ext-5">Protective Coatings</a>
+                            <a href="services/window-restoration.html" class="hotspot-label hotspot-right" id="ext-6">Window
+                                Restoration &amp; Polishing</a>
+                            <a href="services/de-ice-boot.html" class="hotspot-label hotspot-right" id="ext-7">De-Ice Boot
+                                Refurbishment</a>
+                            <a href="services/paint-revitalization.html" class="hotspot-label hotspot-right"
+                                id="ext-8">Paint Revitalization</a>
+                        </div>
                     </div>
                 </div>
             </div>
-            </div>
         </section>
 
-        <section id="interior-services" class="section-padding" style="background: var(--clr-bg);">
-            <div class="container">
-                <div class="section-title">
-                    <h2><span style="background: linear-gradient(135deg, var(--clr-primary), var(--clr-text)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25));">INTERIOR SERVICES</span></h2>
-                    <p style="max-width: 800px; margin: 2rem auto 0; color: var(--clr-text-muted);">
-                        At AirProtect, we excel in providing top-tier interior detailing services designed specifically
-                        for aircraft owners and aviation enthusiasts. Our expert team uses cutting-edge techniques and
-                        premium products to ensure your aircraft's interior is meticulously cleaned and maintained.
-                    </p>
-                </div>
+        <section id="interior-services" class="section-padding int-curtain" style="background: var(--clr-bg); padding-top: 0; padding-bottom: 0;">
+            <!-- Desktop: scroll animation (title rendered inside React component) -->
+            <div class="desktop-only">
+                <div id="interior-scroll-root"></div>
+            </div>
 
-                <div class="services-interactive">
-                    <div class="hotspot-wrapper">
-                        <img src="assets/plane_interior_top.png" alt="Aircraft Interior Top View" class="plane-visual"
-                            loading="lazy">
-
-                        <!-- Left Side -->
-                        <a href="services/interior-cleaning.html" class="hotspot-label hotspot-left" id="int-1">Interior
-                            Cleaning &amp; Detail</a>
-                        <a href="services/leather-conditioning.html" class="hotspot-label hotspot-left"
-                            id="int-2">Leather Conditioning</a>
-                        <a href="services/leather-repair.html" class="hotspot-label hotspot-left" id="int-3">Leather
-                            Repair &amp; Re-Dye</a>
-                        <a href="services/stain-removal.html" class="hotspot-label hotspot-left" id="int-4">Stain
-                            Removal</a>
-                        <!-- Right Side -->
-                        <a href="services/lavatory-sanitation.html" class="hotspot-label hotspot-right"
-                            id="int-5">Lavatory &amp; Galley Sanitation</a>
-                        <a href="services/carpet-extraction.html" class="hotspot-label hotspot-right" id="int-6">Carpet
-                            &amp; Upholstery Extraction</a>
-                        <a href="services/wood-polishing.html" class="hotspot-label hotspot-right" id="int-7">Wood &amp;
-                            Trim Polishing</a>
-                        <a href="services/dry-cleaning.html" class="hotspot-label hotspot-right" id="int-8">Dry Cleaning
-                            Carpet &amp; Upholstery</a>
+            <!-- Mobile Static Layout -->
+            <div class="mobile-only">
+                <div class="container">
+                    <div class="section-title">
+                        <h2><span style="background: linear-gradient(135deg, var(--clr-primary), var(--clr-text)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25));">INTERIOR SERVICES</span></h2>
+                        <p style="max-width: 800px; margin: 2rem auto 0; color: var(--clr-text-muted);">
+                            At AirProtect, we excel in providing top-tier interior detailing services designed specifically
+                            for aircraft owners and aviation enthusiasts. Our expert team uses cutting-edge techniques and
+                            premium products to ensure your aircraft's interior is meticulously cleaned and maintained.
+                        </p>
+                    </div>
+                    <div class="services-interactive">
+                        <div class="hotspot-wrapper">
+                            <img src="assets/Interior_Services.png" alt="Aircraft Interior Top View" class="plane-visual" loading="lazy">
+                            <a href="services/interior-cleaning.html" class="hotspot-label hotspot-left" id="int-1">Interior Cleaning &amp; Detail</a>
+                            <a href="services/leather-conditioning.html" class="hotspot-label hotspot-left" id="int-2">Leather Conditioning</a>
+                            <a href="services/leather-repair.html" class="hotspot-label hotspot-left" id="int-3">Leather Repair &amp; Re-Dye</a>
+                            <a href="services/stain-removal.html" class="hotspot-label hotspot-left" id="int-4">Stain Removal</a>
+                            <a href="services/lavatory-sanitation.html" class="hotspot-label hotspot-right" id="int-5">Lavatory &amp; Galley Sanitation</a>
+                            <a href="services/carpet-extraction.html" class="hotspot-label hotspot-right" id="int-6">Carpet &amp; Upholstery Extraction</a>
+                            <a href="services/wood-polishing.html" class="hotspot-label hotspot-right" id="int-7">Wood &amp; Trim Polishing</a>
+                            <a href="services/dry-cleaning.html" class="hotspot-label hotspot-right" id="int-8">Dry Cleaning Carpet &amp; Upholstery</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -486,6 +488,12 @@
                             <li>Exterior Surface Preservation</li>
                             <li>Quick Refresh</li>
                         </ul>
+                        <span class="pkg-more">
+                            <span class="pkg-more__label">View Details</span>
+                            <span class="pkg-plus-icon" aria-hidden="true">
+                                <svg fill="none" height="18" width="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                            </span>
+                        </span>
                     </a>
 
                     <a href="services/flightline-elite.html" class="package-card glass"
@@ -500,6 +508,12 @@
                             <li>Paint Preservation System</li>
                             <li>Cabin Sanitization</li>
                         </ul>
+                        <span class="pkg-more">
+                            <span class="pkg-more__label">View Details</span>
+                            <span class="pkg-plus-icon" aria-hidden="true">
+                                <svg fill="none" height="18" width="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                            </span>
+                        </span>
                     </a>
 
                     <a href="services/flightline-command.html" class="package-card glass"
@@ -514,12 +528,18 @@
                             <li>Comprehensive Surface Protection</li>
                             <li>Priority Scheduling</li>
                         </ul>
+                        <span class="pkg-more">
+                            <span class="pkg-more__label">View Details</span>
+                            <span class="pkg-plus-icon" aria-hidden="true">
+                                <svg fill="none" height="18" width="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                            </span>
+                        </span>
                     </a>
                 </div>
             </div>
         </section>
 
-        <section id="targeted-support" class="section-padding" style="background: var(--clr-surface);">
+        <section id="targeted-support" class="section-padding" style="background: var(--clr-bg);">
             <div class="container">
                 <div class="targeted-support-container">
                     <div class="targeted-support-text">
@@ -530,11 +550,24 @@
                             address specific aircraft care needs and maintenance challenges.
                         </p>
                         <ul class="targeted-support-list">
-                            <li><a href="services/gear-well-cleaning.html">Gear well and belly cleaning</a></li>
-                            <li><a href="services/oxidation-correction.html">Oxidation evaluation and correction</a>
+                            <li>
+                                <a href="services/gear-well-cleaning.html" class="ts-link">
+                                    <svg class="ts-arrow" fill="none" height="18" width="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M6 9h6V5l7 7-7 7v-4H6V9z"/></svg>
+                                    Gear well and belly cleaning
+                                </a>
                             </li>
-                            <li><a href="services/preservation-consultation.html">Aircraft preservation
-                                    consultations</a></li>
+                            <li>
+                                <a href="services/oxidation-correction.html" class="ts-link">
+                                    <svg class="ts-arrow" fill="none" height="18" width="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M6 9h6V5l7 7-7 7v-4H6V9z"/></svg>
+                                    Oxidation evaluation and correction
+                                </a>
+                            </li>
+                            <li>
+                                <a href="services/preservation-consultation.html" class="ts-link">
+                                    <svg class="ts-arrow" fill="none" height="18" width="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M6 9h6V5l7 7-7 7v-4H6V9z"/></svg>
+                                    Aircraft preservation consultations
+                                </a>
+                            </li>
                         </ul>
                     </div>
                     <div class="targeted-support-image gif-container">
@@ -585,7 +618,8 @@
         </script>
         <script src="main.js"></script>
         <script src="theme-toggle.js"></script>
-        <script src="animate-exterior.js"></script>
+        <script src="exterior-scroll.js"></script>
+        <script src="interior-scroll.js"></script>
         <script>
             (function () {
                 const hamburger = document.getElementById('hamburger-menu');
@@ -721,41 +755,52 @@
                     offset: ["start start", "end end"]
                 });
 
-                const x1 = useTransform(scrollYProgress, [0.2, 0.6], ['0%', '-30%']);
-                const x2 = useTransform(scrollYProgress, [0.2, 0.6], ['0%', '-10%']);
-                const x3 = useTransform(scrollYProgress, [0.2, 0.6], ['0%', '10%']);
-                const x4 = useTransform(scrollYProgress, [0.2, 0.6], ['0%', '30%']);
-                const gap = useTransform(scrollYProgress, [0.2, 0.6], [0, 16]);
-                const innerRadius = useTransform(scrollYProgress, [0.2, 0.4], [0, 12]);
-                const borderOpacity = useTransform(scrollYProgress, [0.2, 0.4], [0, 0.2]);
-                const shadowOpacity = useTransform(scrollYProgress, [0.2, 0.4], [0, 0.5]);
-                const imgOpacity = useTransform(scrollYProgress, [0.3, 0.5], [1, 0.1]);
-                const contentOpacity = useTransform(scrollYProgress, [0.5, 0.7], [0, 1]);
-                const contentY = useTransform(scrollYProgress, [0.6, 0.9], [20, 0]);
-                const rotateY = useTransform(scrollYProgress, [0.3, 0.7], [0, 180]);
-                const groupScale = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.8, 1, 1, 0.9]);
+                const x1 = useTransform(scrollYProgress, [0.12, 0.45], ['0%', '-30%']);
+                const x2 = useTransform(scrollYProgress, [0.12, 0.45], ['0%', '-10%']);
+                const x3 = useTransform(scrollYProgress, [0.12, 0.45], ['0%', '10%']);
+                const x4 = useTransform(scrollYProgress, [0.12, 0.45], ['0%', '30%']);
+                const gap = useTransform(scrollYProgress, [0.12, 0.45], [0, 16]);
+                const innerRadius = useTransform(scrollYProgress, [0.12, 0.27], [0, 12]);
+                const borderOpacity = useTransform(scrollYProgress, [0.12, 0.27], [0, 0.2]);
+                const shadowOpacity = useTransform(scrollYProgress, [0.12, 0.27], [0, 0.5]);
+                const imgOpacity = useTransform(scrollYProgress, [0.18, 0.35], [1, 0.1]);
+                const contentOpacity = useTransform(scrollYProgress, [0.32, 0.45], [0, 1]);
+                const contentY = useTransform(scrollYProgress, [0.32, 0.45], [20, 0]);
+                const rotateY = useTransform(scrollYProgress, [0.18, 0.45], [0, 180]);
+                const groupScale = useTransform(scrollYProgress, [0, 0.12], [0.8, 1]);
+                const groupOpacity = useTransform(scrollYProgress, [0.82, 0.97], [1, 0]);
+                const titleY = useTransform(scrollYProgress, [0, 0.12, 0.97], ['38vh', '0vh', '30vh']);
+                const titleOpacity = useTransform(scrollYProgress, [0, 0.06, 0.72, 0.97], [0, 1, 1, 0]);
 
             return React.createElement('main', { className: "text-white", style: { background: 'var(--clr-bg)', color: 'var(--clr-text)' } },
-                React.createElement(motion.div, {
-                    initial: { opacity: 0, y: 40 },
-                    whileInView: { opacity: 1, y: 0 },
-                    viewport: { once: true, amount: 0.6 },
-                    transition: { duration: 0.9, ease: [0.25, 1, 0.5, 1] },
-                    style: { textAlign: 'center', paddingTop: '4rem', paddingBottom: '2rem', maxWidth: '900px', margin: '0 auto', paddingLeft: '1rem', paddingRight: '1rem' }
-                },
-                    React.createElement('h2', { style: { background: 'linear-gradient(135deg, var(--clr-primary), var(--clr-text))', WebkitBackgroundClip: 'text', backgroundClip: 'text', WebkitTextFillColor: 'transparent', filter: 'drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25))', fontSize: 'clamp(2rem, 5vw, 3.5rem)', marginTop: '0', marginBottom: '1.25rem', color: 'var(--clr-text)', fontWeight: '900', lineHeight: '1.15', textTransform: 'uppercase', letterSpacing: '1px' } }, "Why Choose AirProtect Over the Competition?"),
-                    React.createElement('p', { style: { maxWidth: '750px', margin: '0 auto', color: 'var(--clr-text-muted)', fontSize: '1rem', lineHeight: '1.7' } }, "Discover why AirProtect stands out in the industry with our unparalleled expertise and commitment to excellence.")
-                ),
-                React.createElement('div', { ref: containerRef, className: "relative h-[400vh]" },
-                    React.createElement('div', { className: "sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden perspective-1500" },
-                        React.createElement(motion.div, { style: { scale: groupScale }, className: "relative w-full max-w-7xl px-4 md:px-12 flex justify-center items-center" },
+                React.createElement('div', { ref: containerRef, className: "relative h-[750vh]" },
+                    React.createElement('div', { className: "sticky top-0 h-screen w-full flex flex-col items-center justify-end perspective-1500", style: { paddingBottom: '8vh' } },
+                        React.createElement(motion.div, {
+                            style: {
+                                y: titleY,
+                                opacity: titleOpacity,
+                                textAlign: 'center',
+                                paddingBottom: '1.5rem',
+                                maxWidth: '900px',
+                                width: '100%',
+                                paddingLeft: '1rem',
+                                paddingRight: '1rem',
+                                position: 'relative',
+                                zIndex: 20,
+                                flexShrink: 0
+                            }
+                        },
+                            React.createElement('h2', { style: { background: 'linear-gradient(135deg, var(--clr-primary), var(--clr-text))', WebkitBackgroundClip: 'text', backgroundClip: 'text', WebkitTextFillColor: 'transparent', filter: 'drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25))', fontSize: 'clamp(2rem, 5vw, 3.5rem)', marginTop: '0', marginBottom: '1.25rem', color: 'var(--clr-text)', fontWeight: '900', lineHeight: '1.15', textTransform: 'uppercase', letterSpacing: '1px' } }, "Why Choose AirProtect Over the Competition?"),
+                            React.createElement('p', { style: { maxWidth: '750px', margin: '0 auto', color: 'var(--clr-text-muted)', fontSize: '1rem', lineHeight: '1.7' } }, "Discover why AirProtect stands out in the industry with our unparalleled expertise and commitment to excellence.")
+                        ),
+                        React.createElement(motion.div, { style: { scale: groupScale, opacity: groupOpacity }, className: "relative w-full max-w-7xl px-4 md:px-12 flex justify-center items-center" },
                             React.createElement('div', { className: "flex w-full h-full items-center justify-center preserve-3d" },
                                 CARD_DATA.map((card, index) => {
                                     const xTransform = [x1, x2, x3, x4][index];
-                                    const rotationZ = useTransform(scrollYProgress, [0.4, 0.8], [0, card.rotation]);
+                                    const rotationZ = useTransform(scrollYProgress, [0.32, 0.70], [0, card.rotation]);
                                     const borderColor = useTransform(borderOpacity, (v) => `rgba(255,255,255,${v})`);
                                     const borderW = useTransform(scrollYProgress, [0.2, 0.4], [0, 1]);
-                                    const cardMargin = useTransform(scrollYProgress, [0.0, 0.2, 0.6], [index !== 0 ? -1 : 0, 0, 16]);
+                                    const cardMargin = useTransform(scrollYProgress, [0.0, 0.12, 0.45], [index !== 0 ? -1 : 0, 0, 16]);
                                     return React.createElement(motion.div, {
                                             key: card.id,
                                             style: { 
