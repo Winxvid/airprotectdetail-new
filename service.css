@@ -2042,14 +2042,17 @@ footer>.container {
         padding: 0.7rem 1rem;
     }
     .dock-logo {
-        position: static;
+        position: relative;
         transform: none;
         order: 1;
+        z-index: 1000;
     }
     .dock-logo img { height: 44px; }
     .hamburger {
         display: flex;
         order: 2;
+        position: relative;
+        z-index: 1000;
     }
     .dock-pill-wrap {
         display: none;
