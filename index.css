@@ -1151,8 +1151,13 @@ nav ul li:hover>.dropdown-menu {
     }
 
     .hero {
+        height: auto;
         padding-top: 150px;
         padding-bottom: 60px;
+    }
+
+    .hero-sticky {
+        position: relative;
     }
 
     .hero h1 {
@@ -2142,8 +2147,13 @@ nav ul li:hover>.dropdown-menu {
     }
 
     .hero {
+        height: auto;
         padding-top: 150px;
         padding-bottom: 60px;
+    }
+
+    .hero-sticky {
+        position: relative;
     }
 
     .hero h1 {
@@ -2425,6 +2435,18 @@ nav ul li:hover>.dropdown-menu {
     position: relative;
     z-index: 8;
     margin-top: -100vh;
+}
+
+/* --- Disable curtain overlap on mobile --- */
+@media (max-width: 992px) {
+    .wcu-curtain,
+    .ext-curtain,
+    .int-curtain {
+        margin-top: 0;
+        z-index: auto;
+        border-radius: 0;
+        box-shadow: none;
+    }
 }
 
 /* ======================================================================
