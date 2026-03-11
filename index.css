@@ -2466,6 +2466,8 @@ nav ul li:hover>.dropdown-menu {
         z-index: auto;
         border-radius: 0;
         box-shadow: none;
+        padding-top: 4rem !important;
+        padding-bottom: 4rem !important;
     }
 }
 
