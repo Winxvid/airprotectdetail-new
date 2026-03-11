@@ -2486,13 +2486,18 @@ nav ul li:hover>.dropdown-menu {
 
 /* -- Header overrides ------------------------------------------------- */
 #main-header {
-    background: transparent !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-    border: none !important;
+    background: rgba(9, 17, 27, 0.75) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border-bottom: 1px solid var(--glass-border) !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-top: none !important;
 }
 #main-header.scrolled {
-    background: transparent !important;
+    background: rgba(9, 17, 27, 0.92) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
 }
 
 /* -- Dock nav row ------------------------------------------------------ */
@@ -2978,7 +2983,7 @@ nav ul li:hover>.dropdown-menu {
         gap: 0;
         align-items: stretch;
     }
-    .dock-pill-wrap.nav-open  { display: block; }
+    .dock-pill-wrap.nav-open  { display: block; max-height: calc(100dvh - 110px); overflow-y: auto; -webkit-overflow-scrolling: touch; }
     .dock-pill-items.nav-open { display: flex; }
     .dock-sep { display: none; }
     .dock-item {
@@ -3034,7 +3039,7 @@ nav ul li:hover>.dropdown-menu {
         transition: max-height 0.45s cubic-bezier(0.23,1,0.32,1), opacity 0.3s ease;
     }
     .dock-item.open .dropdown-menu {
-        max-height: 600px;
+        max-height: 1000px;
         transition: max-height 0.4s cubic-bezier(0.23,1,0.32,1);
     }
     /* Prevent touch :hover from applying desktop position/transform side-effects */
