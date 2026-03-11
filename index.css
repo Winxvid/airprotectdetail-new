@@ -1093,6 +1093,11 @@ nav ul li:hover>.dropdown-menu {
         font-size: 2rem;
     }
 
+    .section-title p {
+        font-size: 0.95rem !important;
+        line-height: 1.5 !important;
+    }
+
     .package-card {
         min-width: unset;
         max-width: 100vw;
@@ -1151,13 +1156,8 @@ nav ul li:hover>.dropdown-menu {
     }
 
     .hero {
-        height: auto;
         padding-top: 150px;
         padding-bottom: 60px;
-    }
-
-    .hero-sticky {
-        position: relative;
     }
 
     .hero h1 {
@@ -1171,6 +1171,11 @@ nav ul li:hover>.dropdown-menu {
 
     .section-title h2 {
         font-size: 1.8rem;
+    }
+
+    .section-title p {
+        font-size: 0.95rem !important;
+        line-height: 1.5 !important;
     }
 
     .service-card,
@@ -1235,7 +1240,12 @@ nav ul li:hover>.dropdown-menu {
     }
 
     .section-title h2 {
-        font-size: 1rem;
+        font-size: 1.5rem;
+    }
+
+    .section-title p {
+        font-size: 0.9rem !important;
+        line-height: 1.5 !important;
     }
 
     .hero h1 {
@@ -1786,7 +1796,12 @@ nav ul li:hover>.dropdown-menu {
     }
 
     .section-title h2 {
-        font-size: 1rem;
+        font-size: 1.5rem;
+    }
+
+    .section-title p {
+        font-size: 0.9rem !important;
+        line-height: 1.5 !important;
     }
 
     .hero h1 {
@@ -2147,13 +2162,8 @@ nav ul li:hover>.dropdown-menu {
     }
 
     .hero {
-        height: auto;
         padding-top: 150px;
         padding-bottom: 60px;
-    }
-
-    .hero-sticky {
-        position: relative;
     }
 
     .hero h1 {
@@ -2166,6 +2176,11 @@ nav ul li:hover>.dropdown-menu {
 
     .section-title h2 {
         font-size: 1.8rem;
+    }
+
+    .section-title p {
+        font-size: 0.95rem !important;
+        line-height: 1.5 !important;
     }
 
     .service-card,
@@ -2223,7 +2238,12 @@ nav ul li:hover>.dropdown-menu {
     }
 
     .section-title h2 {
-        font-size: 1rem;
+        font-size: 1.5rem;
+    }
+
+    .section-title p {
+        font-size: 0.9rem !important;
+        line-height: 1.5 !important;
     }
 
     .hero h1 {
