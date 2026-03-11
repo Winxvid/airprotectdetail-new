@@ -3033,7 +3033,7 @@ nav ul li:hover>.dropdown-menu {
         gap: 0;
         align-items: stretch;
     }
-    .dock-pill-wrap.nav-open  { display: block; max-height: calc(100dvh - 110px); overflow-y: auto; -webkit-overflow-scrolling: touch; }
+    .dock-pill-wrap.nav-open  { display: block; position: fixed; top: 0; left: 0; right: 0; padding-top: 100px; max-height: 100dvh; overflow-y: auto; -webkit-overflow-scrolling: touch; border-radius: 0 0 16px 16px; z-index: 999; }
     .dock-pill-items.nav-open { display: flex; }
     .dock-sep { display: none; }
     .dock-item {
@@ -3114,5 +3114,12 @@ nav ul li:hover>.dropdown-menu {
     .mega-col ul li a {
         padding: 0.45rem 0.5rem;
         font-size: 12.5px;
+    }
+}
+
+/* Taller top-bar at 576px (stacks to 2 lines) needs more padding-top on the overlay panel */
+@media (max-width: 576px) {
+    .dock-pill-wrap.nav-open {
+        padding-top: 126px;
     }
 }

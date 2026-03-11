@@ -1527,6 +1527,26 @@ footer>.container {
     }
 }
 
+/* On mobile, fix the header when nav is open so the panel overlays the page */
+@media (max-width: 768px) {
+    body.nav-open #main-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+    }
+    .dock-pill-wrap.nav-open {
+        padding-top: 100px;
+    }
+}
+
+@media (max-width: 576px) {
+    .dock-pill-wrap.nav-open {
+        padding-top: 126px; /* top-bar stacks to 2 lines at this breakpoint */
+    }
+}
+
 /* ─── Reduce motion for accessibility ─── */
 @media (prefers-reduced-motion: reduce) {
 
@@ -2049,7 +2069,7 @@ footer>.container {
         gap: 0;
         align-items: stretch;
     }
-    .dock-pill-wrap.nav-open  { display: block; }
+    .dock-pill-wrap.nav-open  { display: block; position: fixed; top: 0; left: 0; right: 0; padding-top: 100px; max-height: 100dvh; overflow-y: auto; -webkit-overflow-scrolling: touch; border-radius: 0 0 16px 16px; z-index: 999; }
     .dock-pill-items.nav-open { display: flex; }
     .dock-sep { display: none; }
     .dock-item {
@@ -2130,5 +2150,12 @@ footer>.container {
     .mega-col ul li a {
         padding: 0.45rem 0.5rem;
         font-size: 12.5px;
+    }
+}
+
+/* Taller top-bar at 576px (stacks to 2 lines) needs more padding-top on the overlay panel */
+@media (max-width: 576px) {
+    .dock-pill-wrap.nav-open {
+        padding-top: 126px;
     }
 }
