@@ -1352,10 +1352,39 @@ footer>.container {
         padding: 50px 0 20px;
     }
 
+    /* Footer bottom: social icons + veteran badge on one row, copyright below */
     .footer-bottom {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px 12px;
+        padding: 12px 16px;
+    }
+    .footer-bottom-left {
+        display: contents;
+    }
+    .footer-bottom-right {
+        display: contents;
+    }
+    .footer-bottom .social-links {
+        order: 1;
+        flex: 0 0 auto;
+        justify-content: center;
+        gap: 0.75rem;
+    }
+    .footer-bottom .veteran-badge {
+        order: 2;
+        flex: 0 0 auto;
+        width: 48px;
+        height: auto;
+    }
+    .footer-divider {
+        display: none;
+    }
+    .footer-bottom .footer-copyright {
+        order: 3;
+        flex: 0 0 100%;
+        text-align: center;
+        margin: 4px 0 0;
     }
 
     .footer-content,
@@ -1381,16 +1410,6 @@ footer>.container {
     .footer-logo {
         max-width: 100px;
         margin-bottom: 1rem;
-    }
-
-    .veteran-badge {
-        width: 60px;
-        height: auto;
-    }
-
-    .social-links {
-        justify-content: center;
-        gap: 0.75rem;
     }
 
     .social-links a {
