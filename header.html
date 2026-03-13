@@ -52,10 +52,20 @@
         <!-- Dock pill -->
         <div class="dock-pill-wrap">
 
-            <!-- Gooey sliding gold bubble (filtered, desktop only) -->
-            <div class="dock-liquid-layer" aria-hidden="true">
-                <span class="dock-liquid-bubble" id="dock-liquid-bubble"></span>
+            <!-- Golden active indicator ring (slides between buttons) -->
+            <div class="dock-indicator" id="dock-indicator" aria-hidden="true">
+                <span class="dock-ind-glow"></span>
+                <span class="dock-ind-clip">
+                    <span class="dock-ind-ring"></span>
+                </span>
+                <span class="dock-ind-plate"></span>
             </div>
+
+            <!-- Film grain noise overlay -->
+            <div class="dock-grain" aria-hidden="true"></div>
+
+            <!-- Radial ambient glow -->
+            <div class="dock-ambient" aria-hidden="true"></div>
 
             <nav aria-label="Main navigation">
                 <ul class="dock-pill-items" id="main-nav">
@@ -63,15 +73,6 @@
                     <!-- HOME -->
                     <li class="dock-item" data-dock-id="home">
                         <a href="{{BASE}}index.html" class="dock-btn">
-                            <span class="dock-av" aria-hidden="true">
-                                <span class="dock-pbox">
-                                    <span class="dock-pring"></span>
-                                    <span class="dock-pshine"></span>
-                                    <span class="dock-pmask"></span>
-                                </span>
-                                <span class="dock-glow-a"></span>
-                                <span class="dock-glow-b"></span>
-                            </span>
                             <i class="fa-solid fa-house" aria-hidden="true"></i>
                             <span class="dock-label">Home</span>
                         </a>
@@ -81,15 +82,6 @@
                     <!-- ABOUT -->
                     <li class="dock-item" data-dock-id="about">
                         <a href="{{BASE}}about.html" class="dock-btn">
-                            <span class="dock-av" aria-hidden="true">
-                                <span class="dock-pbox">
-                                    <span class="dock-pring"></span>
-                                    <span class="dock-pshine"></span>
-                                    <span class="dock-pmask"></span>
-                                </span>
-                                <span class="dock-glow-a"></span>
-                                <span class="dock-glow-b"></span>
-                            </span>
                             <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
                             <span class="dock-label">About</span>
                         </a>
@@ -99,15 +91,6 @@
                     <!-- SERVICES (mega-menu dropdown) -->
                     <li class="dock-item has-dropdown" data-dock-id="services">
                         <a href="{{BASE}}index.html#services" class="dock-btn dropdown-toggle">
-                            <span class="dock-av" aria-hidden="true">
-                                <span class="dock-pbox">
-                                    <span class="dock-pring"></span>
-                                    <span class="dock-pshine"></span>
-                                    <span class="dock-pmask"></span>
-                                </span>
-                                <span class="dock-glow-a"></span>
-                                <span class="dock-glow-b"></span>
-                            </span>
                             <i class="fa-solid fa-plane" aria-hidden="true"></i>
                             <span class="dock-label">Services <i class="fa-solid fa-chevron-down dropdown-arrow"></i></span>
                         </a>
@@ -145,15 +128,6 @@
                     <!-- PACKAGES (mega-menu dropdown) -->
                     <li class="dock-item has-dropdown" data-dock-id="packages">
                         <a href="{{BASE}}index.html#packages" class="dock-btn dropdown-toggle">
-                            <span class="dock-av" aria-hidden="true">
-                                <span class="dock-pbox">
-                                    <span class="dock-pring"></span>
-                                    <span class="dock-pshine"></span>
-                                    <span class="dock-pmask"></span>
-                                </span>
-                                <span class="dock-glow-a"></span>
-                                <span class="dock-glow-b"></span>
-                            </span>
                             <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
                             <span class="dock-label">Packages <i class="fa-solid fa-chevron-down dropdown-arrow"></i></span>
                         </a>
@@ -181,15 +155,6 @@
                     <!-- QUOTE (CTA) -->
                     <li class="dock-item dock-cta-item" data-dock-id="quote">
                         <a href="{{BASE}}index.html#footer" class="dock-btn">
-                            <span class="dock-av" aria-hidden="true">
-                                <span class="dock-pbox">
-                                    <span class="dock-pring"></span>
-                                    <span class="dock-pshine"></span>
-                                    <span class="dock-pmask"></span>
-                                </span>
-                                <span class="dock-glow-a"></span>
-                                <span class="dock-glow-b"></span>
-                            </span>
                             <i class="fa-solid fa-file-lines" aria-hidden="true"></i>
                             <span class="dock-label">Quote</span>
                         </a>
@@ -199,8 +164,9 @@
                     <!-- THEME TOGGLE -->
                     <li class="dock-item dock-theme-item" data-dock-id="theme">
                         <button type="button" class="dock-btn theme-toggle" aria-label="Toggle light/dark mode">
-                            <span class="theme-toggle-thumb">
-                                <i class="fa-solid fa-moon" aria-hidden="true"></i>
+                            <span class="theme-toggle-icons">
+                                <i class="fa-solid fa-moon theme-icon-dark" aria-hidden="true"></i>
+                                <i class="fa-solid fa-sun theme-icon-light" aria-hidden="true"></i>
                             </span>
                             <span class="dock-label">Theme</span>
                         </button>

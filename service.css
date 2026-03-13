@@ -1651,8 +1651,10 @@ footer>.container {
     position: relative;
     display: inline-flex;
     align-items: center;
-    background: #111111;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(17, 17, 17, 0.55);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 9999px;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8),
                 0 0 0 1px rgba(255, 255, 255, 0.02);
@@ -1665,25 +1667,101 @@ footer>.container {
                 0 0 24px rgba(212, 175, 55, 0.12);
 }
 
-.dock-liquid-layer {
-    position: absolute;
-    inset: 0;
-    border-radius: 9999px;
-    overflow: hidden;
-    pointer-events: none;
-    filter: url(#liquid-goo);
-}
-
-.dock-liquid-bubble {
+/* ── Sliding Golden Ring Indicator ───────────────────────────── */
+.dock-indicator {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 58px;
-    height: 58px;
-    border-radius: 22px;
-    background: #d4af37;
+    width: 62px;
+    height: 62px;
     left: 6px;
-    transition: left 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 1;
+    pointer-events: none;
+    transition: left 0.5s cubic-bezier(0.34, 1.2, 0.64, 1),
+                opacity 0.3s ease;
+}
+
+/* Layer 1: Glow — blurred warm gold behind the ring */
+.dock-ind-glow {
+    position: absolute;
+    inset: -6px;
+    border-radius: 24px;
+    background: #e8af48;
+    opacity: 0.15;
+    filter: blur(14px);
+}
+
+/* Layer 2: Clip container */
+.dock-ind-clip {
+    position: absolute;
+    inset: 0;
+    border-radius: 18px;
+    overflow: hidden;
+}
+
+/* Layer 3: Rotating conic-gradient — gold-dominant, 2 white hotspots, subtle pink/blue iridescence */
+.dock-ind-ring {
+    position: absolute;
+    inset: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+        from 0deg,
+        #533517 0%,
+        #c49746 7%,
+        #feeaa5 14%,
+        #ffffff 21%, #ffffff 24%,
+        #ffc0cb 25%, #ffc0cb 26.5%,
+        #7eb8da 27%, #7eb8da 28.5%,
+        #feeaa5 30%,
+        #c49746 37%,
+        #533517 44%,
+        #ffffff 47%, #ffffff 50%,
+        #533517 50%,
+        #c49746 57%,
+        #feeaa5 64%,
+        #ffffff 71%, #ffffff 74%,
+        #ffc0cb 75%, #ffc0cb 76.5%,
+        #7eb8da 77%, #7eb8da 78.5%,
+        #feeaa5 80%,
+        #c49746 87%,
+        #533517 94%,
+        #ffffff 97%, #ffffff 100%
+    );
+    animation: dock-ring-spin 4.5s linear infinite;
+}
+@keyframes dock-ring-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Layer 4: Inner plate — inset 2px, only 2px of ring visible */
+.dock-ind-plate {
+    position: absolute;
+    inset: 2px;
+    border-radius: 16px;
+    background: rgba(17, 17, 17, 0.92);
+}
+
+/* ── Film grain noise overlay ──────────────────────────────── */
+.dock-grain {
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    pointer-events: none;
+    z-index: 3;
+    opacity: 0.035;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── Radial ambient glow ───────────────────────────────────── */
+.dock-ambient {
+    position: absolute;
+    inset: -24px;
+    border-radius: 9999px;
+    pointer-events: none;
+    z-index: 0;
+    background: radial-gradient(ellipse at center, rgba(212, 175, 55, 0.06) 0%, transparent 70%);
 }
 
 .dock-pill-items {
@@ -1737,80 +1815,8 @@ footer>.container {
     font-family: inherit;
 }
 
-.dock-av {
-    position: absolute;
-    inset: 4px;
-    pointer-events: none;
-    display: none;
-}
-.dock-item.active .dock-av {
-    display: block;
-}
-
-.dock-pbox {
-    position: absolute;
-    inset: 0;
-    border-radius: 22px;
-    padding: 1.5px;
-    overflow: hidden;
-}
-
-.dock-pring {
-    position: absolute;
-    inset: -100%;
-    background: conic-gradient(
-        from 0deg,
-        #f3d06a 0%, #ffffff 10%, #d4af37 20%, #ff0000 30%,
-        #d4af37 40%, #00ffd5 50%, #f3d06a 60%, #ffffff 70%,
-        #d4af37 80%, #7a00ff 90%, #f3d06a 100%
-    );
-    animation: dock-ring-spin 4s linear infinite;
-}
-@keyframes dock-ring-spin {
-    to { transform: rotate(360deg); }
-}
-
-.dock-pshine {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.65), transparent);
-    transform: skewX(20deg) translateX(-150%);
-    animation: dock-shine-sweep 2.5s linear infinite;
-    z-index: 10;
-}
-@keyframes dock-shine-sweep {
-    to { transform: skewX(20deg) translateX(350%); }
-}
-
-.dock-pmask {
-    position: absolute;
-    inset: 1.5px;
-    border-radius: 21px;
-    background: #1a1a1a;
-    z-index: 20;
-}
-
-.dock-glow-a {
-    position: absolute;
-    inset: 0;
-    border-radius: 22px;
-    filter: blur(24px);
-    opacity: 0.4;
-    background: conic-gradient(from 0deg, #ff0000, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff0000);
-}
-
-.dock-glow-b {
-    position: absolute;
-    inset: 0;
-    border-radius: 22px;
-    filter: blur(12px);
-    opacity: 0.65;
-    background: #d4af37;
-}
-
 /* -- Icons & labels ---------------------------------------------------- */
-.dock-btn > i,
-.dock-theme-item .theme-toggle-thumb i {
+.dock-btn > i {
     position: relative;
     z-index: 30;
     font-size: 19px;
@@ -1901,64 +1907,83 @@ footer>.container {
     justify-content: center !important;
     gap: 0 !important;
 }
-.dock-theme-item .theme-toggle-thumb {
-    width: auto !important;
-    height: auto !important;
-    background: transparent !important;
-    box-shadow: none !important;
-    transform: none !important;
-    border-radius: 0 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
+
+/* Crossfade icon container */
+.theme-toggle-icons {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 30;
 }
-[data-theme="light"] .dock-theme-item .theme-toggle-thumb {
-    transform: none !important;
+.theme-icon-dark,
+.theme-icon-light {
+    position: absolute;
+    font-size: 19px;
+    line-height: 1;
+    color: #555555;
+    transition: opacity 0.35s ease,
+                transform 0.35s cubic-bezier(0.34, 1.2, 0.64, 1),
+                color 0.3s ease;
+    translate: var(--dock-mx, 0px) var(--dock-my, 0px);
 }
-.dock-theme-item .theme-toggle-thumb i {
-    position: relative !important;
-    z-index: 30 !important;
-    font-size: 19px !important;
-    line-height: 1 !important;
+
+/* Dark mode default: moon visible, sun hidden */
+.theme-icon-dark {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
 }
-.dock-theme-item .theme-toggle:hover .theme-toggle-thumb i {
-    color: #d4af37 !important;
-    transform: scale(1.22) translateY(-3px) !important;
+.theme-icon-light {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.5);
 }
+
+/* Light mode: sun visible, moon hidden */
+[data-theme="light"] .theme-icon-dark {
+    opacity: 0;
+    transform: rotate(90deg) scale(0.5);
+}
+[data-theme="light"] .theme-icon-light {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+}
+
+.dock-theme-item .theme-toggle:hover .theme-icon-dark,
+.dock-theme-item .theme-toggle:hover .theme-icon-light {
+    color: #d4af37;
+}
+
 .dock-theme-item .dock-label { margin-top: 4px; }
 
-/* -- Theme icon spin keyframes ---------------------------------------- */
-@keyframes dock-spin-out {
-    from { transform: rotate(0deg);   }
-    to   { transform: rotate(180deg); }
+/* -- Theme bounce animation ------------------------------------------- */
+@keyframes dock-theme-bounce {
+    0%   { transform: scale(1); }
+    40%  { transform: scale(1.25); }
+    70%  { transform: scale(0.95); }
+    100% { transform: scale(1); }
 }
-@keyframes dock-spin-in {
-    from { transform: rotate(180deg); }
-    to   { transform: rotate(360deg); }
-}
-.dock-theme-item .theme-toggle-thumb i.is-spinning-out {
-    animation: dock-spin-out 0.2s ease-in forwards !important;
-    transition: none !important;
-}
-.dock-theme-item .theme-toggle-thumb i.is-spinning-in {
-    animation: dock-spin-in 0.28s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
-    transition: none !important;
+.theme-toggle.is-bouncing .theme-toggle-icons {
+    animation: dock-theme-bounce 0.4s cubic-bezier(0.34, 1.2, 0.64, 1);
 }
 
 /* -- Light theme overrides -------------------------------------------- */
 [data-theme="light"] .dock-pill-wrap {
-    background: rgba(255,255,255,0.96);
+    background: rgba(255,255,255,0.65);
     border-color: rgba(0,0,0,0.08);
     box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15), 0 0 0 1px rgba(0,0,0,0.04);
 }
-[data-theme="light"] .dock-liquid-bubble { background: #d4af37; }
-[data-theme="light"] .dock-pmask         { background: #f5f5f5; }
-[data-theme="light"] .dock-btn > i        { color: #1a1a1a; }
-[data-theme="light"] .dock-label          { color: #333333; }
-[data-theme="light"] .dock-sep            { background: rgba(0,0,0,0.1); }
+[data-theme="light"] .dock-ind-plate  { background: rgba(255,255,255,0.92); }
+[data-theme="light"] .dock-btn > i     { color: #1a1a1a; }
+[data-theme="light"] .dock-label       { color: #333333; }
+[data-theme="light"] .dock-sep         { background: rgba(0,0,0,0.1); }
 [data-theme="light"] .dock-cta-item:not(.active) .dock-btn > i,
 [data-theme="light"] .dock-cta-item:not(.active) .dock-label { color: #b8930a; }
-[data-theme="light"] .dock-theme-item .theme-toggle-thumb i { color: #1a1a1a !important; }
+[data-theme="light"] .theme-icon-dark,
+[data-theme="light"] .theme-icon-light { color: #1a1a1a; }
+[data-theme="light"] .dock-theme-item .theme-toggle:hover .theme-icon-dark,
+[data-theme="light"] .dock-theme-item .theme-toggle:hover .theme-icon-light { color: #d4af37; }
 
 /* -- Dropdown menus ---------------------------------------------------- */
 .dropdown-menu {
@@ -2064,7 +2089,9 @@ footer>.container {
         transform: none !important;
     }
     .dock-pill-wrap:hover { box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.02); }
-    .dock-liquid-layer { display: none; }
+    .dock-indicator { display: none; }
+    .dock-grain { display: none; }
+    .dock-ambient { display: none; }
     .dock-pill-items {
         display: none;
         flex-direction: column;
@@ -2078,7 +2105,6 @@ footer>.container {
     .dock-item {
         width: 100%;
     }
-    .dock-av { display: none !important; }
     .dock-btn {
         width: 100%;
         height: auto;
@@ -2099,7 +2125,6 @@ footer>.container {
         color: var(--clr-text, #fff);
         margin-top: 0;
     }
-    .dock-av { display: none !important; }
     .dock-item.active .dock-btn > i    { color: var(--clr-primary, #d4af37); filter: none; transform: none; }
     .dock-item.active .dock-label      { color: var(--clr-primary, #d4af37); }
     .dock-theme-item .theme-toggle {
@@ -2110,7 +2135,11 @@ footer>.container {
         justify-content: flex-start !important;
         gap: 0.75rem !important;
     }
-    .dock-theme-item .theme-toggle-thumb i { font-size: 15px !important; }
+    .dock-theme-item .theme-toggle-icons { width: auto; height: auto; }
+    .theme-icon-dark, .theme-icon-light { font-size: 15px; position: relative; }
+    .theme-icon-light { display: none; }
+    [data-theme="light"] .theme-icon-dark { display: none; opacity: 1; transform: none; }
+    [data-theme="light"] .theme-icon-light { display: block; opacity: 1; transform: none; }
 
     /* Mobile dropdown accordion */
     .dropdown-menu {

@@ -50,12 +50,6 @@
            aren't in the DOM when it runs (async injection).
            We re-wire them here. ───────────────────────────── */
         var THEME_KEY = 'ap_theme';
-        var isLight = document.documentElement.getAttribute('data-theme') === 'light';
-
-        // Correct the icon on the injected button
-        document.querySelectorAll('.theme-toggle-thumb i').forEach(function (icon) {
-            icon.className = isLight ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
-        });
 
         // Wire click handlers on all toggle buttons on the page
         document.querySelectorAll('.theme-toggle').forEach(function (btn) {
@@ -70,17 +64,14 @@
                 }
                 localStorage.setItem(THEME_KEY, next);
 
-                // Spin 0→180, swap icon at midpoint, finish 180→360
-                document.querySelectorAll('.theme-toggle-thumb i').forEach(function (icon) {
-                    icon.classList.remove('is-spinning-out', 'is-spinning-in');
-                    void icon.offsetWidth; // force reflow to restart animation
-                    icon.classList.add('is-spinning-out');
-                    setTimeout(function () {
-                        icon.classList.remove('is-spinning-out');
-                        icon.className = (next === 'light' ? 'fa-solid fa-sun' : 'fa-solid fa-moon') + ' is-spinning-in';
-                        setTimeout(function () { icon.classList.remove('is-spinning-in'); }, 300);
-                    }, 200);
-                });
+                // Bounce animation — scale up to 1.25× then spring back
+                var toggleBtn = this;
+                toggleBtn.classList.remove('is-bouncing');
+                void toggleBtn.offsetWidth;
+                toggleBtn.classList.add('is-bouncing');
+                setTimeout(function () {
+                    toggleBtn.classList.remove('is-bouncing');
+                }, 450);
             });
         });
 
@@ -171,10 +162,10 @@
             if (e.key === 'Escape' && nav.classList.contains('nav-open')) closeMenu();
         });
 
-        /* ── D. Dock — active state & bubble ─────────────────── */
-        var dockItems = document.querySelectorAll('.dock-item[data-dock-id]');
-        var bubble    = document.getElementById('dock-liquid-bubble');
-        var pillWrap  = document.querySelector('.dock-pill-wrap');
+        /* ── D. Dock — active state & indicator ──────────────────── */
+        var dockItems  = document.querySelectorAll('.dock-item[data-dock-id]');
+        var indicator  = document.getElementById('dock-indicator');
+        var pillWrap   = document.querySelector('.dock-pill-wrap');
 
         // Determine initial active item from current URL
         var path      = window.location.pathname;
@@ -184,15 +175,16 @@
         else if (packagePages.test(path))        currentId = 'packages';
         else if (/\/services\//.test(path))      currentId = 'services';
 
-        function updateBubble() {
-            if (!bubble || !pillWrap) return;
+        function updateIndicator() {
+            if (!indicator || !pillWrap) return;
             var active = document.querySelector('.dock-item.active');
-            if (!active) return;
+            if (!active) { indicator.style.opacity = '0'; return; }
+            indicator.style.opacity = '1';
             var pr   = pillWrap.getBoundingClientRect();
             var ir   = active.getBoundingClientRect();
-            var bW   = 58;
-            var left = (ir.left - pr.left) + (ir.width - bW) / 2;
-            bubble.style.left = left + 'px';
+            var indW = 62;
+            var left = (ir.left - pr.left) + (ir.width - indW) / 2;
+            indicator.style.left = left + 'px';
         }
 
         function setActive(id) {
@@ -201,7 +193,7 @@
             dockItems.forEach(function (item) {
                 item.classList.toggle('active', item.dataset.dockId === id);
             });
-            updateBubble();
+            updateIndicator();
         }
 
         // Set initial active state
@@ -215,29 +207,40 @@
             if (btn) btn.addEventListener('click', function () { setActive(id); });
         });
 
-        // Position bubble once layout has settled
-        setTimeout(updateBubble, 100);
-        window.addEventListener('resize', updateBubble);
+        // Position indicator once layout has settled
+        setTimeout(updateIndicator, 100);
+        window.addEventListener('resize', updateIndicator);
 
         /* ── G. Magnetic icon pull (desktop only) ────────────── */
         if (window.innerWidth > 768) {
             dockItems.forEach(function (item) {
                 var btn  = item.querySelector('.dock-btn, .theme-toggle');
                 if (!btn) return;
-                var icon = item.querySelector('.theme-toggle-thumb i') ||
-                           item.querySelector('.dock-btn > i');
-                if (!icon) return;
+                var icons = item.querySelectorAll('.theme-icon-dark, .theme-icon-light');
+                var icon = icons.length ? null : (item.querySelector('.dock-btn > i'));
 
                 btn.addEventListener('mousemove', function (e) {
                     var r  = btn.getBoundingClientRect();
                     var dx = (e.clientX - (r.left + r.width  / 2)) * 0.35;
                     var dy = (e.clientY - (r.top  + r.height / 2)) * 0.35;
-                    icon.style.setProperty('--dock-mx', dx.toFixed(2) + 'px');
-                    icon.style.setProperty('--dock-my', dy.toFixed(2) + 'px');
+                    if (icon) {
+                        icon.style.setProperty('--dock-mx', dx.toFixed(2) + 'px');
+                        icon.style.setProperty('--dock-my', dy.toFixed(2) + 'px');
+                    }
+                    icons.forEach(function (ic) {
+                        ic.style.setProperty('--dock-mx', dx.toFixed(2) + 'px');
+                        ic.style.setProperty('--dock-my', dy.toFixed(2) + 'px');
+                    });
                 });
                 btn.addEventListener('mouseleave', function () {
-                    icon.style.setProperty('--dock-mx', '0px');
-                    icon.style.setProperty('--dock-my', '0px');
+                    if (icon) {
+                        icon.style.setProperty('--dock-mx', '0px');
+                        icon.style.setProperty('--dock-my', '0px');
+                    }
+                    icons.forEach(function (ic) {
+                        ic.style.setProperty('--dock-mx', '0px');
+                        ic.style.setProperty('--dock-my', '0px');
+                    });
                 });
             });
         }

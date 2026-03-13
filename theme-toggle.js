@@ -34,17 +34,9 @@
 
                 localStorage.setItem(STORAGE_KEY, next);
 
-                // Update icon inside all toggles
-                document.querySelectorAll('.theme-toggle-thumb i').forEach(function (icon) {
-                    icon.className = next === 'light' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
-                });
+                // The CSS crossfade handles icon switching automatically
+                // via [data-theme="light"] selectors — no icon swap needed
             });
-        });
-
-        // Set correct icon on load
-        var isLight = document.documentElement.getAttribute('data-theme') === 'light';
-        document.querySelectorAll('.theme-toggle-thumb i').forEach(function (icon) {
-            icon.className = isLight ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
         });
     }
 
