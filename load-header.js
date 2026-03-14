@@ -28,7 +28,7 @@
     if (!placeholder) return;
 
     /* ── 2. Fetch, inject, then init ─────────────────────────── */
-    fetch(base + 'header.html')
+    fetch(base + 'header.html?v=' + Date.now(), { cache: 'no-store' })
         .then(function (res) { return res.text(); })
         .then(function (html) {
             html = html.replace(/\{\{BASE\}\}/g, base);
@@ -83,83 +83,146 @@
             }, { passive: true });
         }
 
-        /* ── C. Hamburger + mobile nav ───────────────────────── */
+        /* ── C. Mobile Mercury Drawer ────────────────────────────── */
         var hamburger = document.getElementById('hamburger-menu');
-        var nav       = document.getElementById('main-nav');
-        var pillWrap  = document.querySelector('.dock-pill-wrap');
-        var body      = document.body;
-        var animating = false;
+        var drawer    = document.getElementById('mobile-drawer');
+        var backdrop  = document.getElementById('mobile-drawer-backdrop');
+        var closeBtn  = document.getElementById('mobile-drawer-close');
+        var pill      = document.getElementById('mdr-pill');
+        var gooZone   = document.getElementById('mdr-goo-zone');
         var savedScrollY = 0;
 
-        function openMenu() {
-            if (animating || nav.classList.contains('nav-open')) return;
-            animating = true;
-            // Save scroll position before locking (iOS Safari fix)
+        function openDrawer() {
+            if (!drawer) return;
             savedScrollY = window.scrollY || window.pageYOffset;
-            body.style.top = '-' + savedScrollY + 'px';
-            nav.classList.add('nav-open');
-            if (pillWrap) pillWrap.classList.add('nav-open');
-            hamburger.classList.add('is-active');
-            body.classList.add('nav-open');
-            setTimeout(function () { animating = false; }, 450);
+            document.body.style.top = '-' + savedScrollY + 'px';
+            document.body.classList.add('nav-open');
+            drawer.classList.add('mdr-open');
+            drawer.removeAttribute('aria-hidden');
+            backdrop.classList.add('mdr-backdrop-on');
+            if (hamburger) hamburger.classList.add('is-active');
         }
 
-        function closeMenu() {
-            if (animating || !nav.classList.contains('nav-open')) return;
-            animating = true;
-            nav.classList.remove('nav-open');
-            if (pillWrap) pillWrap.classList.remove('nav-open');
-            hamburger.classList.remove('is-active');
-            document.querySelectorAll('.has-dropdown.open').forEach(function (el) {
-                el.classList.remove('open');
+        function closeDrawer() {
+            if (!drawer) return;
+            drawer.classList.remove('mdr-open');
+            drawer.setAttribute('aria-hidden', 'true');
+            backdrop.classList.remove('mdr-backdrop-on');
+            if (hamburger) hamburger.classList.remove('is-active');
+            // close all open sub-menus
+            drawer.querySelectorAll('.mdr-item.mdr-sub-open').forEach(function(item) {
+                var toggle = item.querySelector('.mdr-btn');
+                var sub = item.querySelector('.mdr-submenu');
+                item.classList.remove('mdr-sub-open');
+                if (toggle) toggle.setAttribute('aria-expanded', 'false');
+                if (sub) { sub.classList.remove('mdr-sub-open'); sub.setAttribute('aria-hidden', 'true'); }
             });
             setTimeout(function () {
-                body.classList.remove('nav-open');
-                body.style.top = '';
-                // Restore scroll position (iOS Safari fix)
+                document.body.classList.remove('nav-open');
+                document.body.style.top = '';
                 window.scrollTo(0, savedScrollY);
-                animating = false;
-            }, 450);
+            }, 420);
         }
 
-        hamburger.addEventListener('click', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            nav.classList.contains('nav-open') ? closeMenu() : openMenu();
+        if (hamburger) {
+            hamburger.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                drawer && drawer.classList.contains('mdr-open') ? closeDrawer() : openDrawer();
+            });
+        }
+        if (closeBtn)  closeBtn.addEventListener('click', closeDrawer);
+        if (backdrop)  backdrop.addEventListener('click', closeDrawer);
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && drawer && drawer.classList.contains('mdr-open')) closeDrawer();
         });
 
-        // Mobile accordion for Services / Packages dropdowns
-        document.querySelectorAll('.has-dropdown > .dropdown-toggle').forEach(function (toggle) {
-            toggle.addEventListener('click', function (e) {
-                if (window.innerWidth <= 768) {
+        /* Mercury pill positioning */
+        function movePill(item) {
+            if (!pill || !gooZone) return;
+            var btn      = item.querySelector('.mdr-btn');
+            if (!btn) return;
+            var zoneRect = gooZone.getBoundingClientRect();
+            var btnRect  = btn.getBoundingClientRect();
+            var top      = btnRect.top - zoneRect.top;
+            pill.style.top     = top + 'px';
+            pill.style.height  = btnRect.height + 'px';
+            pill.style.opacity = '1';
+        }
+
+        /* Active-state management */
+        var mdrItems = drawer ? drawer.querySelectorAll('.mdr-item') : [];
+
+        function setMdrActive(id) {
+            mdrItems.forEach(function (item) {
+                var isThis = item.dataset.mdrId === id;
+                item.classList.toggle('mdr-active', isThis);
+                if (isThis) movePill(item);
+            });
+        }
+
+        /* Determine initial active page */
+        var dpath   = window.location.pathname;
+        var dActive = 'home';
+        var dpkg    = /\/(gear-well-cleaning|oxidation-correction|preservation-consultation|flightline-standard|flightline-elite|flightline-command)\.html/;
+        if      (/\/about\.html/.test(dpath))    dActive = 'about';
+        else if (dpkg.test(dpath))               dActive = 'packages';
+        else if (/\/services\//.test(dpath))     dActive = 'services';
+
+        /* Set initial pill position after DOM paints */
+        setTimeout(function () { setMdrActive(dActive); }, 60);
+
+        /* Wire up nav item clicks */
+        mdrItems.forEach(function (item) {
+            var id     = item.dataset.mdrId;
+            var hasSub = item.classList.contains('mdr-has-sub');
+            var btn    = item.querySelector('.mdr-btn');
+            var sub    = hasSub ? item.querySelector('.mdr-submenu') : null;
+
+            if (!btn) return;
+
+            btn.addEventListener('click', function (e) {
+                if (hasSub) {
                     e.preventDefault();
-                    e.stopPropagation();
-                    var parent = this.closest('.has-dropdown');
-                    document.querySelectorAll('.has-dropdown.open').forEach(function (el) {
-                        if (el !== parent) el.classList.remove('open');
+                    var isNowOpen = !item.classList.contains('mdr-sub-open');
+
+                    /* close all other open subs */
+                    mdrItems.forEach(function (other) {
+                        if (other === item || !other.classList.contains('mdr-has-sub')) return;
+                        var oSub = other.querySelector('.mdr-submenu');
+                        var oBtn = other.querySelector('.mdr-btn');
+                        other.classList.remove('mdr-sub-open');
+                        if (oBtn)  oBtn.setAttribute('aria-expanded', 'false');
+                        if (oSub)  { oSub.classList.remove('mdr-sub-open'); oSub.setAttribute('aria-hidden', 'true'); }
                     });
-                    parent.classList.toggle('open');
+
+                    item.classList.toggle('mdr-sub-open', isNowOpen);
+                    btn.setAttribute('aria-expanded', isNowOpen ? 'true' : 'false');
+                    if (sub) {
+                        sub.classList.toggle('mdr-sub-open', isNowOpen);
+                        sub.setAttribute('aria-hidden', isNowOpen ? 'false' : 'true');
+                    }
                 }
+                setMdrActive(id);
             });
-        });
 
-        // Close mobile nav when a real link is tapped
-        document.querySelectorAll('#main-nav a:not(.dropdown-toggle)').forEach(function (link) {
-            link.addEventListener('click', function () {
-                if (window.innerWidth <= 768) closeMenu();
-            });
-        });
-
-        // Close on outside click
-        document.addEventListener('click', function (e) {
-            if (window.innerWidth <= 768 && nav.classList.contains('nav-open')) {
-                if (!nav.contains(e.target) && !hamburger.contains(e.target)) closeMenu();
+            /* Close drawer when a sub-link is tapped */
+            if (sub) {
+                sub.querySelectorAll('a').forEach(function (link) {
+                    link.addEventListener('click', function () { closeDrawer(); });
+                });
+            } else if (btn.tagName === 'A') {
+                btn.addEventListener('click', function () {
+                    if (window.innerWidth <= 768) closeDrawer();
+                });
             }
         });
 
-        // Close on Escape key
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape' && nav.classList.contains('nav-open')) closeMenu();
+        /* Recalculate pill on resize (orientation change, etc.) */
+        window.addEventListener('resize', function () {
+            var active = drawer ? drawer.querySelector('.mdr-item.mdr-active') : null;
+            if (active) movePill(active);
         });
 
         /* ── D. Dock — active state & indicator ──────────────────── */

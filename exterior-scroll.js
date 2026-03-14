@@ -20,6 +20,24 @@
     // 0.88 – 0.97 : plane exits left + fades out
     // 0.88 – 0.98 : tag group fades out
 
+    function ServiceTag({ service, scrollYProgress, start, end }) {
+        const opacity = useTransform(scrollYProgress, [start, end], [0, 1]);
+        const y       = useTransform(scrollYProgress, [start, end], [20, 0]);
+        return React.createElement(motion.a, {
+            id: service.id,
+            href: service.href,
+            className: `hotspot-label hotspot-${service.side}`,
+            style: {
+                opacity,
+                y,
+                position: 'absolute',
+                zIndex: 20,
+                textDecoration: 'none',
+                pointerEvents: 'auto'
+            }
+        }, service.label);
+    }
+
     function ExteriorServicesScroll() {
         const containerRef = useRef(null);
         const [isMobile, setIsMobile] = useState(window.innerWidth <= 992);
@@ -147,24 +165,15 @@
                         }
                     },
                         EXTERIOR_SERVICES.map((service, index) => {
-                            const start   = SEQUENCE_START + (index * SEQUENCE_GAP);
-                            const end     = start + 0.06;
-                            const opacity = useTransform(scrollYProgress, [start, end], [0, 1]);
-                            const y       = useTransform(scrollYProgress, [start, end], [20, 0]);
-                            return React.createElement(motion.a, {
+                            const start = SEQUENCE_START + (index * SEQUENCE_GAP);
+                            const end   = start + 0.06;
+                            return React.createElement(ServiceTag, {
                                 key: service.id,
-                                id: service.id,
-                                href: service.href,
-                                className: `hotspot-label hotspot-${service.side}`,
-                                style: {
-                                    opacity,
-                                    y,
-                                    position: 'absolute',
-                                    zIndex: 20,
-                                    textDecoration: 'none',
-                                    pointerEvents: 'auto'
-                                }
-                            }, service.label);
+                                service,
+                                scrollYProgress,
+                                start,
+                                end
+                            });
                         })
                     )
                 )

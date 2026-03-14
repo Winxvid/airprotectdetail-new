@@ -3150,3 +3150,324 @@ nav ul li:hover>.dropdown-menu {
         padding-top: 126px;
     }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE MERCURY DRAWER
+   Slides in from the left on ≤ 768px. Desktop dock untouched.
+═══════════════════════════════════════════════════════════════ */
+
+/* Hidden SVG filter (gooey mercury effect) */
+.mobile-goo-svg {
+    position: absolute;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    visibility: hidden;
+}
+
+/* ── Backdrop ──────────────────────────────────────────────── */
+#mobile-drawer-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 1199;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+#mobile-drawer-backdrop.mdr-backdrop-on {
+    opacity: 1;
+}
+
+/* ── Drawer shell ─────────────────────────────────────────── */
+#mobile-drawer {
+    display: none;               /* block on ≤768px via media query */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: min(300px, 90vw);
+    height: 100dvh;
+    background: #05070a;
+    z-index: 1200;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    transform: translateX(-105%);
+    transition: transform 0.42s cubic-bezier(0.23, 1, 0.32, 1);
+    will-change: transform;
+    box-shadow: 6px 0 48px rgba(0, 0, 0, 0.7);
+}
+
+#mobile-drawer.mdr-open {
+    transform: translateX(0);
+}
+
+/* ── Drawer header ────────────────────────────────────────── */
+.mdr-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.4rem 1.25rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: #05070a;
+}
+
+.mdr-brand {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    line-height: 1.4;
+    gap: 1px;
+}
+
+.mdr-brand-name {
+    color: #3b82f6;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.mdr-brand-sub {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.32em;
+    opacity: 0.42;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.mdr-close {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 1.15rem;
+    cursor: pointer;
+    padding: 0.4rem 0.5rem;
+    line-height: 1;
+    transition: color 0.2s;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.mdr-close:hover { color: #fff; }
+
+/* ── Nav wrapper ───────────────────────────────────────────── */
+.mdr-nav {
+    flex: 1 0 auto;
+}
+
+/* ── Gooey zone (pill + main buttons) ────────────────────── */
+.mdr-goo-zone {
+    position: relative;
+    padding: 0.6rem 0.6rem 0.3rem;
+}
+
+/* Mercury pill */
+.mdr-pill {
+    position: absolute;
+    left: 0.6rem;
+    right: 0.6rem;
+    height: 52px;
+    top: 0.6rem;
+    border-radius: 14px;
+    background: #ffffff;
+    box-shadow: 0 0 24px rgba(255, 255, 255, 0.18);
+    z-index: 0;
+    overflow: hidden;
+    transition:
+        top    0.48s cubic-bezier(0.34, 1.56, 0.64, 1),
+        height 0.48s cubic-bezier(0.34, 1.56, 0.64, 1),
+        opacity 0.2s ease;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.mdr-pill-shimmer {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(147, 197, 253, 0.35), transparent);
+    width: 50%;
+    transform: skewX(-12deg);
+    animation: mdr-shimmer 2.8s linear infinite;
+}
+
+@keyframes mdr-shimmer {
+    from { left: -55%; }
+    to   { left: 155%; }
+}
+
+.mdr-pill-edge {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: #f59e0b;
+    border-radius: 14px 0 0 14px;
+}
+
+/* Nav items */
+.mdr-item {
+    position: relative;
+}
+
+.mdr-submenu {
+    display: none;
+    padding: 0.4rem 1rem 0.5rem 2.75rem;
+    position: relative;
+    z-index: 10;
+}
+
+.mdr-submenu.mdr-sub-open {
+    display: block;
+}
+
+.mdr-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    width: 100%;
+    padding: 0.85rem 1rem;
+    background: none;
+    border: none;
+    text-decoration: none;
+    color: rgba(161, 161, 170, 1);    /* zinc-400 */
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-align: left;
+    border-radius: 14px;
+    transition: color 0.18s;
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+    z-index: 2;
+    line-height: 1.2;
+    background: transparent;
+}
+
+.mdr-btn > i:first-child {
+    font-size: 1.05rem;
+    width: 20px;
+    flex-shrink: 0;
+    color: rgba(113, 113, 122, 1);    /* zinc-500 */
+    transition: color 0.18s;
+}
+
+.mdr-btn > span {
+    flex: 1;
+}
+
+.mdr-chevron {
+    font-size: 0.65rem;
+    margin-left: auto;
+    transition: transform 0.32s cubic-bezier(0.23, 1, 0.32, 1);
+    flex-shrink: 0;
+}
+
+/* Active: text turns dark over white pill */
+.mdr-item.mdr-active > .mdr-btn,
+.mdr-item.mdr-active > .mdr-btn > i:first-child {
+    color: #111 !important;
+}
+
+/* Open dropdown: rotate chevron */
+.mdr-item.mdr-sub-open > .mdr-btn .mdr-chevron {
+    transform: rotate(180deg);
+}
+
+/* ── Sub-menu zone (outside the goo filter) ───────────────── */
+.mdr-sub-zone {
+    flex-shrink: 0;
+}
+
+.mdr-sub-title-gap {
+    margin-top: 0.7rem;
+    padding-top: 0.7rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.mdr-sub-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.63rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #d4af37;
+    margin-bottom: 0.45rem;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.mdr-sub-title i { font-size: 0.68rem; opacity: 0.85; }
+
+.mdr-submenu > a {
+    display: block;
+    padding: 0.32rem 0;
+    font-size: 0.81rem;
+    color: rgba(113, 113, 122, 1);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.18s, padding-left 0.18s;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.mdr-submenu > a:hover,
+.mdr-submenu > a:active { color: #d4af37; padding-left: 5px; }
+
+/* ── Drawer footer ────────────────────────────────────────── */
+.mdr-footer {
+    padding: 0.85rem 1.25rem 1.25rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.mdr-theme-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    background: none;
+    border: none;
+    color: rgba(113, 113, 122, 1);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 0.5rem 0.25rem;
+    -webkit-tap-highlight-color: transparent;
+    transition: color 0.2s;
+}
+
+.mdr-theme-btn:hover { color: #fff; }
+
+.mdr-theme-btn .theme-icon-dark,
+.mdr-theme-btn .theme-icon-light { font-size: 1.05rem; }
+
+/* ── Light-theme overrides ────────────────────────────────── */
+[data-theme="light"] #mobile-drawer        { background: #f4f4f5; }
+[data-theme="light"] .mdr-header           { background: #f4f4f5; border-bottom-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .mdr-brand-name       { color: #2563eb; }
+[data-theme="light"] .mdr-brand-sub        { color: #333; }
+[data-theme="light"] .mdr-close            { color: rgba(0,0,0,0.45); }
+[data-theme="light"] .mdr-close:hover      { color: #000; }
+[data-theme="light"] .mdr-btn              { color: rgba(63, 63, 70, 1); }
+[data-theme="light"] .mdr-btn > i:first-child { color: rgba(113,113,122,1); }
+[data-theme="light"] .mdr-pill             { background: #18181b; box-shadow: 0 0 24px rgba(0,0,0,0.2); }
+[data-theme="light"] .mdr-item.mdr-active > .mdr-btn,
+[data-theme="light"] .mdr-item.mdr-active > .mdr-btn > i:first-child { color: #fff !important; }
+[data-theme="light"] .mdr-submenu > a        { color: rgba(100,100,100,1); }
+[data-theme="light"] .mdr-footer           { border-top-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .mdr-theme-btn        { color: rgba(100,100,100,1); }
+[data-theme="light"] .mdr-theme-btn:hover  { color: #000; }
+
+/* ── Enable on mobile only ────────────────────────────────── */
+@media (max-width: 768px) {
+    #mobile-drawer          { display: block; }
+    #mobile-drawer-backdrop { display: block; }
+}

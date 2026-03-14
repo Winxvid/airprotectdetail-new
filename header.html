@@ -177,4 +177,140 @@
 
         </div><!-- /dock-pill-wrap -->
     </div><!-- /dock-nav-row -->
+
+    <!-- ═══════════════════════════════════════════════════
+         MOBILE MERCURY DRAWER
+         Slides in from the left on screens ≤ 768px.
+         Completely separate from the desktop dock.
+    ═══════════════════════════════════════════════════ -->
+
+    <!-- Gooey SVG filter (hidden, used by the nav button zone) -->
+    <svg class="mobile-goo-svg" aria-hidden="true" focusable="false">
+        <defs>
+            <filter id="mobile-mercury-goo">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur" />
+                <feColorMatrix in="blur" mode="matrix"
+                    values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -10" />
+            </filter>
+        </defs>
+    </svg>
+
+    <div id="mobile-drawer" role="dialog" aria-modal="true"
+         aria-label="Navigation menu" aria-hidden="true">
+
+        <!-- Drawer top bar -->
+        <div class="mdr-header">
+            <a href="{{BASE}}index.html" class="mdr-brand" aria-label="AirProtect – homepage">
+                <span class="mdr-brand-name">AIRPROTECT</span>
+                <span class="mdr-brand-sub">AIRCRAFT DETAILING</span>
+            </a>
+            <button id="mobile-drawer-close" class="mdr-close" aria-label="Close navigation">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="mdr-nav" aria-label="Mobile main navigation">
+
+            <!-- Zone A: Mercury pill + main nav buttons (gooey filtered) -->
+            <div class="mdr-goo-zone" id="mdr-goo-zone">
+
+                <!-- The sliding white pill -->
+                <div class="mdr-pill" id="mdr-pill" aria-hidden="true">
+                    <div class="mdr-pill-shimmer"></div>
+                    <div class="mdr-pill-edge"></div>
+                </div>
+
+                <!-- Home -->
+                <div class="mdr-item" data-mdr-id="home">
+                    <a href="{{BASE}}index.html" class="mdr-btn">
+                        <i class="fa-solid fa-house"></i>
+                        <span>Home</span>
+                    </a>
+                </div>
+
+                <!-- About -->
+                <div class="mdr-item" data-mdr-id="about">
+                    <a href="{{BASE}}about.html" class="mdr-btn">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span>About</span>
+                    </a>
+                </div>
+
+                <!-- Services (has sub-menu) -->
+                <div class="mdr-item mdr-has-sub" data-mdr-id="services">
+                    <button class="mdr-btn" aria-expanded="false" aria-controls="mdr-sub-services">
+                        <i class="fa-solid fa-plane"></i>
+                        <span>Services</span>
+                        <i class="fa-solid fa-chevron-down mdr-chevron" aria-hidden="true"></i>
+                    </button>
+                    <div class="mdr-submenu" id="mdr-sub-services" aria-hidden="true">
+                        <p class="mdr-sub-title"><i class="fa-solid fa-plane"></i> Exterior Care</p>
+                        <a href="{{BASE}}services/dry-wash.html">Dry Wash</a>
+                        <a href="{{BASE}}services/wet-wash.html">Wet Wash</a>
+                        <a href="{{BASE}}services/exterior-wax.html">Exterior Wax</a>
+                        <a href="{{BASE}}services/brightwork-polishing.html">Brightwork Polishing</a>
+                        <a href="{{BASE}}services/protective-coatings.html">Protective Coatings</a>
+                        <a href="{{BASE}}services/window-restoration.html">Window Restoration</a>
+                        <a href="{{BASE}}services/de-ice-boot.html">De-Ice Boot Refurbishment</a>
+                        <a href="{{BASE}}services/paint-revitalization.html">Paint Revitalization</a>
+                        <p class="mdr-sub-title mdr-sub-title-gap"><i class="fa-solid fa-couch"></i> Interior Care</p>
+                        <a href="{{BASE}}services/interior-cleaning.html">Interior Cleaning &amp; Detail</a>
+                        <a href="{{BASE}}services/leather-conditioning.html">Leather Conditioning</a>
+                        <a href="{{BASE}}services/leather-repair.html">Leather Repair &amp; Re-Dye</a>
+                        <a href="{{BASE}}services/stain-removal.html">Stain Removal</a>
+                        <a href="{{BASE}}services/lavatory-sanitation.html">Lavatory &amp; Galley Sanitation</a>
+                        <a href="{{BASE}}services/carpet-extraction.html">Carpet &amp; Upholstery Extraction</a>
+                        <a href="{{BASE}}services/wood-polishing.html">Wood &amp; Trim Polishing</a>
+                        <a href="{{BASE}}services/dry-cleaning.html">Dry Cleaning Carpet &amp; Upholstery</a>
+                    </div>
+                </div>
+
+                <!-- Packages (has sub-menu) -->
+                <div class="mdr-item mdr-has-sub" data-mdr-id="packages">
+                    <button class="mdr-btn" aria-expanded="false" aria-controls="mdr-sub-packages">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <span>Packages</span>
+                        <i class="fa-solid fa-chevron-down mdr-chevron" aria-hidden="true"></i>
+                    </button>
+                    <div class="mdr-submenu" id="mdr-sub-packages" aria-hidden="true">
+                        <p class="mdr-sub-title"><i class="fa-solid fa-crosshairs"></i> Targeted Support</p>
+                        <a href="{{BASE}}services/gear-well-cleaning.html">Gear Well &amp; Belly Cleaning</a>
+                        <a href="{{BASE}}services/oxidation-correction.html">Oxidation Correction</a>
+                        <a href="{{BASE}}services/preservation-consultation.html">Preservation Consultations</a>
+                        <p class="mdr-sub-title mdr-sub-title-gap"><i class="fa-solid fa-shield-halved"></i> Flightline Programs</p>
+                        <a href="{{BASE}}services/flightline-standard.html">Flightline Standard</a>
+                        <a href="{{BASE}}services/flightline-elite.html">Flightline Elite</a>
+                        <a href="{{BASE}}services/flightline-command.html">Flightline Command</a>
+                    </div>
+                </div>
+
+                <!-- Quote -->
+                <div class="mdr-item" data-mdr-id="quote">
+                    <a href="{{BASE}}index.html#footer" class="mdr-btn">
+                        <i class="fa-solid fa-file-lines"></i>
+                        <span>Quote</span>
+                    </a>
+                </div>
+
+            </div><!-- /mdr-goo-zone -->
+
+        </nav><!-- /mdr-nav -->
+
+        <!-- Drawer footer — theme toggle -->
+        <div class="mdr-footer">
+            <button type="button" class="mdr-theme-btn theme-toggle" aria-label="Toggle light/dark mode">
+                <span class="theme-toggle-icons">
+                    <i class="fa-solid fa-moon theme-icon-dark" aria-hidden="true"></i>
+                    <i class="fa-solid fa-sun theme-icon-light" aria-hidden="true"></i>
+                </span>
+                <span>Theme</span>
+            </button>
+        </div>
+
+    </div><!-- /#mobile-drawer -->
+
+    <!-- Backdrop -->
+    <div id="mobile-drawer-backdrop" aria-hidden="true"></div>
+
 </header>
