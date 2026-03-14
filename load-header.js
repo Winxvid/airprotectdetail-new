@@ -210,11 +210,23 @@
             /* Close drawer when a sub-link is tapped */
             if (sub) {
                 sub.querySelectorAll('a').forEach(function (link) {
-                    link.addEventListener('click', function () { closeDrawer(); });
+                    link.addEventListener('click', function () {
+                        document.body.classList.remove('nav-open');
+                        document.body.style.top = '';
+                        drawer.classList.remove('mdr-open');
+                        drawer.setAttribute('aria-hidden', 'true');
+                        backdrop.classList.remove('mdr-backdrop-on');
+                    });
                 });
             } else if (btn.tagName === 'A') {
                 btn.addEventListener('click', function () {
-                    if (window.innerWidth <= 768) closeDrawer();
+                    if (window.innerWidth <= 768) {
+                        document.body.classList.remove('nav-open');
+                        document.body.style.top = '';
+                        drawer.classList.remove('mdr-open');
+                        drawer.setAttribute('aria-hidden', 'true');
+                        backdrop.classList.remove('mdr-backdrop-on');
+                    }
                 });
             }
         });
