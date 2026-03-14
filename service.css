@@ -2253,8 +2253,23 @@ footer>.container {
 
 .mdr-brand {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
     text-decoration: none;
+    gap: 0.65rem;
+}
+
+.mdr-brand-logo {
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+    flex-shrink: 0;
+    opacity: 0.92;
+}
+
+.mdr-brand-text {
+    display: flex;
+    flex-direction: column;
     line-height: 1.4;
     gap: 1px;
 }
