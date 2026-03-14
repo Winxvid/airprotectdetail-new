@@ -3173,12 +3173,14 @@ nav ul li:hover>.dropdown-menu {
     background: rgba(0, 0, 0, 0.55);
     z-index: 1199;
     opacity: 0;
+    pointer-events: none;
     transition: opacity 0.35s ease;
     -webkit-tap-highlight-color: transparent;
 }
 
 #mobile-drawer-backdrop.mdr-backdrop-on {
     opacity: 1;
+    pointer-events: auto;
 }
 
 /* ── Drawer shell ─────────────────────────────────────────── */
