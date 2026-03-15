@@ -167,6 +167,7 @@
         var dActive = 'home';
         var dpkg    = /\/(gear-well-cleaning|oxidation-correction|preservation-consultation|flightline-standard|flightline-elite|flightline-command)\.html/;
         if      (/\/about\.html/.test(dpath))    dActive = 'about';
+        else if (/\/quote\.html/.test(dpath))    dActive = 'quote';
         else if (dpkg.test(dpath))               dActive = 'packages';
         else if (/\/services\//.test(dpath))     dActive = 'services';
 
@@ -247,6 +248,7 @@
         var currentId = 'home';
         var packagePages = /\/(gear-well-cleaning|oxidation-correction|preservation-consultation|flightline-standard|flightline-elite|flightline-command)\.html/;
         if (/\/about\.html/.test(path))         currentId = 'about';
+        else if (/\/quote\.html/.test(path))     currentId = 'quote';
         else if (packagePages.test(path))        currentId = 'packages';
         else if (/\/services\//.test(path))      currentId = 'services';
 
@@ -357,10 +359,6 @@
                     var el = document.getElementById(s.el);
                     if (el && el.getBoundingClientRect().top < mid) candidate = s.id;
                 });
-
-                // Nearing footer → highlight Quote
-                var footer = document.getElementById('footer');
-                if (footer && footer.getBoundingClientRect().top < winH * 0.8) candidate = 'quote';
 
                 setActive(candidate);
             }, { passive: true });

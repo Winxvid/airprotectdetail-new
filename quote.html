@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>!function(){var t=localStorage.getItem('ap_theme');t&&document.documentElement.setAttribute('data-theme',t)}();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request a Quote | AirProtect Aircraft Detailing</title>
+    <meta name="description"
+        content="Request a free quote from AirProtect Detailing. Veteran-owned aircraft preservation — provide your aircraft details and we'll craft a tailored service plan.">
+    <link rel="stylesheet" href="service.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="assets/favicon.png" type="image/png">
+    <style>
+        /* Airport autocomplete field — match contact-form styling */
+        .airport-search-wrap {
+            position: relative;
+            width: 100%;
+        }
+        .airport-search-wrap input {
+            padding: 1rem;
+            background: var(--clr-surface);
+            border: 1px solid var(--glass-border);
+            color: var(--clr-text);
+            border-radius: 4px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            min-height: 48px;
+            width: 100%;
+            box-sizing: border-box;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        .airport-search-wrap input:focus {
+            outline: none;
+            border-color: var(--clr-primary);
+        }
+        .airport-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--clr-surface);
+            border: 1px solid var(--glass-border);
+            border-top: none;
+            border-radius: 0 0 4px 4px;
+            max-height: 240px;
+            overflow-y: auto;
+            z-index: 100;
+            display: none;
+        }
+        .airport-results.active {
+            display: block;
+        }
+        .airport-result-item {
+            padding: 0.75rem 1rem;
+            color: var(--clr-text);
+            cursor: pointer;
+            font-size: 0.9rem;
+            border-bottom: 1px solid var(--glass-border);
+            transition: background 0.15s;
+        }
+        .airport-result-item:last-child {
+            border-bottom: none;
+        }
+        .airport-result-item:hover,
+        .airport-result-item.selected {
+            background: rgba(75, 130, 195, 0.45);
+        }
+        .airport-result-item .airport-code {
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        /* Aircraft autocomplete — match contact-form styling */
+        .aircraft-search-wrap {
+            position: relative;
+            width: 100%;
+        }
+        .aircraft-search-wrap input {
+            padding: 1rem;
+            background: var(--clr-surface);
+            border: 1px solid var(--glass-border);
+            color: var(--clr-text);
+            border-radius: 4px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            min-height: 48px;
+            width: 100%;
+            box-sizing: border-box;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        .aircraft-search-wrap input:focus {
+            outline: none;
+            border-color: var(--clr-primary);
+        }
+        .aircraft-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--clr-surface);
+            border: 1px solid var(--glass-border);
+            border-top: none;
+            border-radius: 0 0 4px 4px;
+            max-height: 240px;
+            overflow-y: auto;
+            z-index: 100;
+            display: none;
+        }
+        .aircraft-results.active {
+            display: block;
+        }
+        .aircraft-result-item {
+            padding: 0.75rem 1rem;
+            color: var(--clr-text);
+            cursor: pointer;
+            font-size: 0.9rem;
+            border-bottom: 1px solid var(--glass-border);
+            transition: background 0.15s;
+        }
+        .aircraft-result-item:last-child {
+            border-bottom: none;
+        }
+        .aircraft-result-item:hover {
+            background: rgba(75, 130, 195, 0.45);
+        }
+        .aircraft-result-item small {
+            display: block;
+            color: var(--clr-text-muted);
+            margin-top: 2px;
+            font-size: 0.8rem;
+        }
+        /* Required field error state */
+        .airport-search-wrap.field-error input,
+        .aircraft-search-wrap.field-error input {
+            border-color: #e74c3c !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="header-placeholder"></div>
+    <script src="load-header.js"></script>
+
+    <main>
+
+        <section class="section-padding" style="position: relative; overflow: hidden; min-height: 80vh; display: flex; align-items: center;">
+            <video class="footer-video-bg" autoplay muted loop playsinline>
+                <source src="assets/Request_Consultation.mp4" type="video/mp4">
+            </video>
+            <!-- Dark overlay matching footer::before -->
+            <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.62); z-index: 0; pointer-events: none;"></div>
+            <div class="container" style="position: relative; z-index: 1;">
+                <div class="footer-content">
+                    <div class="contact-container">
+                        <div>
+                            <h2 style="font-size: 3.5rem; background: linear-gradient(135deg, var(--clr-primary), var(--clr-text)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.25));">PRESERVE YOUR LEGACY</h2>
+                            <p style="margin-top: 1rem; color: var(--clr-text-muted);">Provide your aircraft details
+                                below. As a veteran-owned company, we approach every aircraft with discipline and
+                                respect.</p>
+                        </div>
+                        <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+                            <input type="hidden" name="access_key" value="045c56e1-0f78-414b-9e7f-82f1e97cd12d">
+                            <!-- Honeypot Spam Protection -->
+                            <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
+                            <input type="text" name="name" placeholder="Full Name" required>
+                            <input type="email" name="email" placeholder="Email Address" required>
+                            <input type="tel" name="phone" placeholder="Phone Number" required>
+                            <div class="airport-search-wrap">
+                                <input type="text" id="airport-input" placeholder="Search Airport (name, city, or IATA code)... *" autocomplete="off" required>
+                                <div id="airport-results" class="airport-results"></div>
+                            </div>
+                            <input type="hidden" id="selected-airport-name" name="airport_name">
+                            <input type="hidden" id="selected-airport-code" name="airport_code">
+                            <div class="aircraft-search-wrap">
+                                <input type="text" id="aircraft-input" placeholder="Aircraft Model (e.g. Cessna, Boeing...) *" autocomplete="off" required>
+                                <div id="aircraft-results" class="aircraft-results"></div>
+                            </div>
+                            <input type="hidden" id="aircraft-hidden" name="aircraft">
+                            <select name="service" required>
+                                <option value="" disabled selected>Service Interested In *</option>
+                                <optgroup label="Flightline Programs">
+                                    <option value="Flightline Standard">Flightline Standard</option>
+                                    <option value="Flightline Elite">Flightline Elite</option>
+                                    <option value="Flightline Command">Flightline Command</option>
+                                </optgroup>
+                                <optgroup label="Exterior Preservation">
+                                    <option value="Dry Wash">Dry Wash</option>
+                                    <option value="Wet Wash">Wet Wash</option>
+                                    <option value="Exterior Wax">Exterior Wax</option>
+                                    <option value="Brightwork Polishing">Brightwork Polishing</option>
+                                    <option value="Protective Coatings">Protective Coatings</option>
+                                    <option value="Window Restoration & Polishing">Window Restoration & Polishing</option>
+                                    <option value="De-Ice Boot Refurbishment">De-Ice Boot Refurbishment</option>
+                                    <option value="Paint Revitalization">Paint Revitalization</option>
+                                </optgroup>
+                                <optgroup label="Cabin Care">
+                                    <option value="Interior Cleaning & Detail">Interior Cleaning & Detail</option>
+                                    <option value="Leather Conditioning">Leather Conditioning</option>
+                                    <option value="Leather Repair & Re-Dye">Leather Repair & Re-Dye</option>
+                                    <option value="Stain Removal">Stain Removal</option>
+                                    <option value="Lavatory & Galley Sanitation">Lavatory & Galley Sanitation</option>
+                                    <option value="Carpet & Upholstery Extraction">Carpet & Upholstery Extraction</option>
+                                    <option value="Wood & Trim Polishing">Wood & Trim Polishing</option>
+                                    <option value="Dry Cleaning Carpet & Upholstery">Dry Cleaning Carpet & Upholstery</option>
+                                </optgroup>
+                                <optgroup label="Targeted Support">
+                                    <option value="Gear Well & Belly Cleaning">Gear Well & Belly Cleaning</option>
+                                    <option value="Oxidation Correction">Oxidation Correction</option>
+                                    <option value="Preservation Consultation">Preservation Consultation</option>
+                                </optgroup>
+                            </select>
+                            <textarea name="message" placeholder="Additional Details" rows="4"></textarea>
+                            <button type="submit" class="btn btn-primary submit-btn">
+                                <span class="submit-btn__text">Send Request</span>
+                                <span class="submit-btn__icon" aria-hidden="true">
+                                    <svg class="submit-btn__svg" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg" overflow="visible">
+                                        <path class="submit-btn__plane" d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/>
+                                        <line class="submit-btn__line submit-btn__line--1" x1="5" y1="15" x2="1" y2="19" stroke-width="1.5"/>
+                                        <line class="submit-btn__line submit-btn__line--2" x1="7" y1="17" x2="3" y2="21" stroke-width="1.5"/>
+                                        <line class="submit-btn__line submit-btn__line--3" x1="9" y1="19" x2="5" y2="23" stroke-width="1.5"/>
+                                    </svg>
+                                </span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Minimal footer bar (no duplicate form) -->
+    <footer style="position: relative; z-index: 1;">
+        <div class="container">
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <div class="social-links">
+                        <a href="https://youtube.com/@airprotectgroup" target="_blank" aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://www.facebook.com/airPROTECTdetailing" target="_blank" aria-label="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="https://www.instagram.com/airprotectllc/" target="_blank" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/tim-warner-jr-206b95381/" target="_blank" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                    <span class="footer-divider"></span>
+                    <p class="footer-copyright">&copy; 2026 AirProtect. All rights reserved.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <img src="assets/veteran.png" alt="Veteran Owned Business" class="veteran-badge" loading="lazy"
+                        style="opacity: 0.85;">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Form submission via Web3Forms
+        const form = document.querySelector('.contact-form');
+        if (form) {
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                // Validate autocomplete fields — must have a selection, not just typed text
+                const airportWrap   = document.querySelector('.airport-search-wrap');
+                const aircraftWrap  = document.querySelector('.aircraft-search-wrap');
+                const airportName   = document.getElementById('selected-airport-name');
+                const aircraftVal   = document.getElementById('aircraft-hidden');
+                let hasError = false;
+
+                if (!airportName.value) {
+                    airportWrap.classList.add('field-error');
+                    document.getElementById('airport-input').placeholder = 'Please select an airport from the list *';
+                    hasError = true;
+                } else {
+                    airportWrap.classList.remove('field-error');
+                }
+
+                if (!aircraftVal.value) {
+                    aircraftWrap.classList.add('field-error');
+                    document.getElementById('aircraft-input').placeholder = 'Please select an aircraft from the list *';
+                    hasError = true;
+                } else {
+                    aircraftWrap.classList.remove('field-error');
+                }
+
+                if (hasError) return;
+
+                const btn = form.querySelector('button');
+                const originalText = btn.innerText;
+
+                btn.innerText = 'Sending...';
+                btn.style.pointerEvents = 'none';
+
+                const formData = new FormData(form);
+
+                try {
+                    const response = await fetch('https://api.web3forms.com/submit', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    const result = await response.json();
+
+                    if (result.success) {
+                        btn.innerText = 'Request Sent!';
+                        btn.style.background = '#00d084';
+                        form.reset();
+                        // Also clear the autocomplete visible inputs and hidden values
+                        document.getElementById('airport-input').value = '';
+                        document.getElementById('aircraft-input').value = '';
+                        document.getElementById('selected-airport-name').value = '';
+                        document.getElementById('selected-airport-code').value = '';
+                        document.getElementById('aircraft-hidden').value = '';
+                    } else {
+                        btn.innerText = 'Error Sending';
+                        btn.style.background = '#e74c3c';
+                        console.log(result);
+                    }
+                } catch (error) {
+                    btn.innerText = 'Error Sending';
+                    btn.style.background = '#e74c3c';
+                    console.log(error);
+                }
+
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.style.background = '';
+                    btn.style.pointerEvents = 'auto';
+                }, 4000);
+            });
+        }
+    </script>
+    <script>
+        // Airport Autocomplete via Geoapify Search API
+        (function() {
+            const GEOAPIFY_KEY = "a76adb5f55ad483fa6d9ee59a105312a";
+            const input = document.getElementById('airport-input');
+            const resultsDiv = document.getElementById('airport-results');
+            const hiddenName = document.getElementById('selected-airport-name');
+            const hiddenCode = document.getElementById('selected-airport-code');
+            let debounceTimer;
+
+            input.addEventListener('input', function() {
+                clearTimeout(debounceTimer);
+                const query = this.value.trim();
+                if (query.length < 2) {
+                    resultsDiv.classList.remove('active');
+                    resultsDiv.innerHTML = '';
+                    hiddenName.value = '';
+                    hiddenCode.value = '';
+                    return;
+                }
+                debounceTimer = setTimeout(() => fetchAirports(query), 300);
+            });
+
+            async function fetchAirports(query) {
+                const url = `https://api.geoapify.com/v1/geocode/search?text=${encodeURIComponent(query + ' airport')}&type=amenity&lang=en&limit=10&format=json&apiKey=${GEOAPIFY_KEY}`;
+                try {
+                    const res = await fetch(url);
+                    const data = await res.json();
+                    // Filter to only real airports (those with IATA or ICAO codes)
+                    const airports = (data.results || []).filter(r => {
+                        const names = r.other_names || {};
+                        return names.iata || names.icao;
+                    });
+                    renderResults(airports);
+                } catch (err) {
+                    console.error('Airport search error:', err);
+                }
+            }
+
+            function renderResults(results) {
+                if (!results.length) {
+                    resultsDiv.classList.remove('active');
+                    resultsDiv.innerHTML = '';
+                    return;
+                }
+                resultsDiv.innerHTML = results.map((r, i) => {
+                    const name = r.name || r.formatted || '';
+                    const names = r.other_names || {};
+                    const code = names.iata || names.icao || '';
+                    const city = r.city || '';
+                    const state = r.state || '';
+                    const location = [city, state].filter(Boolean).join(', ');
+                    const display = code
+                        ? `<span class="airport-code">${code}</span> &ndash; ${name}` + (location ? ` &ndash; ${location}` : '')
+                        : name + (location ? ` &ndash; ${location}` : '');
+                    return `<div class="airport-result-item" data-index="${i}" data-name="${name.replace(/"/g, '&quot;')}" data-code="${code}">${display}</div>`;
+                }).join('');
+                resultsDiv.classList.add('active');
+
+                resultsDiv.querySelectorAll('.airport-result-item').forEach(item => {
+                    item.addEventListener('click', function() {
+                        const name = this.dataset.name;
+                        const code = this.dataset.code;
+                        input.value = code ? `${code} \u2013 ${name}` : name;
+                        hiddenName.value = name;
+                        hiddenCode.value = code || 'N/A';
+                        resultsDiv.classList.remove('active');
+                        resultsDiv.innerHTML = '';
+                    });
+                });
+            }
+
+            // Close results when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.airport-search-wrap')) {
+                    resultsDiv.classList.remove('active');
+                }
+            });
+        })();
+    </script>
+
+            // Close results when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.airport-search-wrap')) {
+                    resultsDiv.classList.remove('active');
+                }
+            });
+        })();
+    </script>
+    <script>
+        // Aircraft Model Autocomplete via API Ninjas
+        (function() {
+            const NINJA_KEY = 'FeAFtc3zjxGeC5dZp4S8IbNF03nnat1jz0fl6NK6';
+            const acInput = document.getElementById('aircraft-input');
+            const acResults = document.getElementById('aircraft-results');
+            const acHidden = document.getElementById('aircraft-hidden');
+            let acTimer;
+
+            acInput.addEventListener('input', function() {
+                clearTimeout(acTimer);
+                const query = this.value.trim();
+                if (query.length < 3) {
+                    acResults.classList.remove('active');
+                    acResults.innerHTML = '';
+                    return;
+                }
+                acTimer = setTimeout(() => fetchAircraft(query), 300);
+            });
+
+            async function fetchAircraft(query) {
+                try {
+                    // Search both manufacturer and model in parallel since
+                    // the API treats them as separate exact-match fields
+                    const [byMfr, byModel] = await Promise.all([
+                        fetch(`https://api.api-ninjas.com/v1/aircraft?manufacturer=${encodeURIComponent(query)}&limit=10`, {
+                            headers: { 'X-Api-Key': NINJA_KEY }
+                        }).then(r => r.json()).catch(() => []),
+                        fetch(`https://api.api-ninjas.com/v1/aircraft?model=${encodeURIComponent(query)}&limit=10`, {
+                            headers: { 'X-Api-Key': NINJA_KEY }
+                        }).then(r => r.json()).catch(() => [])
+                    ]);
+                    // Merge and deduplicate
+                    const seen = new Set();
+                    const combined = [];
+                    [...byMfr, ...byModel].forEach(p => {
+                        const key = `${p.manufacturer} ${p.model}`;
+                        if (!seen.has(key)) { seen.add(key); combined.push(p); }
+                    });
+                    renderAircraft(combined);
+                } catch (err) {
+                    console.error('Aircraft search error:', err);
+                }
+            }
+
+            function renderAircraft(planes) {
+                if (!planes.length) {
+                    acResults.classList.remove('active');
+                    acResults.innerHTML = '';
+                    return;
+                }
+                acResults.innerHTML = planes.map((p, i) => {
+                    const label = `${p.manufacturer} ${p.model}`;
+                    const engine = p.engine_type || 'N/A';
+                    return `<div class="aircraft-result-item" data-index="${i}" data-value="${label.replace(/"/g, '&quot;')}">
+                        <strong>${label}</strong>
+                        <small>Engine: ${engine}</small>
+                    </div>`;
+                }).join('');
+                acResults.classList.add('active');
+
+                acResults.querySelectorAll('.aircraft-result-item').forEach(item => {
+                    item.addEventListener('click', function() {
+                        const val = this.dataset.value;
+                        acInput.value = val;
+                        acHidden.value = val;
+                        acResults.classList.remove('active');
+                        acResults.innerHTML = '';
+                    });
+                });
+            }
+
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.aircraft-search-wrap')) {
+                    acResults.classList.remove('active');
+                }
+            });
+        })();
+    </script>
+    <script src="gif-optimizer.js" defer></script>
+
+</body>
+
+</html>

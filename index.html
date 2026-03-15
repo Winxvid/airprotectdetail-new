@@ -500,16 +500,16 @@
         <script src="load-footer.js"></script>
 
         <script>
-            // Preloader — show only on first visit per session
+            // Preloader — show only on very first visit (persists across sessions)
             (function () {
                 const preloader = document.getElementById('preloader');
                 if (!preloader) return;
 
-                const isFirstVisit = !sessionStorage.getItem('ap_visited');
+                const isFirstVisit = !localStorage.getItem('ap_visited');
 
                 if (isFirstVisit) {
-                    // Mark as visited so subsequent navigation skips preloader
-                    sessionStorage.setItem('ap_visited', '1');
+                    // Mark as visited permanently so it never shows again
+                    localStorage.setItem('ap_visited', '1');
 
                     // Show the preloader immediately
                     preloader.classList.remove('hidden');

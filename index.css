@@ -2934,9 +2934,11 @@ nav ul li:hover>.dropdown-menu {
     box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15), 0 0 0 1px rgba(0,0,0,0.04);
 }
 [data-theme="light"] .dock-ind-plate  { background: rgba(255,255,255,0.92); }
-[data-theme="light"] .dock-btn > i     { color: #1a1a1a; }
-[data-theme="light"] .dock-label       { color: #333333; }
+[data-theme="light"] .dock-btn > i     { color: #1b1f2e; }
+[data-theme="light"] .dock-label       { color: #1b1f2e; }
 [data-theme="light"] .dock-sep         { background: rgba(0,0,0,0.1); }
+[data-theme="light"] .dock-item.active .dock-btn > i    { color: #1b1f2e; }
+[data-theme="light"] .dock-item.active .dock-label       { color: #1b1f2e; }
 [data-theme="light"] .dock-cta-item:not(.active) .dock-btn > i,
 [data-theme="light"] .dock-cta-item:not(.active) .dock-label { color: #b8930a; }
 [data-theme="light"] .theme-icon-dark,
