@@ -2,14 +2,14 @@ const { motion, useScroll, useTransform } = window.Motion;
 const { useRef } = React;
 
 const EXTERIOR_SERVICES = [
-    { id: 'ext-1', label: 'Dry Wash', href: 'services/dry-wash.html', side: 'left' },
-    { id: 'ext-2', label: 'Wet Wash', href: 'services/wet-wash.html', side: 'left' },
-    { id: 'ext-3', label: 'Exterior Wax', href: 'services/exterior-wax.html', side: 'left' },
-    { id: 'ext-4', label: 'Brightwork Polishing', href: 'services/brightwork-polishing.html', side: 'left' },
-    { id: 'ext-5', label: 'Protective Coatings', href: 'services/protective-coatings.html', side: 'right' },
-    { id: 'ext-6', label: 'Window Restoration & Polishing', href: 'services/window-restoration.html', side: 'right' },
-    { id: 'ext-7', label: 'De-Ice Boot Refurbishment', href: 'services/de-ice-boot.html', side: 'right' },
-    { id: 'ext-8', label: 'Paint Revitalization', href: 'services/paint-revitalization.html', side: 'right' },
+    { id: 'ext-1', label: 'Dry Wash', href: 'dry-wash.html', side: 'left' },
+    { id: 'ext-2', label: 'Wet Wash', href: 'wet-wash.html', side: 'left' },
+    { id: 'ext-3', label: 'Exterior Wax', href: 'exterior-wax.html', side: 'left' },
+    { id: 'ext-4', label: 'Brightwork Polishing', href: 'brightwork-polishing.html', side: 'left' },
+    { id: 'ext-5', label: 'Protective Coatings', href: 'protective-coatings.html', side: 'right' },
+    { id: 'ext-6', label: 'Window Restoration & Polishing', href: 'window-restoration.html', side: 'right' },
+    { id: 'ext-7', label: 'De-Ice Boot Refurbishment', href: 'de-ice-boot.html', side: 'right' },
+    { id: 'ext-8', label: 'Paint Revitalization', href: 'paint-revitalization.html', side: 'right' },
 ];
 
 function ExteriorServicesScroll() {
@@ -59,7 +59,7 @@ function ExteriorServicesScroll() {
                 
                 // Plane Image
                 React.createElement(motion.img, {
-                    src: "assets/plane_exterior_top.png",
+                    src: "plane_exterior_top.png",
                     alt: "Aircraft Exterior",
                     style: { x: planeX, opacity: planeOpacity },
                     className: "absolute w-full h-full object-contain z-0 max-w-[90%] md:max-w-[70%]"

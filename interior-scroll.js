@@ -3,13 +3,13 @@
     const { useRef, useEffect, useState } = React;
 
     const INTERIOR_SERVICES = [
-        { id: 'int-1', label: 'Interior Cleaning & Detail', href: 'services/interior-cleaning.html', side: 'left' },
-        { id: 'int-2', label: 'Leather Conditioning', href: 'services/leather-conditioning.html', side: 'left' },
-        { id: 'int-3', label: 'Stain Removal', href: 'services/stain-removal.html', side: 'left' },
-        { id: 'int-4', label: 'Lavatory & Galley Sanitation', href: 'services/lavatory-sanitation.html', side: 'right' },
-        { id: 'int-5', label: 'Carpet & Upholstery Extraction', href: 'services/carpet-extraction.html', side: 'right' },
-        { id: 'int-6', label: 'Wood & Trim Polishing', href: 'services/wood-polishing.html', side: 'right' },
-        { id: 'int-7', label: 'Dry Cleaning Carpet & Upholstery', href: 'services/dry-cleaning.html', side: 'right' },
+        { id: 'int-1', label: 'Interior Cleaning & Detail', href: 'interior-cleaning.html', side: 'left' },
+        { id: 'int-2', label: 'Leather Conditioning', href: 'leather-conditioning.html', side: 'left' },
+        { id: 'int-3', label: 'Stain Removal', href: 'stain-removal.html', side: 'left' },
+        { id: 'int-4', label: 'Lavatory & Galley Sanitation', href: 'lavatory-sanitation.html', side: 'right' },
+        { id: 'int-5', label: 'Carpet & Upholstery Extraction', href: 'carpet-extraction.html', side: 'right' },
+        { id: 'int-6', label: 'Wood & Trim Polishing', href: 'wood-polishing.html', side: 'right' },
+        { id: 'int-7', label: 'Dry Cleaning Carpet & Upholstery', href: 'dry-cleaning.html', side: 'right' },
     ];
 
     // Scroll timeline (scrollYProgress 0–1 over 650vh):
@@ -146,7 +146,7 @@
                     }
                 },
                     React.createElement(motion.img, {
-                        src: "assets/Interior_Services.png",
+                        src: "Interior_Services.png",
                         alt: "Aircraft Interior",
                         className: "plane-visual",
                         style: {
