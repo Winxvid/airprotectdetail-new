@@ -1621,7 +1621,7 @@ nav ul li:hover>.dropdown-menu {
 
 #int-2 {
     top: 30%;
-    right: 70%;
+    right: 72%;
 }
 
 #int-3 {
@@ -1630,28 +1630,37 @@ nav ul li:hover>.dropdown-menu {
 }
 
 #int-4 {
-    top: 80%;
-    right: 65%;
-}
-
-#int-5 {
     top: 10%;
     left: 65%;
 }
 
-#int-6 {
+#int-5 {
     top: 30%;
     left: 70%;
 }
 
-#int-7 {
+#int-6 {
     top: 55%;
     left: 75%;
 }
 
-#int-8 {
+#int-7 {
     top: 80%;
-    left: 65%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.hotspot-bottom {
+    border: 1px solid var(--glass-border);
+    border-top: 3px solid var(--clr-primary);
+}
+
+.hotspot-bottom::before {
+    width: 1px;
+    height: 40px;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 /* Responsive Adjustments */
