@@ -1771,7 +1771,8 @@ nav ul li:hover>.dropdown-menu {
         cursor: pointer !important;
         display: flex !important;
         justify-content: space-between !important;
-        align-items: center !important;
+        align-items: flex-start !important;
+        gap: 0.5rem !important;
     }
 
     .hotspot-label::after {
