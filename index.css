@@ -1759,6 +1759,8 @@ nav ul li:hover>.dropdown-menu {
         width: 95vw !important;
         left: unset !important;
         right: unset !important;
+        top: unset !important;
+        transform: none !important;
         border-radius: 6px !important;
         background: var(--clr-surface) !important;
         border: 2px solid var(--clr-primary) !important;
